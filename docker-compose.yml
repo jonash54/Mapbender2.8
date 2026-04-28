@@ -1,0 +1,71 @@
+# Local-only dev stack for Mapbender 2.8.
+#
+# Quick start:
+#   docker compose up --build           # PHP 7.4 baseline (known-good)
+#   docker compose build --build-arg PHP_VERSION=8.3 && docker compose up
+#
+# Visit:
+#   http://localhost:8080/mapbender/   (login: root / root)
+#
+# Wipe everything (DB + initialised marker) and start fresh:
+#   docker compose down -v
+#   rm -f conf/mapbender.conf conf/.docker-initialised
+
+services:
+  db:
+    image: postgis/postgis:14-3.3
+    environment:
+      POSTGRES_USER: mapbender
+      POSTGRES_PASSWORD: mapbender
+      POSTGRES_DB: postgres
+    volumes:
+      - mapbender_db:/var/lib/postgresql/data
+    ports:
+      - "55432:5432"   # exposed in case you want to poke around with psql/pgcli
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mapbender"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  web:
+    build:
+      context: ./docker
+      args:
+        PHP_VERSION: ${PHP_VERSION:-7.4}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: mapbender
+      DB_USER: mapbender
+      DB_PASSWORD: mapbender
+    volumes:
+      - ./:/var/www/mapbender
+    ports:
+      - "8080:80"
+
+  # parallel PHP 7.4 stack for regression diffing
+  web74:
+    build:
+      context: ./docker
+      args:
+        PHP_VERSION: "7.4"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: mapbender
+      DB_USER: mapbender
+      DB_PASSWORD: mapbender
+    volumes:
+      - ./:/var/www/mapbender
+    ports:
+      - "8081:80"
+
+volumes:
+  mapbender_db:

@@ -1,0 +1,5 @@
+../log/*
+../http/tmp/*
+../http/print/tmp/*
+../conf/mapbender.conf
+../conf/.docker-initialised
