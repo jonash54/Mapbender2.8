@@ -36,9 +36,9 @@ class gui implements RPCObject{
     static $displayName = "Gui";
     static $internalName = "gui";
 	
-	public function __construct ($guiId) {
+	public function __construct ($guiId = null) {
         $this->id = $guiId;
-		if (func_num_args() == 1) {
+		if ($guiId !== null) {
 			$id = func_get_arg(0);
 			if ($this->guiExists($id))	{
 				$this->id = $id;
@@ -496,8 +496,13 @@ class gui implements RPCObject{
 			array_push($t, array());
 
 			// execute all SQLs
+			// BEGIN/COMMIT cannot be used as prepared statements — use db_query for those
 			for ($i = 0; $i < count($sql); $i++) {
-				$res = db_prep_query($sql[$i], $v[$i], $t[$i]);
+				if (in_array(trim($sql[$i]), ['BEGIN', 'COMMIT'])) {
+					$res = db_query($sql[$i]);
+				} else {
+					$res = db_prep_query($sql[$i], $v[$i], $t[$i]);
+				}
 				// if an SQL fails, send a ROLLBACK and return false
 				if (!$res) {
 					db_query("ROLLBACK");

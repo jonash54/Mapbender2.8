@@ -52,6 +52,7 @@ class User implements RPCObject{
 	var $isActive = 'f';
 	var $createDigest = 'f';
 	var $preferredGui = '';
+	var $returnObject;
 	//new 2020-03-18 for compatibility to older typo3 based portal systems
 	var $wantsNewsletter = 'f';
 	var $allowsSurvey = 'f';
@@ -752,8 +753,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:selfRegisterNewUser()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "User with name: ".$mbUserName." alreadyRegistrated!";
-		$this->returnObject->error->{__type} = "Content already exists";
+		$this->returnObject->error->{"'__type'"} = "Content already exists";
 		return json_encode($this->returnObject);
 	}
 	//mb_user_owner
@@ -816,8 +818,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:selfRegisterNewUser()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "An error occured when trying to insert user '".$mbUserName."' into mapbender mb_user table!";
-		$this->returnObject->error->{__type} = "Database exception";
+		$this->returnObject->error->{"'__type'"} = "Database exception";
 		return json_encode($this->returnObject);
 	}
 	//get id from user with initial uuid
@@ -837,8 +840,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:selfRegisterNewUser()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "An error occured when trying to insert user '".$row['mb_user_id']."' into group '".$publicGroupId."' of mapbender mb_group table!";
-		$this->returnObject->error->{__type} = "Database exception";
+		$this->returnObject->error->{"'__type'"} = "Database exception";
 		return json_encode($this->returnObject);
 	}
 	//return result
@@ -865,8 +869,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:authenticateUserByName()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "No account for user with name: ".$mbUserName." found in mapbender database!";
-		$this->returnObject->error->{__type} = "Object not found";
+		$this->returnObject->error->{"'__type'"} = "Object not found";
 		return json_encode($this->returnObject);
 	}
 	$row = db_fetch_array($res);
@@ -883,8 +888,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:authenticateUserByName()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "Account for user with name: ".$mbUserName." has not been activated til now. Please activate the account to allow authentication: ".$activateRedirectUrl;
-		$this->returnObject->error->{__type} = "Method not possible";
+		$this->returnObject->error->{"'__type'"} = "Method not possible";
 		return json_encode($this->returnObject);
 	} else if ($row['is_active'] == "t" or $row['is_active'] == ""){ //maybe for older users which are registrated before 06/2019
 		//change password only, if secure password not already given !!!!!!
@@ -928,8 +934,9 @@ class User implements RPCObject{
 				$this->returnObject->success = false;
 				unset($this->returnObject->result);
 				$this->returnObject->help = "class_user.php:authenticateUserByName()";
+				$this->returnObject->error = new \stdClass();
 				$this->returnObject->error->message = "Could not authenticate user ".$mbUserName. " with old password - either the password is wrong or the hash algo differs!";
-				$this->returnObject->error->{__type} = "Access denied";
+				$this->returnObject->error->{"'__type'"} = "Access denied";
 				return json_encode($this->returnObject);
 			}
 		} else {
@@ -992,8 +999,9 @@ class User implements RPCObject{
 			$this->returnObject->success = false;
 			unset($this->returnObject->result);
 			$this->returnObject->help = "class_user.php:authenticateUserByName()";
+			$this->returnObject->error = new \stdClass();
 			$this->returnObject->error->message = "Password failed third time for ".$mbUserName. ". Account is now locked! Reactivation Mail was sent!";
-			$this->returnObject->error->{__type} = "Access denied";
+			$this->returnObject->error->{"'__type'"} = "Access denied";
 			# send reactivationmail
 			$e = new mb_exception("sending email to name=".$row['mb_user_name']."  email=".$row['mb_user_email']." key=".$activation_key);
 			if (defined("DJANGO_PORTAL") && DJANGO_PORTAL == true) {
@@ -1017,8 +1025,9 @@ class User implements RPCObject{
 			$this->returnObject->success = false;
 			unset($this->returnObject->result);
 			$this->returnObject->help = "class_user.php:authenticateUserByName()";
+			$this->returnObject->error = new \stdClass();
 			$this->returnObject->error->message = "Account for activated user with name: ".$mbUserName." could not be authenticated with given password!";
-			$this->returnObject->error->{__type} = "Access denied";
+			$this->returnObject->error->{"'__type'"} = "Access denied";
 			return json_encode($this->returnObject);
 
 		}
@@ -1029,8 +1038,9 @@ class User implements RPCObject{
 		$this->returnObject->success = false;
 		unset($this->returnObject->result);
 		$this->returnObject->help = "class_user.php:authenticateUserByName()";
+		$this->returnObject->error = new \stdClass();
 		$this->returnObject->error->message = "Account for user (not active!) with name: ".$mbUserName." could not be authenticated with given password!";
-		$this->returnObject->error->{__type} = "Access denied";
+		$this->returnObject->error->{"'__type'"} = "Access denied";
 		return json_encode($this->returnObject);
 	}
     }

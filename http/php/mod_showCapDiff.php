@@ -22,7 +22,7 @@ require_once(dirname(__FILE__)."/../classes/class_administration.php");
 require_once(dirname(__FILE__)."/../classes/class_mb_exception.php");
 //validate parameters
 $upload_id = false;
-if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
+if (isset($_REQUEST["serviceType"]) && $_REQUEST["serviceType"] != "") {
 	$testMatch = $_REQUEST["serviceType"];	
  	if (!($testMatch == 'wms' or $testMatch == 'wfs')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -32,7 +32,7 @@ if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
 	$serviceType = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
         //validate integer
         $testMatch = $_REQUEST["id"];
         //give max 99 entries - more will be to slow
@@ -44,7 +44,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
         $id = $testMatch;
         $testMatch = NULL;
 }
-if (isset($_REQUEST["upload_id"]) & $_REQUEST["upload_id"] != "") {
+if (isset($_REQUEST["upload_id"]) && $_REQUEST["upload_id"] != "") {
     //validate integer
     $testMatch = $_REQUEST["upload_id"];
     //give max 99 entries - more will be to slow

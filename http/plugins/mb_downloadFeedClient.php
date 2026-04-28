@@ -2,7 +2,7 @@
 //http://localhost/mapbender_trunk/plugins/mb_downloadFeedClient.php
 require_once dirname(__FILE__) . "/../../core/globalSettings.php";
 require_once dirname(__FILE__) . "/../classes/class_user.php";
-if (isset($_REQUEST['url']) & $_REQUEST['url'] != "") {
+if (isset($_REQUEST['url']) && $_REQUEST['url'] != "") {
 	//validate
 	$testMatch = $_REQUEST["url"];
 	if (preg_match('#^(http|https):\/\/#i', $testMatch) && filter_var($testMatch, FILTER_VALIDATE_URL)) {
@@ -25,7 +25,7 @@ if (isset($sessionLang) && ($sessionLang!='')) {
 	$langCode = $langCode[0]; # Hopefully de or s.th. else
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 

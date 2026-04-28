@@ -2592,7 +2592,7 @@ SQL;
     		// check if this WMS has a layer equal to the current layer.
     		// If yes, this is a new WMS. If not, append this layer
     		// to the existing WMS.
-			$matchingWmsLayerArray = $this->wmsArray[$wmsIndex]->objLayer;
+			$matchingWmsLayerArray = $this->wmsArray[$wmsIndex]->objLayer ?? [];
 			for ($i = 0; $i < count($matchingWmsLayerArray); $i++) {
 				if ($matchingWmsLayerArray[$i]->layer_name == $currentLayer["name"]) {
 				    // by re-setting the index to null, a new WMS will be

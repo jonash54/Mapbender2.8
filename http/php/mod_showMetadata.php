@@ -70,7 +70,7 @@ $e = new mb_notice("mod_showMetadata.php: new language: ".$languageCode);
 $admin = new administration();
 $layout = 'tabs';
 //Parse REQUEST Parameters
-if (isset($_REQUEST["resource"]) & $_REQUEST["resource"] != "") {
+if (isset($_REQUEST["resource"]) && $_REQUEST["resource"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["resource"];
 	if (!($testMatch == 'wms' or $testMatch == 'layer' or $testMatch == 'wfs' or $testMatch == 'featuretype' or $testMatch == 'wfs-conf'  or $testMatch == 'wmc')){ 
@@ -81,7 +81,7 @@ if (isset($_REQUEST["resource"]) & $_REQUEST["resource"] != "") {
 	$resource = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[\d,]*$/';		
@@ -93,7 +93,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
 	$id = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["outputFormat"];
 	if (!($testMatch == 'iso19139' or $testMatch == 'html' or $testMatch == 'georss')){ 
@@ -104,7 +104,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$outputFormat = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 
@@ -115,7 +115,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	$languageCode = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["layout"]) & $_REQUEST["layout"] != "") {
+if (isset($_REQUEST["layout"]) && $_REQUEST["layout"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["layout"];
 	if (!($testMatch == 'tabs' or $testMatch == 'accordion' or $testMatch == 'plain')){ 
@@ -127,7 +127,7 @@ if (isset($_REQUEST["layout"]) & $_REQUEST["layout"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["subscribe"]) & $_REQUEST["subscribe"] != "") {
+if (isset($_REQUEST["subscribe"]) && $_REQUEST["subscribe"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["subscribe"];
 	if (!($testMatch == '1' or $testMatch == '0')){ 
@@ -1178,12 +1178,12 @@ if (isset($wgs84Bbox)) {
 //$html .= $tableBegin;
 
 //Scales
-if ((isset($resourceMetadata['contentminscale']) & $resourceMetadata['contentminscale'] != '0') or (isset($resourceMetadata['contentmaxscale']) & $resourceMetadata['contentmaxscale'] != '0')){
+if ((isset($resourceMetadata['contentminscale']) && $resourceMetadata['contentminscale'] != '0') or (isset($resourceMetadata['contentmaxscale']) && $resourceMetadata['contentmaxscale'] != '0')){
 	$html .= $t_a.$translation['restrictedScale'].$t_b.$t_c;
-	if (isset($resourceMetadata['contentminscale']) & $resourceMetadata['contentminscale'] != '0' & $resourceMetadata['contentminscale'] != "") {
+	if (isset($resourceMetadata['contentminscale']) && $resourceMetadata['contentminscale'] != '0' & $resourceMetadata['contentminscale'] != "") {
 		$html .= $t_a.$translation['maxscale'].$t_b. "1 : ".$resourceMetadata['contentminscale'].$t_c;	
 	}
-	if (isset($resourceMetadata['contentmaxscale']) & $resourceMetadata['contentmaxscale'] != '0' & $resourceMetadata['contentmaxscale'] != "") {
+	if (isset($resourceMetadata['contentmaxscale']) && $resourceMetadata['contentmaxscale'] != '0' & $resourceMetadata['contentmaxscale'] != "") {
 		$html .= $t_a.$translation['minscale'].$t_b. "1 : ".$resourceMetadata['contentmaxscale'].$t_c;	
 	}
 	//$html .= '</fieldset>';

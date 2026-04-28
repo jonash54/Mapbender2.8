@@ -51,7 +51,7 @@ if (isset($_REQUEST["syncDepartment"]) && $_REQUEST["syncDepartment"] !== "" && 
         $syncDepartment = implode(',', $orgaArray);
 }
 
-if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
+if (isset($_REQUEST["userId"]) && $_REQUEST["userId"] != "") {
         $testMatch = $_REQUEST["userId"];
         $pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){

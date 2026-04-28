@@ -16,7 +16,7 @@ if ($sessionUserId !== false) {
     }
 }
 //parse request parameters
-if (isset($_REQUEST["wmcId"]) & $_REQUEST["wmcId"] != "") {
+if (isset($_REQUEST["wmcId"]) && $_REQUEST["wmcId"] != "") {
     //validate to csv integer list
     $testMatch = $_REQUEST["wmcId"];
     $pattern = '/^[\d,]*$/';		
@@ -28,7 +28,7 @@ if (isset($_REQUEST["wmcId"]) & $_REQUEST["wmcId"] != "") {
     $testMatch = NULL;
 }
 //parse request parameter
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
     //validate to csv integer list
     $testMatch = $_REQUEST["outputFormat"];
     

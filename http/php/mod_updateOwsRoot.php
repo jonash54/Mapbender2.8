@@ -62,7 +62,7 @@ header('Content-Type: application/json; charset=utf-8');
 //validate parameters
 $schedulerParams = array("schedulerPublish", "schedulerSearchable", "schedulerOverwrite", "schedulerOverwriteCategories");
 foreach ($schedulerParams as $schedulerParam) {    
-    if (isset($_REQUEST[$schedulerParam]) & $_REQUEST[$schedulerParam] != "") {
+    if (isset($_REQUEST[$schedulerParam]) && $_REQUEST[$schedulerParam] != "") {
         $testMatch = $_REQUEST[$schedulerParam];
         if (!($testMatch == 'true' or $testMatch == 'false')){
             $resultObject->error->message =   'Parameter $schedulerParam is not valid (true,false).';
@@ -81,7 +81,7 @@ foreach ($schedulerParams as $schedulerParam) {
     }
 }
 
-if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
+if (isset($_REQUEST["serviceType"]) && $_REQUEST["serviceType"] != "") {
     $testMatch = $_REQUEST["serviceType"];
     if (!($testMatch == 'wms' || $testMatch == 'wfs')){
         $resultObject->error->message = 'Parameter serviceType is not valid (wms, wfs).';
@@ -93,7 +93,7 @@ if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
 }
 $serviceType= strtoupper($serviceType);
 
-if (isset($_REQUEST["serviceId"]) & $_REQUEST["serviceId"] != "") {
+if (isset($_REQUEST["serviceId"]) && $_REQUEST["serviceId"] != "") {
     $testMatch = $_REQUEST["serviceId"];
     $pattern = '/^[0-9]*$/';
     if (!preg_match($pattern,$testMatch)){
@@ -105,7 +105,7 @@ if (isset($_REQUEST["serviceId"]) & $_REQUEST["serviceId"] != "") {
     $testMatch = NULL; 
 }
 
-if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
+if (isset($_REQUEST["userId"]) && $_REQUEST["userId"] != "") {
     $testMatch = $_REQUEST["userId"];
     $pattern = '/^[0-9]*$/';
     if (!preg_match($pattern,$testMatch)){

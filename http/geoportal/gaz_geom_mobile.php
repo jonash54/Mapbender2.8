@@ -22,7 +22,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
         $map_height = 0;
         $map_width = 0;
 
-	if (isset($_REQUEST["map_height"]) & $_REQUEST["map_height"] != "") {
+	if (isset($_REQUEST["map_height"]) && $_REQUEST["map_height"] != "") {
 				//validate integer to 99999 - not more
 		$testMatch = $_REQUEST["map_height"];
 		// max 99999
@@ -36,7 +36,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 	
 	}
 
-	if (isset($_REQUEST["map_width"]) & $_REQUEST["map_width"] != "") {
+	if (isset($_REQUEST["map_width"]) && $_REQUEST["map_width"] != "") {
 		//validate integer to 99999 - not more
 		$testMatch = $_REQUEST["map_width"];
 		// max 99999
@@ -51,7 +51,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 	}
      
 
-	if (isset($_REQUEST["maxResults"]) & $_REQUEST["maxResults"] != "") {
+	if (isset($_REQUEST["maxResults"]) && $_REQUEST["maxResults"] != "") {
 		//validate integer to 100 - not more
 		$testMatch = $_REQUEST["maxResults"];
 		//give max 99 entries - more will be to slow
@@ -63,7 +63,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 		$maxResults = $testMatch;
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["maxRows"]) & $_REQUEST["maxRows"] != "") {
+	if (isset($_REQUEST["maxRows"]) && $_REQUEST["maxRows"] != "") {
 		//validate integer to 100 - not more
 		$testMatch = $_REQUEST["maxRows"];
 		//give max 99 entries - more will be to slow
@@ -75,7 +75,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 		$maxRows = $testMatch;
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+	if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 		$testMatch = $_REQUEST["outputFormat"];	
  		if (!($testMatch == 'json')){ 
 			echo '<b>outputFormat</b> is not valid.<br/>'; 
@@ -84,7 +84,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 		$outputFormat = $testMatch;
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["bundesland"]) & $_REQUEST["bundesland"] != "") {
+	if (isset($_REQUEST["bundesland"]) && $_REQUEST["bundesland"] != "") {
 		$testMatch = $_REQUEST["bundesland"];
 		if (!($testMatch == 'Rheinland-Pfalz') && !($testMatch == 'Saarland')){
 			echo '<b>bundesland</b> is not valid.<br/>';
@@ -93,21 +93,21 @@ if ($_REQUEST['resultTarget'] != 'web') {
 		$bundesland = $testMatch;
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["forcePoint"]) & $_REQUEST["forcePoint"] != "") {
+	if (isset($_REQUEST["forcePoint"]) && $_REQUEST["forcePoint"] != "") {
 		$testMatch = $_REQUEST["forcePoint"];
 		if ($testMatch == 'true'){
 			$forcePoint = true;
 		}
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["forceGeonames"]) & $_REQUEST["forceGeonames"] != "") {
+	if (isset($_REQUEST["forceGeonames"]) && $_REQUEST["forceGeonames"] != "") {
 		$testMatch = $_REQUEST["forceGeonames"];
 		if ($testMatch == 'true'){
 			$forceGeonames = true;
 		}
 		$testMatch = NULL;
 	}
-	if (isset($_REQUEST["searchEPSG"]) & $_REQUEST["searchEPSG"] != "") {
+	if (isset($_REQUEST["searchEPSG"]) && $_REQUEST["searchEPSG"] != "") {
 		$testMatch = $_REQUEST["searchEPSG"];	
  		if (!($testMatch == '31467' or $testMatch == '31466' or $testMatch == '31468' or $testMatch == '25832' or $testMatch == '4326')){ 
 			echo '<b>searchEPSG</b> is not valid.<br/>'; 
@@ -116,7 +116,7 @@ if ($_REQUEST['resultTarget'] != 'web') {
 		$searchEPSG = $testMatch;
 		$testMatch = NULL;
 	}
-	/*if (isset($_REQUEST["callback"]) & $_REQUEST["callback"] != "") {
+	/*if (isset($_REQUEST["callback"]) && $_REQUEST["callback"] != "") {
 		$testMatch = $_REQUEST["callback"];	
 		$pattern = '/^jQuery\d+_\d+$/';
 		if (!preg_match($pattern,$testMatch)){ 

@@ -22,7 +22,7 @@ require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 $e = new mb_notice("mb_validateSession.php: checking file " . $_SERVER["SCRIPT_NAME"]);
 
 // if cookies are off - TODO check this behaviour!!!
-if ($_REQUEST["sessionName"] && $_REQUEST["sessionId"]) { //TODO: the request parameter won't be sessionName but maybe PHPSESSID - name of cookie! See line 101 usage of SID
+if (!empty($_REQUEST["sessionName"]) && !empty($_REQUEST["sessionId"])) { //TODO: the request parameter won't be sessionName but maybe PHPSESSID - name of cookie! See line 101 usage of SID
 	//session_name($_REQUEST["sessionName"]);
 	//session_id($_REQUEST["sessionId"]);
 }

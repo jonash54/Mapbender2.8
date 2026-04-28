@@ -24,7 +24,7 @@ if (isset($sessionLang) && ($sessionLang!='')) {
 	$langCode = $langCode[0]; # Hopefully de or s.th. else
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 
@@ -35,7 +35,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	$languageCode = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["resolveCoupledResources"]) & $_REQUEST["resolveCoupledResources"] != "") {
+if (isset($_REQUEST["resolveCoupledResources"]) && $_REQUEST["resolveCoupledResources"] != "") {
 	$testMatch = $_REQUEST["resolveCoupledResources"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>resolveCoupledResources</b> is not valid (true,false (default to false)).<br/>'; 
@@ -53,7 +53,7 @@ if (isset($_REQUEST["resolveCoupledResources"]) & $_REQUEST["resolveCoupledResou
 }
 //write languageCode into session!
 $localeObj->setCurrentLocale($languageCode);
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'html' or $testMatch == 'rdf' or $testMatch == 'iso19139'  or $testMatch == 'html2'  or $testMatch == 'html3')){ 

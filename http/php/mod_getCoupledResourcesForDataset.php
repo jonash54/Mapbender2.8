@@ -137,7 +137,7 @@ foreach ($headers as $header => $value) {
 		$originFromHeader = $value;
     	}
 }
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];
 	//look for whitelist in mapbender.conf
@@ -167,7 +167,7 @@ if (isset($sessionLang) && ($sessionLang!='')) {
 	$langCode = $langCode[0]; # Hopefully de or s.th. else
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 
@@ -178,7 +178,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	$languageCode = $testMatch;
 	$testMatch = NULL;
 }
-/*if (isset($_REQUEST["catalogueId"]) & $_REQUEST["catalogueId"] != "") {
+/*if (isset($_REQUEST["catalogueId"]) && $_REQUEST["catalogueId"] != "") {
 	//validate integer to 100 - not more
 	$testMatch = $_REQUEST["catalogueId"];
 	//
@@ -194,7 +194,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	echo 'Mandatory parameter <b>catalogueId</b> not set!<br/>';
 	die();
 }*/
-/*if (isset($_REQUEST["datasetId"]) & $_REQUEST["datasetId"] != "") {
+/*if (isset($_REQUEST["datasetId"]) && $_REQUEST["datasetId"] != "") {
 	//validate integer to 100 - not more
 	$testMatch = $_REQUEST["datasetId"];
 	//
@@ -212,7 +212,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 }*/
 //write languageCode into session!
 $localeObj->setCurrentLocale($languageCode);
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'html' or $testMatch == 'json')){ 

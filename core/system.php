@@ -179,25 +179,7 @@ if (defined("LOG_PHP_WITH_FIREPHP") && LOG_PHP_WITH_FIREPHP === "on") {
 //
 mb_internal_encoding("UTF-8");
 
-//
-// if magic quotes is on, automatically strip slashes
-// (non-recursive due to possible security hazard)
-//
-if (get_magic_quotes_gpc()) {
-	$in = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
-
-	while (list($k, $v) = each($in)) {
-		foreach ($v as $key => $val) {
-			if (!is_array($val)) {
-				$in[$k][$key] = stripslashes($val);
-				continue;
-			}
-			$in[]= &$in[$k][$key];
-		}
-	}
-
-	unset($in);
-}
+// magic_quotes_gpc was removed in PHP 5.4 — block intentionally left empty.
 
 //
 // until we have decided how to implement a public user,

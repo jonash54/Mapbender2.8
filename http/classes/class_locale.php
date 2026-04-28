@@ -30,6 +30,7 @@ class Mb_locale {
 	var $knownLanguages = null;
 	var $systemLocales = null;
 	var $browserLanguages = null;
+	var $browserLanguage = null;
 	var $os = null;
 	var $name = null;
 	var $defaultLanguage = "en";
@@ -99,13 +100,14 @@ class Mb_locale {
 			$this->os = $this->guessHostOS();
 		}
 		
+		$locale = null;
 		if (!USE_I18N || ($this->os != null && isset($languageId))) {
 			if ($this->isKnownLanguage($languageId)) {
-		
+
 				if ($this->systemLocales == null) {
 					$this->setSystemLocales();
 				}
-		
+
 				$locale = $this->systemLocales[$this->knownLanguages[$languageId]][$this->os];
 				$selectedLocale = setlocale(LC_MESSAGES, $locale);
 
@@ -264,7 +266,7 @@ class Mb_locale {
         function setBrowserLanguages () {
                 $this->browserLanguages = array();
 
-            $bLangs = explode(',', $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+            $bLangs = explode(',', $_SERVER["HTTP_ACCEPT_LANGUAGE"] ?? '');
             foreach ($bLangs as $lang) {
                         if (strpos($lang, ';') === false)
                                 array_push($this->browserLanguages, $lang);

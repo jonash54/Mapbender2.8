@@ -88,7 +88,7 @@ class WmcToXml {
 			$currentOverviewWmsArray = $this->wmc->overviewMap->getWmsArray();
 			for ($k = 0; $k < count($currentOverviewWmsArray); $k++) {
 				$currentOverviewWms = $currentOverviewWmsArray[$k];
-				for ($l = 0; $l < count($currentOverviewWms->objLayer); $l++) {
+				for ($l = 0; $l < count($currentOverviewWms->objLayer ?? []); $l++) {
 					$currentOverviewLayer = $currentOverviewWms->objLayer[$l];
 					array_push($overviewLayerArray, $currentOverviewLayer);
 				}
@@ -100,7 +100,7 @@ class WmcToXml {
 		$currentMap = $this->wmc->mainMap;
 		for ($i = 0; $i < count($currentWmsArray); $i++) {
 			$currentWms = $currentWmsArray[$i];
-			for ($j = 0; $j < count($currentWms->objLayer); $j++) {
+			for ($j = 0; $j < count($currentWms->objLayer ?? []); $j++) {
 				$currentLayer = $currentWms->objLayer[$j];
 
 				$layerNode = null;
@@ -168,8 +168,9 @@ class WmcToXml {
 		// store epsg and bbox of root layer of 0th WMS
 		$firstWms = $this->wmc->mainMap->getWms(0);
 		if ($firstWms !== null) {
-			for ($i = 0; $i < count($firstWms->objLayer[0]->layer_epsg); $i++) {
-				$currentLayerEpsg = $firstWms->objLayer[0]->layer_epsg[$i];
+			$_firstWmsLayer0Epsg = $firstWms->objLayer[0]->layer_epsg ?? [];
+			for ($i = 0; $i < count($_firstWmsLayer0Epsg); $i++) {
+				$currentLayerEpsg = $_firstWmsLayer0Epsg[$i];
 				$extensionData["mainMapBox" . $i] = $currentLayerEpsg;
 			}
 		}
@@ -378,7 +379,7 @@ class WmcToXml {
 		}
 
 		// Layer dimension
-		//$e = new mb_exception("class_wmcToXml.php: layer dimension count: ".count($currentLayer->layer_dimension));
+		//$e = new mb_exception("class_wmcToXml.php: layer dimension count: ".count($currentLayer->layer_dimension ?? []));
 		$dimensionListNode = $this->createLayerDimensionListNode($currentWms, $currentLayer);
 		//$e = new mb_exception("class_wmcToXml.php: type of dimensionListNode: ".gettype($dimensionListNode));
 		if ($dimensionListNode !== null) {
@@ -413,7 +414,7 @@ class WmcToXml {
 			$wms_epsg[1] = $currentWms->gui_wms_epsg;
 		}
 
-		for ($j = 0; $j < count($currentWms->gui_epsg); $j++) {
+		for ($j = 0; $j < count($currentWms->gui_epsg ?? []); $j++) {
 			if (!in_array($currentWms->gui_epsg[$j], $wms_epsg)){
 				array_push($wms_epsg, $currentWms->gui_epsg[$j]);
 			}
@@ -427,7 +428,7 @@ class WmcToXml {
 		//For debug purposes
 		//$e = new mb_exception("class_wmcToXml.php: try to get dimension for layer from currentLayer");
 		//
-		if (count($currentLayer->layer_dimension) >= 1) {
+		if (count($currentLayer->layer_dimension ?? []) >= 1) {
 			//$e = new mb_exception("class_wmcToXml.php: somedimension found");
 			$e_layer_dimensionlist = $this->doc->createElement("DimensionList");
 			foreach($currentLayer->layer_dimension as $dimension) {
@@ -448,7 +449,7 @@ class WmcToXml {
 
 		$data_format_current = false;
 
-		for ($k = 0; $k < count($currentWms->data_format); $k++){
+		for ($k = 0; $k < count($currentWms->data_format ?? []); $k++){
 
 			if ($currentWms->data_type[$k] == "map") {
 				$layerFormat = $currentWms->data_format[$k];
@@ -457,7 +458,7 @@ class WmcToXml {
 
 				if ($data_format_current === false && (
 						$currentWms->data_format[$k] == $currentWms->gui_wms_mapformat ||
-						$k == (count($currentWms->data_format)-1)
+						$k == (count($currentWms->data_format ?? [])-1)
 				)){
 
 					$e_format->setAttribute("current", "1");
@@ -492,7 +493,7 @@ class WmcToXml {
 		$layerExtensionData["layer_featuretype_coupling"] = $currentLayer->layer_featuretype_coupling;
 		$layerExtensionData["layer_identifier"] = $currentLayer->layer_identifier; //json_string
         //add epsg part
-		for ($i = 0; $i < count($currentWms->gui_epsg); $i++) {
+		for ($i = 0; $i < count($currentWms->gui_epsg ?? []); $i++) {
 			$found = false;
 			for ($j = 0; $j < count($layerExtensionData["layer_epsg"]); $j++) {
 				if ($layerExtensionData["layer_epsg"][$j]["epsg"] == $currentWms->gui_epsg[$i]) {
@@ -563,7 +564,7 @@ class WmcToXml {
 
 	private function createLayerStyleNode ($currentWms, $currentLayer) {
 		$e_layer_stylelist = $this->doc->createElement("StyleList");
-		for ($k = 0; $k < count($currentLayer->layer_style); $k++) {
+		for ($k = 0; $k < count($currentLayer->layer_style ?? []); $k++) {
 			$currentStyle = $currentLayer->layer_style[$k];
 			$layerStyle_current = 0;
 			//set style selected gui_layer_style to current

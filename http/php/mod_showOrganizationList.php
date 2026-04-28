@@ -3,7 +3,7 @@
 
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 $orderBy = 'rank';
-if (isset($_REQUEST["orderBy"]) & $_REQUEST["orderBy"] != "") {
+if (isset($_REQUEST["orderBy"]) && $_REQUEST["orderBy"] != "") {
 	$testMatch = $_REQUEST["orderBy"];	
  	if (!($testMatch == 'rank' or $testMatch == 'title' or $testMatch == 'id' or $testMatch == 'date')){ 
 		//echo 'orderBy: <b>'.$testMatch.'</b> is not valid.<br/>'; 

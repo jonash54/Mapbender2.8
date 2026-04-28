@@ -19,7 +19,7 @@ if (!($hostName == 'localhost' or $hostName == '127.0.0.1')) {
 	die();
 }
 
-if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
+if (isset($_REQUEST["userId"]) && $_REQUEST["userId"] != "") {
  //validate integer to 100 - not more
  $testMatch = $_REQUEST["userId"];
  //give max 99 entries - more will be to slow
@@ -40,7 +40,7 @@ if (!isset($_REQUEST["resourceId"])) {
     
 }
 
-if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
+if (isset($_REQUEST["resourceType"]) && $_REQUEST["resourceType"] != "") {
     //validate to inside / outside - TODO implement other ones than intersects which is default
     $testMatch = $_REQUEST["resourceType"];
     if (!in_array($testMatch, $allowedResourceTypes)){
@@ -51,7 +51,7 @@ if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
     $testMatch = NULL;
 }
 
-if (isset($_REQUEST["resourceId"]) & $_REQUEST["resourceId"] != "") {
+if (isset($_REQUEST["resourceId"]) && $_REQUEST["resourceId"] != "") {
     //validate to csv integer list
     $testMatch = $_REQUEST["resourceId"];
     $pattern = '/^[\d,]*$/';

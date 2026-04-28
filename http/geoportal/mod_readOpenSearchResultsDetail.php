@@ -16,7 +16,7 @@ if (isset($_SESSION['mb_lang']) && ($_SESSION['mb_lang']!='')) {
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
 
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 

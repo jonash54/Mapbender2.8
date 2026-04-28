@@ -51,7 +51,7 @@ class LabelPlacement
 	/**
 	 * Default constructor that automatically creates a PointPlacement object.
 	 */
-	function LabelPlacement()
+	function __construct()
 	{
 		//Only PointPlacement is supported by MapServer
 		$this->placement = new PointPlacement();

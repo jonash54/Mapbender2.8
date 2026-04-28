@@ -28,12 +28,13 @@ $showOnlyDatasetMetadata = "false";
 $showOnlyUnlinkedOrganizations = "false";
 
 //parse request parameter
-if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartments"] != "") {
+if (isset($_REQUEST["registratingDepartments"]) && $_REQUEST["registratingDepartments"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["registratingDepartments"];
 	$pattern = '/^[\d,]*$/';		
  	if (!preg_match($pattern,$testMatch)){ 
 		//echo 'registratingDepartments: <b>'.$testMatch.'</b> is not valid.<br/>';
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter registratingDepartments is not valid (integer or cs integer list).';
 		echo json_encode($resultObject);	
 		die();
@@ -46,6 +47,7 @@ if (isset($_REQUEST["syncDepartment"]) && $_REQUEST["syncDepartment"] !== "" && 
         $testMatch = $_REQUEST["syncDepartment"];
         $pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
+                if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
                 $resultObject->error->message = 'Parameter syncDepartment is not valid (integer).';
                 echo json_encode($resultObject);
 		die();	
@@ -58,6 +60,7 @@ if (isset($_REQUEST["orgaId"]) && $_REQUEST["orgaId"] !== "" && $_REQUEST["orgaI
         $testMatch = $_REQUEST["orgaId"];
         $pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
+                if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
                 $resultObject->error->message = 'Parameter orgaId is not valid (integer).';
                 echo json_encode($resultObject);
 		die();	
@@ -69,6 +72,7 @@ if (isset($_REQUEST["orgaId"]) && $_REQUEST["orgaId"] !== "" && $_REQUEST["orgaI
 if (isset($_REQUEST["operation"]) && $_REQUEST["operation"] !== "" && $_REQUEST["operation"] !== null) {
         $testMatch = $_REQUEST["operation"];
  	if (!($testMatch == 'listCatalogues' or $testMatch == 'syncCatalogue' or $testMatch == 'syncCsw' or $testMatch == 'syncCkan' or $testMatch == 'syncCkanOrganizations')){ 
+	 	if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 	 	$resultObject->error->message = 'Parameter operation is not valid (listCatalogues, syncCatalogue, syncCsw, syncCkan, syncCkanOrganizations).'; 
 		echo json_encode($resultObject);	
 		die();	
@@ -77,15 +81,17 @@ if (isset($_REQUEST["operation"]) && $_REQUEST["operation"] !== "" && $_REQUEST[
         $testMatch = NULL;
 }
 
-if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
+if (isset($_REQUEST["userId"]) && $_REQUEST["userId"] != "") {
         $testMatch = $_REQUEST["userId"];
         $pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
+                if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
                 $resultObject->error->message = 'Parameter userId is not valid (integer).';
                 echo json_encode($resultObject);
 		die();
         }
 	if ($testMatch !== Mapbender::session()->get("mb_user_id")) {
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter userId is not equal to the userId from session information - maybe there is no current session!';
 		echo json_encode($resultObject);
 		die();
@@ -99,9 +105,10 @@ if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
     	}
 }
 
-if (isset($_REQUEST["compareTimestamps"]) & $_REQUEST["compareTimestamps"] != "") {
+if (isset($_REQUEST["compareTimestamps"]) && $_REQUEST["compareTimestamps"] != "") {
 	$testMatch = $_REQUEST["compareTimestamps"];	
  	if (!($testMatch == 'false' or $testMatch == 'true')){ 
+	 	if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 	 	$resultObject->error->message = 'Parameter compareTimestamps is not valid (false, true).'; 
 		echo json_encode($resultObject);	
 		die();	
@@ -117,9 +124,10 @@ if (isset($_REQUEST["compareTimestamps"]) & $_REQUEST["compareTimestamps"] != ""
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'json' or $testMatch == 'debug')){ 
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter outputFormat is not valid (json, debug).'; 
 		echo json_encode($resultObject);
 		die();	
@@ -128,7 +136,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["showOnlyDatasetMetadata"]) & $_REQUEST["showOnlyDatasetMetadata"] != "") {
+if (isset($_REQUEST["showOnlyDatasetMetadata"]) && $_REQUEST["showOnlyDatasetMetadata"] != "") {
 	$testMatch = $_REQUEST["showOnlyDatasetMetadata"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>showOnlyDatasetMetadata</b> is not valid (true,false (default to false)).<br/>'; 
@@ -145,7 +153,7 @@ if (isset($_REQUEST["showOnlyDatasetMetadata"]) & $_REQUEST["showOnlyDatasetMeta
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["showOnlyUnlinkedOrganizations"]) & $_REQUEST["showOnlyUnlinkedOrganizations"] != "") {
+if (isset($_REQUEST["showOnlyUnlinkedOrganizations"]) && $_REQUEST["showOnlyUnlinkedOrganizations"] != "") {
 	$testMatch = $_REQUEST["showOnlyUnlinkedOrganizations"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>showOnlyUnlinkedOrganizations</b> is not valid (true,false (default to false)).<br/>'; 

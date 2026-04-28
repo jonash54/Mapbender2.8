@@ -820,7 +820,7 @@ class Map {
 		$res = db_prep_query($sql,$v,$t);
 		$row = db_fetch_array($res);
 
-		if (count($row['var_name']) == 1) {
+		if (is_array($row) && isset($row['var_name'])) {
 			$activatedGuiHtmlCache = $row['var_value'];
 			if ($activatedGuiHtmlCache == 'true') {
 				$activatedGuiHtmlCache = true;
@@ -917,7 +917,7 @@ class Map {
 				$res = db_prep_query($sql, $v, $t);
 				$row = db_fetch_array($res);
 				$epsg = $row["gui_wms_epsg"];
-				$layer_epsg = $wmsArray[0]->objLayer[0]->layer_epsg;
+				$layer_epsg = $wmsArray[0]->objLayer[0]->layer_epsg ?? [];
 				$j = 0;
 				for ($i = 0; $i < count($layer_epsg); $i++) {
 					if ($layer_epsg[$i]["epsg"] === $epsg) {
@@ -925,11 +925,11 @@ class Map {
 						break;
 					}
 				}
-				$minx = $wmsArray[0]->objLayer[0]->layer_epsg[$j]["minx"];
-				$miny = $wmsArray[0]->objLayer[0]->layer_epsg[$j]["miny"];
-				$maxx = $wmsArray[0]->objLayer[0]->layer_epsg[$j]["maxx"];
-				$maxy = $wmsArray[0]->objLayer[0]->layer_epsg[$j]["maxy"];
-				$epsg = $wmsArray[0]->objLayer[0]->layer_epsg[$j]["epsg"];
+				$minx = $layer_epsg[$j]["minx"] ?? null;
+				$miny = $layer_epsg[$j]["miny"] ?? null;
+				$maxx = $layer_epsg[$j]["maxx"] ?? null;
+				$maxy = $layer_epsg[$j]["maxy"] ?? null;
+				$epsg = $layer_epsg[$j]["epsg"] ?? null;
 				$mapExtent = new Mapbender_bbox($minx, $miny, $maxx, $maxy, $epsg);
 				$currentMap->setExtent($mapExtent);
 				if ($cache->isActive) {

@@ -10,7 +10,7 @@ require_once dirname(__FILE__) . "/../classes/class_administration.php";
  * Simple webservice to resolve spatial_dataset_identifiers for layer_ids from the mapbender registry
  */
 $admin = new administration();
-if (isset($_REQUEST["layerIds"]) & $_REQUEST["layerIds"] != "") {
+if (isset($_REQUEST["layerIds"]) && $_REQUEST["layerIds"] != "") {
     //validate to csv integer list
     $testMatch = $_REQUEST["layerIds"];
     $pattern = '/^[\d,]*$/';

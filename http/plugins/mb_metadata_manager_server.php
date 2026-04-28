@@ -52,7 +52,7 @@ function validateType($variable, $value) {
 function parseMetadataRow($row, $withOutFirstColumn = false) {
 	global $hierarchyLevel;
 	//convert NULL to '', NULL values cause datatables to crash
-	$walk = array_walk($row, create_function('&$s', '$s=strval($s);'));
+	$walk = array_walk($row, function (&) {  = strval(); });
 	//preview with uuid
 	$row[0] = $row[0];
 	$row[1] = $row[1];

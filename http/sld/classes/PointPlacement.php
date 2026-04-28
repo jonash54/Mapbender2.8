@@ -67,7 +67,7 @@ class PointPlacement
 	/**
 	 * Default constructor that automatically creates an AnchorPoint and a Displacement object.
 	 */
-	function PointPlacement()
+	function __construct()
 	{
 		$this->anchorpoint = new AnchorPoint();
 		$this->displacement = new Displacement();

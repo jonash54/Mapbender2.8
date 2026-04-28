@@ -37,7 +37,7 @@ if (defined("MAPBENDER_PATH") && MAPBENDER_PATH != '') {
 	$mapbenderUrl = "http://www.geoportal.rlp.de/mapbender";
 }
 //check http get parameters
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'json' or $testMatch == 'monitoring' or $testMatch == 'table')){ 
 		echo 'outputFormat: is not valid.<br/>'; 
@@ -46,7 +46,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$outputFormat = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["exportObjects"]) & $_REQUEST["exportObjects"] != "") {
+if (isset($_REQUEST["exportObjects"]) && $_REQUEST["exportObjects"] != "") {
 	$testMatch = $_REQUEST["exportObjects"];	
  	if (!($testMatch == 'datasets' or $testMatch == 'services' or $testMatch == 'organizations')){ 
 		echo 'outputFormat: is not valid.<br/>'; 
@@ -55,7 +55,7 @@ if (isset($_REQUEST["exportObjects"]) & $_REQUEST["exportObjects"] != "") {
 	$exportObjects = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartments"] != "") {
+if (isset($_REQUEST["registratingDepartments"]) && $_REQUEST["registratingDepartments"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["registratingDepartments"];
 	$pattern = '/^[\d,]*$/';		
@@ -66,7 +66,7 @@ if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartm
 	$registratingDepartments = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["language"]) & $_REQUEST["language"] != "") {
+if (isset($_REQUEST["language"]) && $_REQUEST["language"] != "") {
 	$testMatch = $_REQUEST["language"];	
  	if (!($testMatch == 'de' or $testMatch == 'en' or $testMatch == 'fr')){ 
 		echo 'language: is not valid.<br/>'; 

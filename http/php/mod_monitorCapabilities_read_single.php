@@ -40,7 +40,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'">'
 <body>
 <?php
 $admin = new administration();
-if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
+if (isset($_REQUEST["serviceType"]) && $_REQUEST["serviceType"] != "") {
 	$testMatch = $_REQUEST["serviceType"];	
  	if (!($testMatch == 'wms' or $testMatch == 'wfs')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -50,7 +50,7 @@ if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
 	$serviceType = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
         //validate integer
         $testMatch = $_REQUEST["id"];
         //give max 99 entries - more will be to slow

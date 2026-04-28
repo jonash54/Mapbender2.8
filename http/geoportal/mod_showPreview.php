@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 //get type of resource and id of resource - normally layer and wmc
 $resource = 'layer';
 $id = 0;
-if (isset($_REQUEST["resource"]) & $_REQUEST["resource"] != "") {
+if (isset($_REQUEST["resource"]) && $_REQUEST["resource"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["resource"];
 	if (!($testMatch == 'layer' or $testMatch == 'wmc' or $testMatch == 'layerlegend' or $testMatch == 'metadata')){
@@ -13,7 +13,7 @@ if (isset($_REQUEST["resource"]) & $_REQUEST["resource"] != "") {
 	$resource = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to integer
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[0-9]*$/';

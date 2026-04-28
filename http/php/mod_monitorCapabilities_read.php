@@ -20,7 +20,7 @@ $serviceType = "WMS";
 $e_id = "monitor_results";
 $gui_id = $_REQUEST["guiID"];
 //validate parameters
-if (isset($_REQUEST["serviceType"]) & $_REQUEST["serviceType"] != "") {
+if (isset($_REQUEST["serviceType"]) && $_REQUEST["serviceType"] != "") {
 	$testMatch = $_REQUEST["serviceType"];	
  	if (!($testMatch == 'wms' or $testMatch == 'wfs')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 

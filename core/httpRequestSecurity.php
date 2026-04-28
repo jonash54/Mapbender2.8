@@ -12,7 +12,9 @@ if (strpos($_SERVER['PHP_SELF'],'<script>') !== false ) {
 //echo $_SERVER['SCRIPT_NAME']."<br>";
 //test ob php_self auf script_name ended!
 //get last string 
-$phpScriptName = end(explode("/", $_SERVER['SCRIPT_NAME']));
+$_phpScriptParts = explode("/", $_SERVER['SCRIPT_NAME']);
+$phpScriptName = end($_phpScriptParts);
+unset($_phpScriptParts);
 //echo $phpScriptName."<br>";
 //echo json_encode(endsWith($_SERVER['PHP_SELF'], $phpScriptName))."<br>";
 if (!endsWith($_SERVER['PHP_SELF'], $phpScriptName)) {

@@ -39,7 +39,7 @@ class AddOperationModule
 	/**
 	 * constructor that sets the necessary values ov the member fields
 	 */
-	function AddOperationModule($objId, $htmlId)
+	function __construct($objId, $htmlId)
 	{
 		$this->objId = $objId;
 		$this->htmlId = $htmlId;

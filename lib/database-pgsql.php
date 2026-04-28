@@ -130,7 +130,7 @@ function db_query($qstring) {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname,$db_debug,
 		$conn,$conn_update,$QUERY_COUNT,$DBSERVER,$OWNER,$PW,$DB;
 	$QUERY_COUNT++;
-	$ret = pg_exec($qstring);
+	$ret = pg_query($conn, $qstring);
 //	$e = new mb_exception("not ps:  ".$_SERVER['SCRIPT_FILENAME']." : ".$qstring);
 	if(!$ret){
 		$e = new mb_exception("db_query($qstring)=$ret db_error=".db_error());
@@ -145,9 +145,10 @@ function db_query($qstring) {
  *  @param		$types (array types as strings)		
  */
 function db_prep_query($qstring, $params, $types){
+	global $conn;
 	$orig_qstring = $qstring;
 	$ci = new checkInput($qstring,$params,$types);
-	$params = $ci->v; 
+	$params = $ci->v;
 	if(PREPAREDSTATEMENTS == false){
 		for ($i=0; $i<count($params); $i++){
 			$needle = "$".strval($i+1);
@@ -173,11 +174,11 @@ function db_prep_query($qstring, $params, $types){
 		}
 	}
 	else{
-		$result = pg_prepare("", $qstring);
+		$result = pg_prepare($conn, "", $qstring);
 		if(!$result){
 			$e = new mb_exception("Error while preparing statement in ".$_SERVER['SCRIPT_FILENAME'].": Sql: ".$qstring.", Error: ".db_error());
 		}
-		$r = pg_execute("", $params);
+		$r = pg_execute($conn, "", $params);
 		if(!$r){
 			$e = new mb_exception("Error while executing prepared statement in ".$_SERVER['SCRIPT_FILENAME'].": Sql: ".$qstring.", Error: ".db_error());
 		}
@@ -224,7 +225,7 @@ function db_rollback() {
 function db_numrows($qhandle) {
 	// return only if qhandle exists, otherwise 0
 	if ($qhandle) {
-		return @pg_numrows($qhandle);
+		return @pg_num_rows($qhandle);
 	} else {
 		return 0;
 	}
@@ -250,7 +251,8 @@ function db_num_rows($qhandle) {
  *  @param	$qhandle (string)	Query result set handle
  */
 function db_free_result($qhandle) {
-	return @pg_freeresult($qhandle);
+	if (!$qhandle) { return false; }
+	return @pg_free_result($qhandle);
 }
 
 /**
@@ -275,7 +277,8 @@ function db_reset_result($qhandle,$row=0) {
  *  @param		$field (string)	Field name
  */
 function db_result($qhandle,$row,$field) {
-	return @pg_result($qhandle,$row,$field);
+	if (!$qhandle) { return false; }
+	return @pg_fetch_result($qhandle,$row,$field);
 }
 
 /**
@@ -284,7 +287,7 @@ function db_result($qhandle,$row,$field) {
  *  @param		$lhandle (string)	Query result set handle
  */
 function db_numfields($lhandle) {
-	return @pg_numfields($lhandle);
+	return @pg_num_fields($lhandle);
 }
 
 /**
@@ -314,7 +317,7 @@ function db_fieldname($lhandle,$fnumber) {
  */
 function db_affected_rows($qhandle) {
 	
-	return @pg_cmdtuples($qhandle);
+	return @pg_affected_rows($qhandle);
 }
 
 /**
@@ -327,19 +330,22 @@ function db_affected_rows($qhandle) {
  *  @param		$qhandle (string)	Query result set handle
  */
 function db_fetch_array($qhandle) {
+	if (!$qhandle) { return false; }
 	return @pg_fetch_array($qhandle);
 }
-/**                                                       
- * fetch a row into an associative array 
- * 
+/**
+ * fetch a row into an associative array
+ *
  *  @param		$qhandle (string)	Query result set handle
  *  @param		$fnumber (int)	Column number
  */
 function db_fetch_assoc($qhandle) {
+	if (!$qhandle) { return false; }
 	return @pg_fetch_assoc($qhandle);
 
 }
 function db_fetch_all($qhandle){
+		if (!$qhandle) { return false; }
 		return @pg_fetch_all($qhandle);
 }
 /**                                                       
@@ -349,6 +355,7 @@ function db_fetch_all($qhandle){
  *  @param		$fnumber (int)	Column number
  */
 function db_fetch_row($qhandle,$fnumber=0) {
+	  if (!$qhandle) { return false; }
 	  return pg_fetch_row($qhandle);
 }
 

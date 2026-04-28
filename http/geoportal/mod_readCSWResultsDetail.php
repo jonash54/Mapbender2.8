@@ -21,7 +21,7 @@ if (isset($_SESSION['mb_lang']) && ($_SESSION['mb_lang']!='')) {
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
 
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 
@@ -33,7 +33,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 }
 //validate following parameter to prohibit xss - see result pentest 03/2014
 //cat_id
-if (isset($_REQUEST["cat_id"]) & $_REQUEST["cat_id"] != "") {
+if (isset($_REQUEST["cat_id"]) && $_REQUEST["cat_id"] != "") {
 	//validate to integer
         $testMatch = $_REQUEST["cat_id"];
         //give max 99 entries - more will be to slow
@@ -45,7 +45,7 @@ if (isset($_REQUEST["cat_id"]) & $_REQUEST["cat_id"] != "") {
         $testMatch = NULL;
 }
 //validate
-if (isset($_REQUEST["validate"]) & $_REQUEST["validate"] != "") {
+if (isset($_REQUEST["validate"]) && $_REQUEST["validate"] != "") {
 	$testMatch = $_REQUEST["validate"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>validate</b> is not valid (true,false).<br/>'; 
@@ -54,7 +54,7 @@ if (isset($_REQUEST["validate"]) & $_REQUEST["validate"] != "") {
 	$testMatch = NULL;
 }
 //uuid
-if (isset($_REQUEST['uuid']) & $_REQUEST['uuid'] != "") {
+if (isset($_REQUEST['uuid']) && $_REQUEST['uuid'] != "") {
 	//validate cs list of uuids or other identifiers - which?
 	$testMatch = $_REQUEST["uuid"];
 	$uuid = new Uuid($testMatch);
@@ -66,7 +66,7 @@ if (isset($_REQUEST['uuid']) & $_REQUEST['uuid'] != "") {
 	$testMatch = NULL;
 }
 //mdtype
-if (isset($_REQUEST["mdtype"]) & $_REQUEST["mdtype"] != "") {
+if (isset($_REQUEST["mdtype"]) && $_REQUEST["mdtype"] != "") {
 	$testMatch = $_REQUEST["mdtype"];	
  	if (!($testMatch == 'html' or $testMatch == 'iso19139' or $testMatch == 'debug' or $testMatch == 'inspire')){ 
 		echo 'Parameter <b>mdtype</b> is not valid (iso19139, html, debug, inspire).<br/>'; 
@@ -75,7 +75,7 @@ if (isset($_REQUEST["mdtype"]) & $_REQUEST["mdtype"] != "") {
 	$testMatch = NULL;
 }
 //outputFormat
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'rdf')){ 
 		echo 'Parameter <b>outputFormat</b> is not valid (rdf).<br/>'; 

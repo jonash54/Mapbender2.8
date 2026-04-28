@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 require_once dirname(__FILE__) . "/../../core/globalSettings.php";
 require_once dirname(__FILE__)."/../classes/class_administration.php";
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[\d,]*$/';		

@@ -25,33 +25,11 @@
  * @author Tobias Rieck tobias.rieck@benndorf.de
  */
 function mbw_split() {
-    
-    $phpversion = phpversion();
+    // split() was removed in PHP 7.0 — on every supported runtime (7.x / 8.x)
+    // we simply forward to explode().
     $pars = func_get_args();
-    $result = null;
-    if (strpos($phpversion, "5.") === 0) {
-        switch ($phpversion[2]) {
-            case "0":
-            case "1":
-            case "2":
-               $result =  split($pars);
-               break;
-            default:
-                if ($pars[2] == null) {
-                    $result = explode($pars[0],$pars[1]);
-                }
-                else {
-                    $result = explode($pars[0],$pars[1],$pars[2]);
-                }
-        }
+    if (!isset($pars[2]) || $pars[2] === null) {
+        return explode($pars[0], $pars[1]);
     }
-    else if (strpos($phpversion, "7.") === 0) {
-        if ($pars[2] == null) {
-            $result = explode($pars[0],$pars[1]);
-        }
-        else {
-            $result = explode($pars[0],$pars[1],$pars[2]);
-        }
-    }
-    return $result;
+    return explode($pars[0], $pars[1], $pars[2]);
 }

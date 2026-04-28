@@ -13,7 +13,7 @@ $hostName = $_SERVER['HTTP_HOST'];
 $orderBy = "rank";
 //read out information from database:
 
-if (isset($_REQUEST["type"]) & $_REQUEST["type"] != "") {
+if (isset($_REQUEST["type"]) && $_REQUEST["type"] != "") {
 	$testMatch = $_REQUEST["type"];	
  	if (!($testMatch == 'keywords' or $testMatch == 'topicCategories' or $testMatch == 'inspireCategories') ){ 
 		//echo 'type: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -23,7 +23,7 @@ if (isset($_REQUEST["type"]) & $_REQUEST["type"] != "") {
 	$type = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'html' or $testMatch == 'json')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -33,7 +33,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$outputFormat = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["scale"]) & $_REQUEST["scale"] != "") {
+if (isset($_REQUEST["scale"]) && $_REQUEST["scale"] != "") {
 	$testMatch = $_REQUEST["scale"];	
  	if (!($testMatch == 'linear' or $testMatch == 'absolute')){ 
 		//echo 'scale: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -43,7 +43,7 @@ if (isset($_REQUEST["scale"]) & $_REQUEST["scale"] != "") {
 	$scale = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["maxObjects"]) & $_REQUEST["maxObjects"] != "") {
+if (isset($_REQUEST["maxObjects"]) && $_REQUEST["maxObjects"] != "") {
 	$testMatch = $_REQUEST["maxObjects"];	
  	if (!(($testMatch == '10') or ($testMatch == '15') or ($testMatch == 20) or ($testMatch == '25') or ($testMatch == '30') or ($testMatch == '35'))){ 
 		//echo 'maxObjects: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -53,7 +53,7 @@ if (isset($_REQUEST["maxObjects"]) & $_REQUEST["maxObjects"] != "") {
 	$maxObjects = (integer)$testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["maxFontSize"]) & $_REQUEST["maxFontSize"] != "") {
+if (isset($_REQUEST["maxFontSize"]) && $_REQUEST["maxFontSize"] != "") {
 	$testMatch = $_REQUEST["maxFontSize"];	
  	if (!(($testMatch == '10') or ($testMatch == '20') or ($testMatch == '30') or ($testMatch == '40'))){ 
 		//echo 'maxFontSize: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -64,7 +64,7 @@ if (isset($_REQUEST["maxFontSize"]) & $_REQUEST["maxFontSize"] != "") {
 	$testMatch = NULL;
 }
 //
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to wms, wfs
 	$testMatch = $_REQUEST["languageCode"];	
  	if (!($testMatch == 'de' or $testMatch == 'en' or  $testMatch == 'fr')){ 
@@ -77,7 +77,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 }
 
 /*
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];	
  	if (!($testMatch == 'www.geoportal.rlp' or $testMatch == 'www.geoportal.rlp.de' or  $testMatch == 'www.gdi-rp-dienste3.rlp.de' or  $testMatch == '10.7.101.151' or $testMatch == '10.7.101.252' )){ 
@@ -88,7 +88,7 @@ if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
 	$testMatch = NULL;
 }
 */
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];	
 	//look for whitelist in mapbender.conf

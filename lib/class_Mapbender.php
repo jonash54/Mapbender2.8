@@ -17,8 +17,8 @@ require_once(dirname(__FILE__)."/class_Singleton.php");
  		return Mapbender_session::singleton();
  	}
  	
- 	public static function singleton() {
-        	return parent::singleton(__CLASS__);
+ 	public static function singleton($classname = __CLASS__) {
+        	return parent::singleton($classname);
     	}
 	
 	public static function postgisAvailable () {

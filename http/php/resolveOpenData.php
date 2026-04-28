@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . "/../classes/class_administration.php";
 require_once dirname(__FILE__) . "/../classes/class_Uuid.php"; 
 
 //parse id from application (metadata_id)
-if (isset($_REQUEST["dcat_orga_id"]) & $_REQUEST["dcat_orga_id"] != "") {
+if (isset($_REQUEST["dcat_orga_id"]) && $_REQUEST["dcat_orga_id"] != "") {
 	//validate to integer
 	$testMatch = $_REQUEST["dcat_orga_id"];
     $uuid = new Uuid($testMatch);

@@ -21,9 +21,9 @@
  		new mb_notice("session.mapbender_session.instantiated ... ");
  	}
 
- 	public static function singleton()
+ 	public static function singleton($classname = __CLASS__)
     {
-        return parent::singleton(__CLASS__);
+        return parent::singleton($classname);
     }
  	
  	/**
@@ -34,7 +34,7 @@
  	public function set($name, $value){
  		$this->start();
  		$_SESSION[$name] = $value;
- 		new mb_notice("session.setSessionVariable.set: " . $name ." = ". $value);
+ 		new mb_notice("session.setSessionVariable.set: " . $name ." = ". (is_scalar($value) ? $value : gettype($value)));
  		session_write_close(); 
  	}
  	
@@ -112,7 +112,9 @@
 			session_id($this->id);
 			new mb_notice("session.sessionStart.changeId to: ". session_id());
 		}
-		session_start();
+		if (session_status() !== PHP_SESSION_ACTIVE) {
+			session_start();
+		}
 		new mb_notice("session.sessionStart.id: ". session_id());
 	}
 	

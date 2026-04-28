@@ -38,7 +38,7 @@ $ckanShowOrgaUrl = $ckanBaseUrl.'action/organization_show?id=';
 //require_once(dirname(__FILE__)."/../php/mb_validatePermission.php");
 $compareTimestamps = false;
 //Parse parameters
-if (isset($_REQUEST["compareTimestamps"]) & $_REQUEST["compareTimestamps"] != "") {
+if (isset($_REQUEST["compareTimestamps"]) && $_REQUEST["compareTimestamps"] != "") {
 	$testMatch = $_REQUEST["compareTimestamps"];	
  	if (!($testMatch == 'false' or $testMatch == 'true')){ 
 		echo 'Parameter <b>compareTimestamps</b> is not valid (false, true).<br/>'; 

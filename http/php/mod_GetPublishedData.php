@@ -19,7 +19,7 @@ $admin = new administration();
 $user_id = Mapbender::session()->get("mb_user_id");
 
 //validate outputFormat
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'kml' or $testMatch == 'gpx' or $testMatch == 'geojson')){ 
@@ -30,7 +30,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$testMatch = NULL;
 }
 //validate wmc_id
-if (isset($_REQUEST["wmc_id"]) & $_REQUEST["wmc_id"] != "") {
+if (isset($_REQUEST["wmc_id"]) && $_REQUEST["wmc_id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["wmc_id"];
 	if ($testMatch == "current") {

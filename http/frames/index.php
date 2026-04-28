@@ -53,9 +53,10 @@ if (!in_array($gui_id, Mapbender::session()->get("mb_user_guis"))) {
 	die();
 }
 //check http parameter integrationType (html/div)
-if (isset($_REQUEST["representationType"]) & $_REQUEST["representationType"] != "") {
+if (isset($_REQUEST["representationType"]) && $_REQUEST["representationType"] != "") {
 	$testMatch = $_REQUEST["representationType"];	
  	if (!($testMatch == 'htmlComplete' or $testMatch == 'htmlElement')){ 
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter outputFormat is not valid (complete, htmlElement).'; 
 		echo json_encode($resultObject);
 		die();	
@@ -64,9 +65,10 @@ if (isset($_REQUEST["representationType"]) & $_REQUEST["representationType"] != 
 	$testMatch = NULL;
 }
 //check http parameter integrationType (html/div)
-if (isset($_REQUEST["withDebugInfo"]) & $_REQUEST["withDebugInfo"] != "") {
+if (isset($_REQUEST["withDebugInfo"]) && $_REQUEST["withDebugInfo"] != "") {
 	$testMatch = $_REQUEST["withDebugInfo"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter outputFormat is not valid (true, false).'; 
 		echo json_encode($resultObject);
 		die();	
@@ -79,9 +81,10 @@ if (isset($_REQUEST["withDebugInfo"]) & $_REQUEST["withDebugInfo"] != "") {
 	$testMatch = NULL;
 }
 //check http parameter encodeResult (true/false)
-if (isset($_REQUEST["encodeResult"]) & $_REQUEST["encodeResult"] != "") {
+if (isset($_REQUEST["encodeResult"]) && $_REQUEST["encodeResult"] != "") {
 	$testMatch = $_REQUEST["encodeResult"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter outputFormat is not valid (true, false).'; 
 		echo json_encode($resultObject);
 		die();	
@@ -97,9 +100,10 @@ if (isset($_REQUEST["encodeResult"]) & $_REQUEST["encodeResult"] != "") {
 	$testMatch = NULL;
 }
 //check http parameter minify (true/false)
-if (isset($_REQUEST["minify"]) & $_REQUEST["minify"] != "") {
+if (isset($_REQUEST["minify"]) && $_REQUEST["minify"] != "") {
 	$testMatch = $_REQUEST["minify"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
+		if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
 		$resultObject->error->message = 'Parameter outputFormat is not valid (true, false).'; 
 		echo json_encode($resultObject);
 		die();	
@@ -142,7 +146,7 @@ $t = array('s');
 $res = db_prep_query($sql,$v,$t);
 $row = db_fetch_array($res);
 //$e = new mb_notice("count row: ".count($row['var_name']));
-if (count($row['var_name']) == 1) {
+if (is_array($row) && isset($row['var_name'])) {
 	$activatedGuiHtmlCache = $row['var_value'];
 	if ($activatedGuiHtmlCache == 'true') {
 		$activatedGuiHtmlCache = true;

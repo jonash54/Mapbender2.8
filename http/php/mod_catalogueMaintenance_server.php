@@ -32,7 +32,7 @@ if (DEFINED("CATALOGUE_MAINTENANCE_USER") && CATALOGUE_MAINTENANCE_USER !== "") 
 	}
 }
 
-if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
+if (isset($_REQUEST["resourceType"]) && $_REQUEST["resourceType"] != "") {
 	$testMatch = $_REQUEST["resourceType"];	
  	if (!($testMatch == 'wms' or $testMatch == 'wfs' or $testMatch == 'dataset' or $testMatch == 'wmc')){ 
 		$resultObj['success'] = false;
@@ -44,7 +44,7 @@ if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["maintenanceFunction"]) & $_REQUEST["maintenanceFunction"] != "") {
+if (isset($_REQUEST["maintenanceFunction"]) && $_REQUEST["maintenanceFunction"] != "") {
 	$testMatch = $_REQUEST["maintenanceFunction"];	
  	if (!($testMatch == 'reindex' or $testMatch == 'monitor')){ 
 		$resultObj['success'] = false;
@@ -56,7 +56,7 @@ if (isset($_REQUEST["maintenanceFunction"]) & $_REQUEST["maintenanceFunction"] !
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["resourceIds"]) & $_REQUEST["resourceIds"] != "") {
+if (isset($_REQUEST["resourceIds"]) && $_REQUEST["resourceIds"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["resourceIds"];
 	$pattern = '/^[\d,]*$/';		

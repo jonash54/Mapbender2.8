@@ -5,7 +5,7 @@ require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 $maxResults = 10;
 $timeBegin = microtime(1000000);
 //validate parameter
-if (isset($_REQUEST["searchText"]) & $_REQUEST["searchText"] != "") {
+if (isset($_REQUEST["searchText"]) && $_REQUEST["searchText"] != "") {
 	$test="(SELECT\s[\w\*\)\(\,\s]+\sFROM\s[\w]+)| (UPDATE\s[\w]+\sSET\s[\w\,\'\=]+)| (INSERT\sINTO\s[\d\w]+[\s\w\d\)\(\,]*\sVALUES\s\([\d\w\'\,\)]+)| (DELETE\sFROM\s[\d\w\'\=]+)";
 	//validate to csv integer list
 	$testMatch = $_REQUEST["searchText"];
@@ -23,7 +23,7 @@ if (isset($_REQUEST["searchText"]) & $_REQUEST["searchText"] != "") {
 		$searchText ='*';
 	}
 }
-if (isset($_REQUEST["maxResults"]) & $_REQUEST["maxResults"] != "") {
+if (isset($_REQUEST["maxResults"]) && $_REQUEST["maxResults"] != "") {
 	//validate integer to 100 - not more
 	$testMatch = $_REQUEST["maxResults"];
 	//give max 99 entries - more will be to slow

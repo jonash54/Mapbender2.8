@@ -21,7 +21,7 @@ require_once(dirname(__FILE__)."/../php/mb_validatePermission.php");
 
 //require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 //validate parameter values
-if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
+if (isset($_REQUEST["resourceType"]) && $_REQUEST["resourceType"] != "") {
 	$testMatch = $_REQUEST["resourceType"];	
  	if (!($testMatch == 'wms' or $testMatch == 'wfs' or $testMatch == 'dataset' or $testMatch == 'wmc')){ 
 		echo 'Parameter <b>resourceType</b> is not valid (wms, wfs, dataset, wmc).<br/>'; 
@@ -31,7 +31,7 @@ if (isset($_REQUEST["resourceType"]) & $_REQUEST["resourceType"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["maintenanceFunction"]) & $_REQUEST["maintenanceFunction"] != "") {
+if (isset($_REQUEST["maintenanceFunction"]) && $_REQUEST["maintenanceFunction"] != "") {
 	$testMatch = $_REQUEST["maintenanceFunction"];	
  	if (!($testMatch == 'reindex' or $testMatch == 'monitor')){ 
 		echo 'Parameter <b>maintenanceFunction</b> is not valid (reindex, monitor).<br/>'; 
@@ -41,7 +41,7 @@ if (isset($_REQUEST["maintenanceFunction"]) & $_REQUEST["maintenanceFunction"] !
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["resourceIds"]) & $_REQUEST["resourceIds"] != "") {
+if (isset($_REQUEST["resourceIds"]) && $_REQUEST["resourceIds"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["resourceIds"];
 	$pattern = '/^[\d,]*$/';		

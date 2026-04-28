@@ -19,11 +19,11 @@ $marker = "marker";
 $markerSize = "medium";
 $markerColor = "#7e7e7e";
 
-if (isset($_REQUEST["marker-symbol"]) & $_REQUEST["marker-symbol"] != "") {
+if (isset($_REQUEST["marker-symbol"]) && $_REQUEST["marker-symbol"] != "") {
 	$marker = $_REQUEST["marker-symbol"];
 }
 
-if (isset($_REQUEST["marker-size"]) & $_REQUEST["marker-size"] != "") {
+if (isset($_REQUEST["marker-size"]) && $_REQUEST["marker-size"] != "") {
 	//validate to inside / outside - TODO implement other ones than intersects which is default
 	$testMatch = $_REQUEST["marker-size"];	
  	if (!($testMatch == 'medium' or $testMatch == 'large' or $testMatch == 'small')){ 
@@ -35,7 +35,7 @@ if (isset($_REQUEST["marker-size"]) & $_REQUEST["marker-size"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["marker-color"]) & $_REQUEST["marker-color"] != "") {
+if (isset($_REQUEST["marker-color"]) && $_REQUEST["marker-color"] != "") {
 	//validate to hex color value
 	//
 	//add # before, because # cannot be part of the url
@@ -55,7 +55,7 @@ if (isset($_REQUEST["marker-color"]) & $_REQUEST["marker-color"] != "") {
 
 $key = array_search($marker, $svgFiles);
 
-if (gettype($key) == integer) {
+if (is_int($key)) {
 	$svgGraphicFilename = $symbolPath.$svgFiles[$key]."-15.svg";
 } else {
 	$svgGraphicFilename = $symbolPath."marker-15.svg";

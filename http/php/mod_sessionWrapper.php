@@ -20,7 +20,7 @@ if (!($hostName == 'localhost' or $hostName == '127.0.0.1')) {
 	die();
 }
 
-if (isset($_REQUEST["sessionId"]) & $_REQUEST["sessionId"] != "") {
+if (isset($_REQUEST["sessionId"]) && $_REQUEST["sessionId"] != "") {
 	//echo "<br>Requested sessionId: ".$_REQUEST["sessionId"]."<br>";
 } else {
 	$resultObj['message'] ='No sessionId given - please give parameter!';
@@ -41,7 +41,7 @@ if ($existSession) {
     die();
 }
 //parse operation
-if (isset($_REQUEST["operation"]) & $_REQUEST["operation"] != "") {
+if (isset($_REQUEST["operation"]) && $_REQUEST["operation"] != "") {
 	$testMatch = $_REQUEST["operation"];
  	if (!in_array($testMatch, $allowedOperations)){
     		$resultObj['message'] ='Parameter operation is not valid '.implode(',', $allowedOperations);
@@ -58,7 +58,7 @@ if (isset($_REQUEST["operation"]) & $_REQUEST["operation"] != "") {
 	die();
 }
 //parse operation
-if (isset($_REQUEST["key"]) & $_REQUEST["key"] != "") {
+if (isset($_REQUEST["key"]) && $_REQUEST["key"] != "") {
 	$testMatch = $_REQUEST["key"];
  	if (!in_array($testMatch, $allowedKeys)){
     		$resultObj['message'] = 'Parameter key is not valid '.implode(',', $allowedKeys);
@@ -88,7 +88,7 @@ switch ($operation) {
 	    case "GML":
                 //validate gml!
 		//parse operation
-		if (isset($_REQUEST["value"]) & $_REQUEST["value"] != "") {
+		if (isset($_REQUEST["value"]) && $_REQUEST["value"] != "") {
 			$testMatch = $_REQUEST["value"];
  			/*if (!in_array($testMatch, $allowedKeys)){
     				$resultObj['message'] = 'Parameter key is not valid '.implode(',', $allowedKeys);
@@ -131,7 +131,7 @@ switch ($operation) {
 		die();
                 break;
 	    case "dsgvo":
-		if (isset($_REQUEST["value"]) & $_REQUEST["value"] != "") {
+		if (isset($_REQUEST["value"]) && $_REQUEST["value"] != "") {
 			$testMatch = $_REQUEST["value"];
 			$value = urldecode($testMatch);
  			switch($value) {
@@ -164,7 +164,7 @@ switch ($operation) {
 		}
 	        break;
 			case "preferred_gui":
-				if (isset($_REQUEST["value"]) & $_REQUEST["value"] != "") {
+				if (isset($_REQUEST["value"]) && $_REQUEST["value"] != "") {
 					$testMatch = $_REQUEST["value"];
 					$value = urldecode($testMatch);
 					Mapbender::session()->set($key, $value);

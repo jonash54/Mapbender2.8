@@ -42,7 +42,7 @@ $e = new mb_notice("mod_showMetadata.php: new language: ".$languageCode);
 
 $outputFormat = "json";
 
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 
@@ -57,7 +57,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 
 $localeObj->setCurrentLocale($languageCode);
 
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'json' or $testMatch == 'html')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -85,7 +85,7 @@ foreach($_REQUEST as $key => $val) {
 	$_REQUEST[strtoupper($key)] = $val;
 }
 //validate request params
-if (isset($_REQUEST['ID']) & $_REQUEST['ID'] != "") {
+if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//validate cs list of uuids or other identifiers - which?
 	$testMatch = $_REQUEST["ID"];
 	//$uuid = new Uuid($testMatch);
@@ -204,8 +204,9 @@ SQL;
 	$sql .= "ows_relation_metadata.fkey_metadata_id = mb_metadata.metadata_id) as metadata_relation on metadata_relation.fkey_featuretype_id = featuretype_inspire.featuretype_id and metadata_relation.uuid = $1;";*/
 
 	//initialize array for result
-	
+
 	//$downloadOptions = new stdClass();
+	$idList = is_array($idList ?? null) ? $idList : [];
 	for ($i = 0; $i < count($idList); $i++) {
 		$v = array($idList[$i]);
 		$t = array('s');

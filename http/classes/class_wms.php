@@ -3703,14 +3703,19 @@ SQL;
 			$layer_id = $row["fkey_layer_id"];
 			if (defined("SHOW_COUPLED_FEATURETYPES_IN_TREE") && SHOW_COUPLED_FEATURETYPES_IN_TREE == true) {
 				$sql = "SELECT *, f_get_download_options_for_layer(layer_id) as downloadoptions, f_get_layer_featuretype_coupling(array[ layer_id ], TRUE) as featuretypecoupling FROM layer WHERE layer_id = $1";
-//$e = new mb_exception("show coupling!");
 			} else {
 				$sql = "SELECT *, f_get_download_options_for_layer(layer_id) as downloadoptions FROM layer WHERE layer_id = $1";
 			}
 			$v = array($layer_id);
 			$t = array('i');
 			$res_layer = db_prep_query($sql,$v,$t);
+			// If the query failed (e.g. db function not available), fall back to plain SELECT
+			if (!$res_layer) {
+				$sql = "SELECT * FROM layer WHERE layer_id = $1";
+				$res_layer = db_prep_query($sql, $v, $t);
+			}
 			$count_layer=0;
+			$layer_cnt = null;
 			while($row2 = db_fetch_array($res_layer)){
 				$this->addLayer($row2["layer_pos"],$row2["layer_parent"]);
 				$layer_cnt=count($this->objLayer)-1;
@@ -3806,6 +3811,7 @@ SQL;
 				$this->objLayer[$layer_cnt]->layer_maxscale = $row2["layer_maxscale"];
 				$count_layer++;
 			}
+			if ($layer_cnt === null) { $count++; continue; } // layer_id not found in layer table — skip
 			$this->objLayer[$layer_cnt]->layer_uid = $layer_id;
 			$this->objLayer[$layer_cnt]->gui_layer_wms_id = $row["gui_layer_wms_id"];
 			$this->objLayer[$layer_cnt]->gui_layer_selectable = $row["gui_layer_selectable"];
@@ -4444,10 +4450,9 @@ class layer extends wms {
 	var $gui_layer_style = NULL;	
 	//var $gui_layer_dataurl_href;
 
-	function layer($id,$parent){
+	function __construct($id,$parent){
 		$this->layer_id = $id;
-		$this->layer_parent = $parent;	
-		//var_dump($this);	
+		$this->layer_parent = $parent;
 	}
 
 	public function equals ($layer) {

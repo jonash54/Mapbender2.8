@@ -35,7 +35,7 @@ class OwsConstraints {
 	}
 	
 	function getRequestParameters() {
-		if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+		if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 			//validate to integer 
 			$testMatch = $_REQUEST["id"];
 			$pattern = '/^[\d]*$/';		
@@ -47,7 +47,7 @@ class OwsConstraints {
 			$this->id = (integer)$testMatch;
 			$testMatch = NULL;	
 		}
-		if (isset($_REQUEST["type"]) & $_REQUEST["type"] != "") {
+		if (isset($_REQUEST["type"]) && $_REQUEST["type"] != "") {
 			//validate to wms, wfs
 			$testMatch = $_REQUEST["type"];	
  			if (!($testMatch == 'wms' or $testMatch == 'wfs'  or $testMatch == 'metadata')){
@@ -58,7 +58,7 @@ class OwsConstraints {
 			$this->type = $testMatch;
 			$testMatch = NULL;
 		}
-		if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+		if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 			//validate to wms, wfs
 			$testMatch = $_REQUEST["languageCode"];	
  			if (!($testMatch == 'de' or $testMatch == 'en' or  $testMatch == 'fr')){ 
@@ -69,7 +69,7 @@ class OwsConstraints {
 			$this->languageCode = $testMatch;
 			$testMatch = NULL;
 		}
-		if (isset($_REQUEST["withHeader"]) & $_REQUEST["withHeader"] != "") {
+		if (isset($_REQUEST["withHeader"]) && $_REQUEST["withHeader"] != "") {
 			//validate to wms, wfs
 			$testMatch = $_REQUEST["withHeader"];	
  			if (!($testMatch == 'true' or $testMatch == 'false')){ 
@@ -84,7 +84,7 @@ class OwsConstraints {
 			}
 			$testMatch = NULL;
 		}
-		if (isset($_REQUEST["asTable"]) & $_REQUEST["asTable"] != "") {
+		if (isset($_REQUEST["asTable"]) && $_REQUEST["asTable"] != "") {
 			//validate to wms, wfs
 			$testMatch = $_REQUEST["asTable"];	
  			if (!($testMatch == 'true' or $testMatch == 'false')){ 
@@ -99,7 +99,7 @@ class OwsConstraints {
 			}
 			$testMatch = NULL;
 		}
-		if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+		if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 			//validate to iso19139 or html
 			$testMatch = $_REQUEST["outputFormat"];	
  			if (!($testMatch === 'iso19139') && !($testMatch === 'html')){ 
@@ -204,7 +204,7 @@ class OwsConstraints {
 		//if fees exists,
 		//if licences are defined,
 		//if network access is restricted - only services
-		if ((isset($row[$this->type.'_proxylog']) & $row[$this->type.'_proxylog'] != 0) or strtoupper($row['accessconstraints']) != "NONE" or strtoupper($row['fees']) != "NONE" or isset($row['termsofuse_id']) or (isset($row[$this->type.'_network_access']) & $row[$this->type.'_network_access'] != 0)) {
+		if ((isset($row[$this->type.'_proxylog']) && $row[$this->type.'_proxylog'] != 0) or strtoupper($row['accessconstraints']) != "NONE" or strtoupper($row['fees']) != "NONE" or isset($row['termsofuse_id']) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0)) {
 			$html = "";
 			//generate text for json object if restrictions exists
 			if ($this->withHeader && $this->outputFormat != "iso19139") {
@@ -217,14 +217,14 @@ class OwsConstraints {
 				$t_c = "\n\t\t</td>\n\t</tr>\n";
 				$tableEnd = "</table>\n";
 				$html .= $tableBegin;
-				if (isset($row[$this->type.'_proxylog']) & $row[$this->type.'_proxylog'] != 0 )  {
+				if (isset($row[$this->type.'_proxylog']) && $row[$this->type.'_proxylog'] != 0 )  {
 					$discPrivacy = $htmlHeader['logInformation'];
 					$discPrivacy .= "<a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a>";
 					$html .= $t_a.$htmlHeader['discPrivacyHeader'].$t_b.$discPrivacy.$t_c;
 				}
-				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) & $row[$this->type.'_network_access'] != 0) ) {
+				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
 					$accessConstraintsHeader = $htmlHeader['accessConstraintsHeader'];
-					if (isset($row[$this->type.'_network_access']) & $row[$this->type.'_network_access'] != 0) {
+					if (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) {
 						$accessConstraints = $htmlHeader['networkAccess'];
 					}
 					else {
@@ -233,7 +233,7 @@ class OwsConstraints {
 					$accessConstraints .= $this->display_text($row['accessconstraints']);
 					$html .= $t_a.$htmlHeader['accessConstraintsHeader'].$t_b.$accessConstraints.$t_c;
 				}
-				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" & isset($row['wms_pricevolume']) & $row['wms_pricevolume'] != 0) or ($this->type == "wfs" & isset($row['wfs_pricevolume']) & $row['wfs_pricevolume'] != 0)) {
+				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
 					$feesPart = $t_a.$htmlHeader['feesHeader'].$t_b;
 					if (isset($row['termsofuse_id'])) {
 						$fees = $htmlHeader['licences'];
@@ -254,7 +254,7 @@ class OwsConstraints {
 							$feesPart .= $fees;
 						}
 					}
-					if ($this->type == "wms" & isset($row['wms_pricevolume']) & $row['wms_pricevolume'] != 0) {
+					if ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) {
 						$priceExample = (integer)$row['wms_pricevolume']*400*600/100000000;
 						$priceInformation = $htmlHeader['priceInformation'][0].(integer)$row['wms_pricevolume'];
 						$priceInformation .= $htmlHeader['priceInformation'][1].$htmlHeader['priceInformation'][2].$priceExample.$htmlHeader['priceInformation'][3]." <a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a><br>";	
@@ -262,7 +262,7 @@ class OwsConstraints {
 					} else {
 						$feesPart .= $t_c;
 					}
-					if ($this->type == "wfs" & isset($row['wfs_pricevolume']) & $row['wfs_pricevolume'] != 0) {
+					if ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0) {
 						$priceExample = (integer)$row['wfs_pricevolume']*1000/100;
 						$priceInformation = $htmlHeader['priceInformation'][0].(integer)$row['wfs_pricevolume'];
 						$priceInformation .= $htmlHeader['priceWfsInformation'][1].$htmlHeader['priceWfsInformation'][2].$priceExample.$htmlHeader['priceInformation'][3]." <a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a><br>";	
@@ -283,14 +283,14 @@ class OwsConstraints {
 				$fees = "";
 				$accessConstraints = "";	
 				//information is given in the standard way - not as a html table
-				if (isset($row[$this->type.'_proxylog']) & $row[$this->type.'_proxylog'] != 0 )  {
+				if (isset($row[$this->type.'_proxylog']) && $row[$this->type.'_proxylog'] != 0 )  {
 					$discPrivacy = "<h2>".$htmlHeader['discPrivacyHeader']."</h2>".$htmlHeader['logInformation'];
 					$discPrivacy .= "<a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a>";
 					$html .= $discPrivacy."<br>";
 				}
-				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) & $row[$this->type.'_network_access'] != 0) ) {
+				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
 					$accessConstraintsHeader = $htmlHeader['accessConstraintsHeader'];
-					if (isset($row[$this->type.'_network_access']) & $row[$this->type.'_network_access'] != 0) {
+					if (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) {
 						$accessConstraints .= $htmlHeader['networkAccess'];
 					}
 					else {
@@ -299,7 +299,7 @@ class OwsConstraints {
 					$accessConstraints .= "<h2>".$htmlHeader['accessConstraintsHeader']."</h2>".$this->display_text($row['accessconstraints']);
 					$html .= $accessConstraints."<br>";
 				}
-				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" & isset($row['wms_pricevolume']) & $row['wms_pricevolume'] != 0) or ($this->type == "wfs" & isset($row['wfs_pricevolume']) & $row['wfs_pricevolume'] != 0)) {
+				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
 					$fees .= "<h2>".$htmlHeader['feesHeader']."</h2>";
 					if (isset($row['termsofuse_id'])) {
 						$fees .= $htmlHeader['licences'];
@@ -317,13 +317,13 @@ class OwsConstraints {
 							$fees .= $this->display_text($row['fees']);
 						}
 					}
-					if ($this->type == "wms" & isset($row['wms_pricevolume']) & $row['wms_pricevolume'] != 0) {
+					if ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) {
 						$priceExample = (integer)$row['wms_pricevolume']*400*600/100000000;
 						$priceInformation = $htmlHeader['priceInformation'][0].(integer)$row['wms_pricevolume'];
 						$priceInformation .= $htmlHeader['priceInformation'][1].$htmlHeader['priceInformation'][2].$priceExample.$htmlHeader['priceInformation'][3]." <a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a><br>";
 						$fees .= $priceInformation."<br>";
 					}
-					if ($this->type == "wfs" & isset($row['wfs_pricevolume']) & $row['wfs_pricevolume'] != 0) {
+					if ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0) {
 						$priceExample = (integer)$row['wfs_pricevolume']*1000/100;
 						$priceInformation = $htmlHeader['priceInformation'][0].(integer)$row['wfs_pricevolume'];
 						$priceInformation .= $htmlHeader['priceWfsInformation'][1].$htmlHeader['priceWfsInformation'][2].$priceExample.$htmlHeader['priceInformation'][3]." <a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a><br>";	

@@ -41,7 +41,7 @@ function abort($message) {
 $iso8601Pattern = '/^\d{4}(-\d\d(-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(([+-]\d\d:\d\d)|Z)?)?)?)?$/i';
 $singleYearPattern = '/^\d{4}$/';
 
-if (isset($_REQUEST["default"]) & $_REQUEST["default"] != "") {
+if (isset($_REQUEST["default"]) && $_REQUEST["default"] != "") {
 	$testMatch = urldecode($_REQUEST["default"]);
 	if (!preg_match($iso8601Pattern,$testMatch) && $testMatch !== 'current'){
 		abort("The value for the default parameter is not a valid iso8601 dateTime string or has the value 'current'."); 	
@@ -49,7 +49,7 @@ if (isset($_REQUEST["default"]) & $_REQUEST["default"] != "") {
 	$default = $testMatch;
 }
 
-if (isset($_REQUEST["operation"]) & $_REQUEST["operation"] != "") {
+if (isset($_REQUEST["operation"]) && $_REQUEST["operation"] != "") {
 	$testMatch = urldecode($_REQUEST["operation"]);
 	if (!$testMatch == 'snapToGrid' && !$testMatch == 'configureTimeline'){ 
 		echo 'Parameter <b>operation</b> is not valid (snapToGrid,configureTimeline).<br/>'; 
@@ -58,7 +58,7 @@ if (isset($_REQUEST["operation"]) & $_REQUEST["operation"] != "") {
 	$operation = $testMatch;
 }	
 
-if (isset($_REQUEST["userValue"]) & $_REQUEST["userValue"] != "") {
+if (isset($_REQUEST["userValue"]) && $_REQUEST["userValue"] != "") {
 	$testMatch = urldecode($_REQUEST["userValue"]);
 	if (!preg_match($iso8601Pattern,$testMatch)){
 		abort("The value for the userValue parameter is not a valid iso8601 dateTime string."); 	
@@ -66,7 +66,7 @@ if (isset($_REQUEST["userValue"]) & $_REQUEST["userValue"] != "") {
 	$userValue = $testMatch;
 }	
 
-if (isset($_REQUEST["extent"]) & $_REQUEST["extent"] != "") {
+if (isset($_REQUEST["extent"]) && $_REQUEST["extent"] != "") {
 	$testMatch = urldecode($_REQUEST["extent"]);
 	//search for comma
 	if (strpos($testMatch,',') !== false) {

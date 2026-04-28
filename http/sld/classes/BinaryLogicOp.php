@@ -60,7 +60,7 @@ class BinaryLogicOp
 	 * Constructor that directly fills the $name variable.
 	 * @param string $name the type of this logical operation.
 	 */
-	function BinaryLogicOp($name)
+	function __construct($name)
 	{
 		$this->name = $name;
 	}
@@ -102,7 +102,7 @@ class BinaryLogicOp
 		
 		$temp .= $offset."  ".$this->name."<br>\n";
 		
-		$number = split("_", $id);
+		$number = explode("_", $id);
 		$number = $number[count($number)-1];
 		$temp .= $offset."   <a class=\"edit\" href=\"?function=deleteoperation&id=".$this->parent."&number=".$number."\">";
 		$temp .= "<img src='./img/minus.gif' border='0'>&nbsp;l&ouml;schen</a>\n";

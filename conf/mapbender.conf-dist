@@ -410,7 +410,7 @@ define("WRAPPER_PATH","/portal/karten.html");
 # --------------------------------------------
 define("DJANGO_PORTAL", false);
 
-define("OWSPROXY_ALLOW_SESSION_GRABBING", false);
+# (OWSPROXY_ALLOW_SESSION_GRABBING is already defined ~line 91)
 
 # --------------------------------------------
 # user autocomplete

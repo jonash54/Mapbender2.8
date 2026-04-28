@@ -13,7 +13,7 @@ $hostName = $_SERVER['HTTP_HOST'];
 $pathToLoadScript = '/portal/karten.html?WMC=';
 $pathToMetadata = '/mapbender/php/mod_showMetadata.php?';
 $pathToPreview = '/mapbender/geoportal/mod_showPreview.php?';
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'html' or $testMatch == 'json')){ 
 		echo '<b>outputFormat</b> is not valid.<br/>'; 
@@ -22,7 +22,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$outputFormat = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["maxObjects"]) & $_REQUEST["maxObjects"] != "") {
+if (isset($_REQUEST["maxObjects"]) && $_REQUEST["maxObjects"] != "") {
 	$testMatch = $_REQUEST["maxObjects"];	
  	$pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
@@ -36,7 +36,7 @@ if (isset($_REQUEST["maxObjects"]) & $_REQUEST["maxObjects"] != "") {
         }	
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["maxAge"]) & $_REQUEST["maxAge"] != "") {
+if (isset($_REQUEST["maxAge"]) && $_REQUEST["maxAge"] != "") {
 	$testMatch = $_REQUEST["maxAge"];	
  	$pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
@@ -46,7 +46,7 @@ if (isset($_REQUEST["maxAge"]) & $_REQUEST["maxAge"] != "") {
 	$maxAge = (integer)$testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to wms, wfs
 	$testMatch = $_REQUEST["languageCode"];	
  	if (!($testMatch == 'de' or $testMatch == 'en'  or $testMatch == 'fr')){ 
@@ -56,7 +56,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	$languageCode = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];	
 	//look for whitelist in mapbender.conf

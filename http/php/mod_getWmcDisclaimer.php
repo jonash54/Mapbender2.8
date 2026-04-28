@@ -23,7 +23,7 @@ $hostName = $_SERVER['HTTP_HOST'];
 $id = 4373; //dummy id
 $withHeader = false;
 //TODO give requesting hostname to this script
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	if ($_REQUEST["id"] == "current") {
 		$id = "current";
 	} else { 
@@ -39,7 +39,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
 	}	
 }
 
-if (isset($_REQUEST["withHeader"]) & $_REQUEST["withHeader"] != "") {
+if (isset($_REQUEST["withHeader"]) && $_REQUEST["withHeader"] != "") {
 	//validate to wms, wfs
 	$testMatch = $_REQUEST["withHeader"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
@@ -56,7 +56,7 @@ if (isset($_REQUEST["withHeader"]) & $_REQUEST["withHeader"] != "") {
 }
 
 //TODO give requesting hostname to this script
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];	
 	//look for whitelist in mapbender.conf
@@ -81,7 +81,7 @@ if (isset($sessionLang) && ($sessionLang!='')) {
 	$languageCode = $langCode; #overwrite the GET Parameter with the SESSION information
 }
 
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 

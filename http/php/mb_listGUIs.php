@@ -67,15 +67,17 @@ function mb_listGUIs($arrayGUIs){
 	$total_guis = 0;
 	$totalCategories = 0;
 	$divHtml = "";
+	$dummyCategorySet = false;
+	$category = null;
 	while($row = db_fetch_array($result)){
-		
+
 		if($category !== $row["category_name"]) {
 			if($divHtml != "") {
 				$divHtml .= '</ul></div>';
 			}
 			$category = $row["category_name"];
 			
-			if(strlen($row["category_name"]) > 0) {
+			if(strlen((string)$row["category_name"]) > 0) {
 				echo '<li><a href="#guiListTab-'.$totalCategories.'">' . $row["category_name"] . '</a></li>';
 			}
 			else {
@@ -95,7 +97,7 @@ function mb_listGUIs($arrayGUIs){
 			$totalCategories++;
 		}
 		
-		if(count($row["category_name"]) === 0 && !$dummyCategorySet && $divHtml == "")  {
+		if(strlen((string)$row["category_name"]) === 0 && !$dummyCategorySet && $divHtml == "")  {
 			echo '<li><a href="#guiListTab-0">'._mb('Others').'</a></li>';
 		
 			$divHtml .= '<div id="guiListTab-0">';

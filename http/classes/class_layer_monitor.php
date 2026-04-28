@@ -101,7 +101,7 @@ class Layer_load_count {
 		foreach( $notAlreadyExists as $newLayerId ) {
     			$insertLayer[] = '('.$newLayerId.',0)';
 		}
-		if (count($insertLayer) > 0) {
+		if (count($insertLayer ?? []) > 0) {
 			$sql = "INSERT INTO layer_load_count (fkey_layer_id,load_count) VALUES ".implode(',',$insertLayer).";";
 			$res = db_query($sql);
 		}

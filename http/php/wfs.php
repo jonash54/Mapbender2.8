@@ -35,7 +35,7 @@ $version = $_GET["VERSION"];
 $service = strtoupper($_GET["SERVICE"]);
 
 //check for integer value WFS_ID
-if (isset($_REQUEST["WFS_ID"]) & $_REQUEST["WFS_ID"] != "") {
+if (isset($_REQUEST["WFS_ID"]) && $_REQUEST["WFS_ID"] != "") {
     //validate integer 
     $testMatch = $_REQUEST["WFS_ID"];
     //give max 99 entries - more will be to slow
@@ -50,7 +50,7 @@ if (isset($_REQUEST["WFS_ID"]) & $_REQUEST["WFS_ID"] != "") {
 }
 
 //check for integer value FEATURETYPE_ID
-if (isset($_REQUEST["FEATURETYPE_ID"]) & $_REQUEST["FEATURETYPE_ID"] != "") {
+if (isset($_REQUEST["FEATURETYPE_ID"]) && $_REQUEST["FEATURETYPE_ID"] != "") {
     //validate integer
     $testMatch = $_REQUEST["FEATURETYPE_ID"];
     //give max 99 entries - more will be to slow

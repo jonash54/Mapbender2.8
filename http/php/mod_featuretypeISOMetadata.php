@@ -75,7 +75,7 @@ foreach($_REQUEST as $key => $val) {
 	$_REQUEST[strtoupper($key)] = $val;
 }
 //validate request params
-if (isset($_REQUEST['ID']) & $_REQUEST['ID'] != "") {
+if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//validate integer
 	$testMatch = $_REQUEST["ID"];
 	$pattern = '/^[\d]*$/';		

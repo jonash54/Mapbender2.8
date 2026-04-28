@@ -24,7 +24,7 @@ $withHierarchy = false;
 $overlayPath = MAPBENDER_PATH."/php/mod_GetPublishedData.php?outputFormat=kml&wmc_id=";
 
 //check for given mobilemap conf file as get parameter
-if (isset($_REQUEST["confFileName"]) & $_REQUEST["confFileName"] != "") {
+if (isset($_REQUEST["confFileName"]) && $_REQUEST["confFileName"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["confFileName"];
 	$pattern = '/^mobilemap[0-9]$/';
@@ -61,7 +61,7 @@ if (!$userId) {
 	$userId = PUBLIC_USER;
 }
 
-if (isset($_REQUEST["wmc_id"]) & $_REQUEST["wmc_id"] != "") {
+if (isset($_REQUEST["wmc_id"]) && $_REQUEST["wmc_id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["wmc_id"];
 	if ($testMatch == "current") {
@@ -79,7 +79,7 @@ if (isset($_REQUEST["wmc_id"]) & $_REQUEST["wmc_id"] != "") {
 	die();
 }
 
-if (isset($_REQUEST["withHierarchy"]) & $_REQUEST["withHierarchy"] != "") {
+if (isset($_REQUEST["withHierarchy"]) && $_REQUEST["withHierarchy"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["withHierarchy"];
 	if ($testMatch !== '1'){ 
@@ -93,7 +93,7 @@ if (isset($_REQUEST["withHierarchy"]) & $_REQUEST["withHierarchy"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["epsg"]) & $_REQUEST["epsg"] != "") {
+if (isset($_REQUEST["epsg"]) && $_REQUEST["epsg"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["epsg"];
 	$pattern = '/^[0-9]*$/';

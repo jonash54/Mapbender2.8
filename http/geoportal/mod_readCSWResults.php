@@ -332,8 +332,8 @@ for ($i_si = $start_cat; $i_si < $end_cat ; $i_si++) {
 	$openSearchWrapperDetail="mod_readCSWResultsDetail.php";
 	//define the right request for the page
 	//calculate the startindex for the requested pagenumber
- 	$startIndex = ((real)$csw_list[$i_si] ["h"]*((integer)$request_p - 1)) + 1;
-	//$number_of_pages=ceil((real)$n_results/(real)$csw_list[$i_si] ['h']);
+ 	$startIndex = ((float)$csw_list[$i_si] ["h"]*((integer)$request_p - 1)) + 1;
+	//$number_of_pages=ceil((float)$n_results/(float)$csw_list[$i_si] ['h']);
 	$getRecords = '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"';
 	$getRecords .= '            xmlns:gmd="http://www.isotc211.org/2005/gmd"';
 	$getRecords .= '            xmlns:ogc="http://www.opengis.net/ogc"';
@@ -492,7 +492,7 @@ $e = new mb_notice($getRecords);
 		logit( "Number of Results in Catalogue ".$i_si.": ".$n_results."\n");
 	}
 	//calculate number of needed pages to show all results:
-	$number_of_pages=ceil((real)$n_results/(real)$csw_list[$i_si] ['h']);
+	$number_of_pages=ceil((float)$n_results/(float)$csw_list[$i_si] ['h']);
 	
 	#do some debugging output
 	#var_dump($openSearchXml);

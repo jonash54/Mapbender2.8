@@ -218,7 +218,7 @@ for ($i_si = $start_cat; $i_si < $end_cat ; $i_si++) {
 		logit( "Number of Results in Catalogue ".$i_si.": ".$n_results."\n");
 	}
 	#calculate number of needed pages to show all results:
-	$number_of_pages=ceil((real)$n_results/(real)$os_list[$i_si] ['h']);
+	$number_of_pages=ceil((float)$n_results/(float)$os_list[$i_si] ['h']);
 	
 	#do some debugging output
 	#var_dump($openSearchXml);

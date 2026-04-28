@@ -48,7 +48,7 @@ class GraphicStroke
 	/**
 	 * Default constructor that automatically creates a Graphic object.
 	 */
-	function GraphicStroke()
+	function __construct()
 	{
 		$this->graphic = new Graphic();
 	}

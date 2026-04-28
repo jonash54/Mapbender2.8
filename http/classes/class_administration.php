@@ -2701,7 +2701,8 @@ SQL;
     }
 
     function getCombinedApplicationMetadata($guiId, $wmcId=false) {
-	//GET first! metadata record for this combination - maybe better GET last 
+	//GET first! metadata record for this combination - maybe better GET last
+	$returnObject = new stdClass();
         if ($wmcId == false) {
 	    $sql = "SELECT uuid, title, abstract, f_get_responsible_organization_for_ressource(metadata_id, 'metadata') as orga_id FROM mb_metadata WHERE fkey_gui_id = $1 AND fkey_wmc_serial_id is null ORDER BY lastchanged DESC LIMIT 1";
 	    $v = array($guiId);

@@ -194,7 +194,7 @@ Look in wmc xml ****************************************************************
 /*
 ************************************************************************************
 */
-$wmcGetApi = WmcFactory::createFromXml($wmc->toXml());
+$wmcGetApi = WmcFactory::createFromXmlStatic($wmc->toXml());
 //$e = new mb_exception("javascripts/initWmcObj.php: write initial wmc obj to {TMPDIR}/class_wmc0.json");//
 //json_encode($wmcGetApi);//: ".json_encode($wmcGetApi));
 /*if($h = fopen(TMPDIR . "/tmp_wmc0.json","w")){
@@ -1124,7 +1124,7 @@ $zoom = $getApi->getZoom();
 if(is_array($zoom)) {
     $e = new mb_notice("javascripts/initWmcObj.php: check ZOOM API: ".implode(',', $zoom));
 }
-if (count($zoom) == 3) {
+if (is_array($zoom) && count($zoom) == 3) {
     //add zoom[2] to x and y and set bbox
     //calculate new extent from scale -  
     //
@@ -1144,9 +1144,9 @@ if (count($zoom) == 3) {
     $wmcGetApi->mainMap->setExtent($bbox);
     //render point at middle position 
 }
-if (count($zoom) == 4 || count($zoom) == 5) {
+if (is_array($zoom) && (count($zoom) == 4 || count($zoom) == 5)) {
 	$e = new mb_notice("javascripts/initWmcObject.php: found EXTENT");
-	if (count($zoom) == 5) {
+	if (is_array($zoom) && count($zoom) == 5) {
 		$bbox = new Mapbender_bbox(
 			$zoom[0],
 			$zoom[1],

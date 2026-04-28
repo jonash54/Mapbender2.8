@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . "/../../core/globalSettings.php";
 require_once dirname(__FILE__) . "/../extensions/phpqrcode/phpqrcode.php";
 $pathExtension = "";
 $return = "default";
-if (isset($_REQUEST["pathExtension"]) & $_REQUEST["pathExtension"] != "") {
+if (isset($_REQUEST["pathExtension"]) && $_REQUEST["pathExtension"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["pathExtension"];	
  	if (!($testMatch == '../../mapbender/tmp/' or $testMatch == '../mapbender/tmp/')){ 
@@ -30,7 +30,7 @@ if (isset($_REQUEST["pathExtension"]) & $_REQUEST["pathExtension"] != "") {
 	$pathExtension = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["return"]) & $_REQUEST["return"] != "") {
+if (isset($_REQUEST["return"]) && $_REQUEST["return"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["return"];	
  	if (!($testMatch == 'applicationlink' or $testMatch == 'imagelink')){ 

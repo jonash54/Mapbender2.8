@@ -4,7 +4,7 @@ $showOnlyDatasetMetadata = "false";
 $showOnlyUnlinkedOrganizations = "false";
 //params: opendata licenses, only metadata, ....
 
-if (isset($_REQUEST["showOnlyDatasetMetadata"]) & $_REQUEST["showOnlyDatasetMetadata"] != "") {
+if (isset($_REQUEST["showOnlyDatasetMetadata"]) && $_REQUEST["showOnlyDatasetMetadata"] != "") {
 	$testMatch = $_REQUEST["showOnlyDatasetMetadata"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>showOnlyDatasetMetadata</b> is not valid (true,false (default to false)).<br/>'; 
@@ -20,7 +20,7 @@ if (isset($_REQUEST["showOnlyDatasetMetadata"]) & $_REQUEST["showOnlyDatasetMeta
 	}
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["showOnlyUnlinkedOrganizations"]) & $_REQUEST["showOnlyUnlinkedOrganizations"] != "") {
+if (isset($_REQUEST["showOnlyUnlinkedOrganizations"]) && $_REQUEST["showOnlyUnlinkedOrganizations"] != "") {
 	$testMatch = $_REQUEST["showOnlyUnlinkedOrganizations"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>showOnlyUnlinkedOrganizations</b> is not valid (true,false (default to false)).<br/>'; 

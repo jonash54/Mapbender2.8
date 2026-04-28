@@ -6,7 +6,7 @@ require_once(dirname(__FILE__)."/../classes/class_Uuid.php");
 $adminLevel = "NUTS_1";
 $registratingDepartments = false;
 $categoryType = "iso";
-if (isset($_REQUEST["adminLevel"]) & $_REQUEST["adminLevel"] != "") {
+if (isset($_REQUEST["adminLevel"]) && $_REQUEST["adminLevel"] != "") {
 	$testMatch = $_REQUEST["adminLevel"];	
  	if (!($testMatch == 'LAU_1' or $testMatch == 'LAU_2' or $testMatch == 'NUTS_3' or $testMatch == 'NUTS_1' or $testMatch == 'NUTS_2' or $testMatch == 'other')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -17,7 +17,7 @@ if (isset($_REQUEST["adminLevel"]) & $_REQUEST["adminLevel"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["categoryType"]) & $_REQUEST["categoryType"] != "") {
+if (isset($_REQUEST["categoryType"]) && $_REQUEST["categoryType"] != "") {
 	$testMatch = $_REQUEST["categoryType"];	
  	if (!($testMatch == 'iso' or $testMatch == 'inspire' or $testMatch == 'custom' or $testMatch == 'opendata')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -28,7 +28,7 @@ if (isset($_REQUEST["categoryType"]) & $_REQUEST["categoryType"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartments"] != "") {
+if (isset($_REQUEST["registratingDepartments"]) && $_REQUEST["registratingDepartments"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["registratingDepartments"];
 	$pattern = '/^[\d,]*$/';		

@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . "/../../core/globalSettings.php";  
 require_once dirname(__FILE__) . "/../classes/class_administration.php"; 
 //parse id from application (metadata_id)
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to integer
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[\d]*$/';		

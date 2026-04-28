@@ -453,7 +453,7 @@ if ((!isset($editSelf) || !$editSelf)) {
 			echo '<option value="'.htmlentities($user->id, ENT_QUOTES, 'UTF-8').'" title="'.htmlentities($user->email, ENT_QUOTES, 'UTF-8').'" selected="selected">'.htmlentities($user->name, ENT_QUOTES, "UTF-8").'</option>';
 		}
 		
-		$cnt_user = count($userArray);
+		$cnt_user = count($userArray ?? []);
 		echo "</select>";
 		echo "</td>";
 	echo "</tr>";

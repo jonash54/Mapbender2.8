@@ -513,7 +513,7 @@ function fillISO19139($iso19139, $recordId) {
 	
 	// old version
 	/*
-	 * if (isset($row['layer_map_preview_filename']) & $row['layer_map_preview_filename'] != '') {
+	 * if (isset($row['layer_map_preview_filename']) && $row['layer_map_preview_filename'] != '') {
 	 * $graphicOverview=$iso19139->createElement("gmd:graphicOverview");
 	 * $MD_BrowseGraphic=$iso19139->createElement("gmd:MD_BrowseGraphic");
 	 * $fileName=$iso19139->createElement("gmd:fileName");

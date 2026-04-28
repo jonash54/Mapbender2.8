@@ -68,8 +68,8 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'">'
 $css_folder = "";
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/" . $css_folder . "login.css\">";
 echo "<link rel=\"shortcut icon\" href=\"../img/favicon.ico\">";
-$name = $_REQUEST["name"];
-$password = $_REQUEST["password"];
+$name = $_REQUEST["name"] ?? '';
+$password = $_REQUEST["password"] ?? '';
 
 
 if(!isset($name) || $name == ''){

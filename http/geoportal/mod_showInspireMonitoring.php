@@ -15,7 +15,7 @@ if (isset($sessionLang) && ($sessionLang!='')) {
 	$langCode = $langCode[0]; 
 	$languageCode = $langCode;
 }
-if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartments"] != "") {
+if (isset($_REQUEST["registratingDepartments"]) && $_REQUEST["registratingDepartments"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["registratingDepartments"];
 	$pattern = '/^[\d,]*$/';		
@@ -26,7 +26,7 @@ if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartm
 	$registratingDepartments = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["withCounts"]) & $_REQUEST["withCounts"] != "") {
+if (isset($_REQUEST["withCounts"]) && $_REQUEST["withCounts"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["withCounts"];
 	//$pattern = '/^[\d,]*$/';		

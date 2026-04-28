@@ -17,10 +17,11 @@ class ElementVar implements RPCObject{
 	 */
 	var $applicationId;
 	var $elementId;
-	var $name;  
+	var $name;
 	var $value;
 	var $context;
 	var $type;
+	var $success;
 	
 	/**
 	 * Constructor

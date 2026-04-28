@@ -2219,11 +2219,11 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 		$res = db_prep_query($sql, $v, $t);
 		$row = db_fetch_array($res);
 		//TODO: use MAPBENDER_PATH!
-		if ((isset($row[$type . '_proxylog']) & $row[$type . '_proxylog'] != 0) or strtoupper($row['accessconstraints']) != "NONE" or strtoupper($row['fees']) != "NONE" or isset($row['termsofuse_id'])) {
+		if ((isset($row[$type . '_proxylog']) && $row[$type . '_proxylog'] != 0) or strtoupper($row['accessconstraints']) != "NONE" or strtoupper($row['fees']) != "NONE" or isset($row['termsofuse_id'])) {
 			//service has some constraints defined!
 			//give symbol and true
 			//termsofuse symbol or exclamation mark
-			if (isset($row['termsofuse_id']) & $row['symbollink'] != "") {
+			if (isset($row['termsofuse_id']) && $row['symbollink'] != "") {
 				$symbolLink = $row['symbollink'];
 			} else {
 				$symbolLink = $this->protocol . "://" . $this->hostName . "/mapbender/img/icn_warn.png";
@@ -2276,7 +2276,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 	private function getValueForParam($paramName, $queryString)
 	{
 		parse_str($queryString, $allQueries);
-		if (isset($allQueries[$paramName]) & $allQueries[$paramName] != '') {
+		if (isset($allQueries[$paramName]) && $allQueries[$paramName] != '') {
 			return $allQueries[$paramName];
 		} else {
 			return false;

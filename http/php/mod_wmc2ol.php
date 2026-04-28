@@ -37,7 +37,7 @@ if (!$userId) {
 	$userId = PUBLIC_USER;
 }
 
-if (isset($_REQUEST["wmc_id"]) & $_REQUEST["wmc_id"] != "") {
+if (isset($_REQUEST["wmc_id"]) && $_REQUEST["wmc_id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["wmc_id"];
 	$pattern = '/^[0-9_]*$/';
@@ -54,7 +54,7 @@ if (isset($_REQUEST["wmc_id"]) & $_REQUEST["wmc_id"] != "") {
 $pointRadius = "10";
 $fillColor = "#666666"; //grey
 
-if (isset($_REQUEST["pointRadius"]) & $_REQUEST["pointRadius"] != "") {
+if (isset($_REQUEST["pointRadius"]) && $_REQUEST["pointRadius"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["pointRadius"];
 	$pattern = '/^[0-9]{2}|^[1-9]{1}$/';		
@@ -68,7 +68,7 @@ if (isset($_REQUEST["pointRadius"]) & $_REQUEST["pointRadius"] != "") {
 }
 
 
-if (isset($_REQUEST["fillColor"]) & $_REQUEST["fillColor"] != "") {
+if (isset($_REQUEST["fillColor"]) && $_REQUEST["fillColor"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["fillColor"];
 	$pattern = '/^#[0-9a-f]{3}|#[0-9a-f]{6}$/';
@@ -81,7 +81,7 @@ if (isset($_REQUEST["fillColor"]) & $_REQUEST["fillColor"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["markerUrl"]) & $_REQUEST["markerUrl"] != "") {
+if (isset($_REQUEST["markerUrl"]) && $_REQUEST["markerUrl"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["markerUrl"];
 	$pattern = '/^[\d,]*$/';

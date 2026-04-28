@@ -5,3 +5,11 @@
 /http/tmp/*.gfs
 /http/tmp/wmc/*
 /tools/tmp/*
+
+# Generated/runtime files — never commit
+conf/mapbender.conf
+conf/.docker-initialised
+log/*.log
+resources/locale/**/*.mo
+http/tmp/
+http/print/tmp/

@@ -47,7 +47,7 @@ $res = db_query($sql);*/
 //
 $geometryType = "false";
 //Parse REQUEST Parameters
-if (isset($_REQUEST["geometryType"]) & $_REQUEST["geometryType"] != "") {
+if (isset($_REQUEST["geometryType"]) && $_REQUEST["geometryType"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["geometryType"];
 	if (!($testMatch == '1' or $testMatch == '2' or $testMatch == '3')){ 
@@ -59,7 +59,7 @@ if (isset($_REQUEST["geometryType"]) & $_REQUEST["geometryType"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[\d,]*$/';		
@@ -72,7 +72,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["operation"]) & $_REQUEST["operation"] != "") {
+if (isset($_REQUEST["operation"]) && $_REQUEST["operation"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["operation"];
 	if (!($testMatch == 'list' or $testMatch == 'show')){ 

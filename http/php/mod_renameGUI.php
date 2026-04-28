@@ -1,4 +1,4 @@
-m<?php
+<?php
 # $Id: mod_renameGUI.php 7262 2010-12-12 10:03:32Z christoph $
 # http://www.mapbender.org/index.php/Administration
 # Copyright (C) 2002 CCGIS 

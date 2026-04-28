@@ -7,7 +7,7 @@ $uuid = false;
 $id = false;
 $outputFormat='iso19139';
 
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["id"];
 	$pattern = '/^[\d,]*$/';		
@@ -20,7 +20,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["uuid"]) & $_REQUEST["uuid"] != "") {
+if (isset($_REQUEST["uuid"]) && $_REQUEST["uuid"] != "") {
 	$uuidClass = new Uuid();
 	if ($uuidClass->isValid($_REQUEST["uuid"])) {
 		$uuid = $_REQUEST["uuid"];
@@ -30,7 +30,7 @@ if (isset($_REQUEST["uuid"]) & $_REQUEST["uuid"] != "") {
 	}
 }
 
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["outputFormat"];
 	if (!($testMatch == 'iso19139' or $testMatch == 'ckan')){ 

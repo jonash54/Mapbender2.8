@@ -1094,6 +1094,7 @@ SQL;
 	    if ($checkOrgaIdentity == true && (integer)$syncList->id !== $this->syncOrgaId) {
 	        $e = new mb_exception("classes/class_syncCkan.php (syncSingleDataSource): Id from json is not identical to id from class! Sync will not be started!");
             $resultObject->success = false;
+            if (!isset($resultObject->error) || !is_object($resultObject->error)) $resultObject->error = new stdClass();
             $resultObject->error->message = "Organization id for the invoked sync process could not be obtained - please check the id!";
             $this->logSyncResultToDb($startTime, $dataSourceType, $this->syncOrgaId, $numberOfCreatedPackages, $numberOfUpdatedPackages, $numberOfDeletedPackages, json_encode($resultObject->error->message), json_encode($resultObject));
             return json_encode($resultObject);

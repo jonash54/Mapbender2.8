@@ -60,7 +60,7 @@ class BinaryComparisonOp
 	 * constructor that directly fills the $name variable.
 	 * @param string $name the type of the comparison operation
 	 */
-	function BinaryComparisonOp($name)
+	function __construct($name)
 	{
 		$this->name = $name;
 	}
@@ -127,7 +127,7 @@ class BinaryComparisonOp
 		$temp .= $offset." </td>\n";
 		$temp .= $offset." <td>\n";
 		
-		$number = split("_", $id);
+		$number = explode("_", $id);
 		$number = $number[count($number)-1];
 		$temp .= $offset."  <a class=\"edit\" href=\"?function=deleteoperation&id=".$this->parent."&number=".$number."\">";
 		$temp .= "<img src='./img/minus.gif' border='0'>&nbsp;l&ouml;schen</a>\n";

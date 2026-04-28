@@ -373,7 +373,7 @@ $ckanId = false;
 //$mapbenderUuid = false;
 $restrictToOpenData = true;
 
-if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
+if (isset($_REQUEST["id"]) && $_REQUEST["id"] != "") {
     //validate to csv integer list
     $testMatch = $_REQUEST["id"];
     $pattern = '/^[\d]*$/';
@@ -386,7 +386,7 @@ if (isset($_REQUEST["id"]) & $_REQUEST["id"] != "") {
     $testMatch = NULL;
 }
 
-if (isset($_REQUEST["ckanId"]) & $_REQUEST["ckanId"] != "") {
+if (isset($_REQUEST["ckanId"]) && $_REQUEST["ckanId"] != "") {
     //validate to uuid
     $testMatch = $_REQUEST["ckanId"];
     $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/';
@@ -400,7 +400,7 @@ if (isset($_REQUEST["ckanId"]) & $_REQUEST["ckanId"] != "") {
 }
 
 
-/*if (isset($_REQUEST["mapbenderUuid"]) & $_REQUEST["mapbenderUuid"] != "") {
+/*if (isset($_REQUEST["mapbenderUuid"]) && $_REQUEST["mapbenderUuid"] != "") {
     //validate to uuid
     $testMatch = $_REQUEST["mapbenderUuid"];
     $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/';
@@ -434,7 +434,7 @@ $actualDate = date("Y-m-d H:i:s");
 $maxAgeInSeconds = 3600; //1hour
 $forceCache = true;
 
-if (isset($_REQUEST["cache"]) & $_REQUEST["cache"] != "") {
+if (isset($_REQUEST["cache"]) && $_REQUEST["cache"] != "") {
     //validate
     $testMatch = $_REQUEST["cache"];
     if ($testMatch != 'true' && $testMatch != 'false'){
@@ -447,7 +447,7 @@ if (isset($_REQUEST["cache"]) & $_REQUEST["cache"] != "") {
     $testMatch = NULL;
 }
 
-if (isset($_REQUEST["orig_identifier"]) & $_REQUEST["orig_identifier"] != "") {
+if (isset($_REQUEST["orig_identifier"]) && $_REQUEST["orig_identifier"] != "") {
     //validate
     $testMatch = $_REQUEST["orig_identifier"];
     if ($testMatch != 'true' && $testMatch != 'false'){
@@ -463,7 +463,7 @@ if (isset($_REQUEST["orig_identifier"]) & $_REQUEST["orig_identifier"] != "") {
     $testMatch = NULL;
 }
 
-if (isset($_REQUEST["restrictToOpenData"]) & $_REQUEST["restrictToOpenData"] != "") {
+if (isset($_REQUEST["restrictToOpenData"]) && $_REQUEST["restrictToOpenData"] != "") {
     //validate
     $testMatch = $_REQUEST["restrictToOpenData"];
     if ($testMatch != 'true' && $testMatch != 'false'){
@@ -479,7 +479,7 @@ if (isset($_REQUEST["restrictToOpenData"]) & $_REQUEST["restrictToOpenData"] != 
     $testMatch = NULL;
 }
 
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
     //validate
     $testMatch = $_REQUEST["outputFormat"];
     if ($testMatch != 'json' && $testMatch != 'rdfxml'){

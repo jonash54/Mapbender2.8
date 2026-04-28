@@ -74,7 +74,7 @@ foreach($_REQUEST as $key => $val) {
 }
 
 //check if opensearchdescription is requested
-if (isset($_REQUEST['GETOPENSEARCH']) & $_REQUEST['GETOPENSEARCH'] != "") {
+if (isset($_REQUEST['GETOPENSEARCH']) && $_REQUEST['GETOPENSEARCH'] != "") {
 	//validate 
 	$testMatch = $_REQUEST["GETOPENSEARCH"];	
  	if ($testMatch != "true" && $testMatch != "false"){ 
@@ -91,7 +91,7 @@ if (isset($_REQUEST['GETOPENSEARCH']) & $_REQUEST['GETOPENSEARCH'] != "") {
 	$testMatch = NULL;
 }
 //check if opensearch should be used
-if (isset($_REQUEST['OPENSEARCH']) & $_REQUEST['OPENSEARCH'] != "") {
+if (isset($_REQUEST['OPENSEARCH']) && $_REQUEST['OPENSEARCH'] != "") {
 	//validate 
 	$testMatch = $_REQUEST["OPENSEARCH"];	
  	if ($testMatch != "true" && $testMatch != "false"){ 
@@ -109,7 +109,7 @@ if (isset($_REQUEST['OPENSEARCH']) & $_REQUEST['OPENSEARCH'] != "") {
 }
 
 //validate request params
-if (isset($_REQUEST['ID']) & $_REQUEST['ID'] != "") {
+if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//validate uuid
 	$testMatch = $_REQUEST["ID"];
 	$uuid = new Uuid($testMatch);
@@ -125,7 +125,7 @@ if (isset($_REQUEST['ID']) & $_REQUEST['ID'] != "") {
 
 /*
 //validate request params
-if (isset($_REQUEST['ID']) & $_REQUEST['ID'] != "") {
+if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//validate integer
 	$testMatch = $_REQUEST["ID"];
 	$pattern = '/^[\d]*$/';		
@@ -143,7 +143,7 @@ if (!isset($_REQUEST['TYPE']) || $_REQUEST['TYPE'] == "") {
 }
 
 //validate request params
-if (isset($_REQUEST['TYPE']) & $_REQUEST['TYPE'] != "") {
+if (isset($_REQUEST['TYPE']) && $_REQUEST['TYPE'] != "") {
 	//validate type
 	$testMatch = $_REQUEST["TYPE"];	
  	if ($testMatch != 'SERVICE' && $testMatch != 'DATASET'){ 
@@ -161,7 +161,7 @@ if (!isset($_REQUEST['GENERATEFROM']) || $_REQUEST['GENERATEFROM'] == "") {
 }
 
 //validate request params
-if (isset($_REQUEST['GENERATEFROM']) & $_REQUEST['GENERATEFROM'] != "") {
+if (isset($_REQUEST['GENERATEFROM']) && $_REQUEST['GENERATEFROM'] != "") {
 	//validate type
 	$testMatch = $_REQUEST["GENERATEFROM"];	
 	if ($testMatch != 'wmslayer' && $testMatch != 'dataurl'  && $testMatch != 'wfs' && $testMatch != 'all' && $testMatch != 'metadata'  && $testMatch != 'remotelist'){ 
@@ -175,28 +175,28 @@ if (isset($_REQUEST['GENERATEFROM']) & $_REQUEST['GENERATEFROM'] != "") {
 
 //parse opensearch parameters - used if $openSearch=true
 //q, spatial_dataset_identifier_namespace, spatial_dataset_identifier_code, crs, language
-if (isset($_REQUEST['q']) & $_REQUEST['q'] != "") {
+if (isset($_REQUEST['q']) && $_REQUEST['q'] != "") {
 	//validate type
 	$testMatch = $_REQUEST["q"];	
 	$osQuery = $testMatch;
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST['spatial_dataset_identifier_namespace']) & $_REQUEST['spatial_dataset_identifier_namespace'] != "") {
+if (isset($_REQUEST['spatial_dataset_identifier_namespace']) && $_REQUEST['spatial_dataset_identifier_namespace'] != "") {
 	//validate type
 	$testMatch = $_REQUEST["spatial_dataset_identifier_namespace"];	
 	$osDatasetNamespace = $testMatch;
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST['spatial_dataset_identifier_code']) & $_REQUEST['spatial_dataset_identifier_code'] != "") {
+if (isset($_REQUEST['spatial_dataset_identifier_code']) && $_REQUEST['spatial_dataset_identifier_code'] != "") {
 	//validate type
 	$testMatch = $_REQUEST["spatial_dataset_identifier_code"];	
 	$osDatasetIdentifier = $testMatch;
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST['crs']) & $_REQUEST['crs'] != "") {
+if (isset($_REQUEST['crs']) && $_REQUEST['crs'] != "") {
 	//validate type TODO
 	$testMatch = $_REQUEST["crs"];	
  	/*if ($testMatch != 'wmslayer' && $testMatch != 'dataurl'  && $testMatch != 'wfs' && $testMatch != 'all'){ 
@@ -208,7 +208,7 @@ if (isset($_REQUEST['crs']) & $_REQUEST['crs'] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST['request']) & $_REQUEST['request'] != "") {
+if (isset($_REQUEST['request']) && $_REQUEST['request'] != "") {
 	//validate type TODO
 	$testMatch = $_REQUEST["request"];	
  	if ($testMatch != 'DescribeSpatialDataset' && $testMatch != 'GetSpatialDataset'){ 
@@ -220,7 +220,7 @@ if (isset($_REQUEST['request']) & $_REQUEST['request'] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST['language']) & $_REQUEST['language'] != "") {
+if (isset($_REQUEST['language']) && $_REQUEST['language'] != "") {
 	//validate type TODO
 	$testMatch = $_REQUEST["language"];	
  	/*if ($testMatch != 'wmslayer' && $testMatch != 'dataurl'  && $testMatch != 'wfs' && $testMatch != 'all'){ 
@@ -234,7 +234,7 @@ if (isset($_REQUEST['language']) & $_REQUEST['language'] != "") {
 
 if ($generateFrom == "wmslayer") {
 	//check if layerId is set too
-	if (isset($_REQUEST['LAYERID']) & $_REQUEST['LAYERID'] != "") {
+	if (isset($_REQUEST['LAYERID']) && $_REQUEST['LAYERID'] != "") {
 		$testMatch = $_REQUEST["LAYERID"];
 		$pattern = '/^[\d]*$/';		
  		if (!preg_match($pattern,$testMatch)){ 
@@ -253,7 +253,7 @@ if ($generateFrom == "wmslayer") {
 
 if ($generateFrom == "wfs") {
 	//check if wfsId is set too
-	if (isset($_REQUEST['WFSID']) & $_REQUEST['WFSID'] != "") {
+	if (isset($_REQUEST['WFSID']) && $_REQUEST['WFSID'] != "") {
 		$testMatch = $_REQUEST["WFSID"];
 		$pattern = '/^[\d]*$/';		
  		if (!preg_match($pattern,$testMatch)){ 

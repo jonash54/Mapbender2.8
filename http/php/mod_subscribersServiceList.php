@@ -57,7 +57,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'">'
 </head>
 <body>
 <?php
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["languageCode"];
 	if (!($testMatch == 'de' or $testMatch == 'fr' or $testMatch == 'en')){ 

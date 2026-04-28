@@ -92,11 +92,11 @@ for($i=0; $i < count($checkForNullRequests); $i++){
 }
 
 //Read out request Parameter:
-if (isset($_REQUEST["searchId"]) & $_REQUEST["searchId"] != "") {
+if (isset($_REQUEST["searchId"]) && $_REQUEST["searchId"] != "") {
 	//gernerate md5 representation, cause the id is used as a filename later on! - no validation needed
 	$searchId = md5($_REQUEST["searchId"]);
 }
-if (isset($_REQUEST["searchText"]) & $_REQUEST["searchText"] != "") {
+if (isset($_REQUEST["searchText"]) && $_REQUEST["searchText"] != "") {
 	$test="(SELECT\s[\w\*\)\(\,\s]+\sFROM\s[\w]+)| (UPDATE\s[\w]+\sSET\s[\w\,\'\=]+)| (INSERT\sINTO\s[\d\w]+[\s\w\d\)\(\,]*\sVALUES\s\([\d\w\'\,\)]+)| (DELETE\sFROM\s[\d\w\'\=]+)";
 	//validate to csv integer list
 	$testMatch = $_REQUEST["searchText"];
@@ -114,7 +114,7 @@ if (isset($_REQUEST["searchText"]) & $_REQUEST["searchText"] != "") {
 		$searchText ='*';
 	}
 }
-if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartments"] != "") {
+if (isset($_REQUEST["registratingDepartments"]) && $_REQUEST["registratingDepartments"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["registratingDepartments"];
 	$pattern = '/^[\d,]*$/';		
@@ -126,7 +126,7 @@ if (isset($_REQUEST["registratingDepartments"]) & $_REQUEST["registratingDepartm
 	$registratingDepartments = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["resourceIds"]) & $_REQUEST["resourceIds"] != "") {
+if (isset($_REQUEST["resourceIds"]) && $_REQUEST["resourceIds"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["resourceIds"];
 	$pattern = '/^[\d,]*$/';		
@@ -138,7 +138,7 @@ if (isset($_REQUEST["resourceIds"]) & $_REQUEST["resourceIds"] != "") {
 	$resourceIds = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["isoCategories"]) & $_REQUEST["isoCategories"] != "") {
+if (isset($_REQUEST["isoCategories"]) && $_REQUEST["isoCategories"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["isoCategories"];
 	$pattern = '/^[\d,]*$/';		
@@ -150,7 +150,7 @@ if (isset($_REQUEST["isoCategories"]) & $_REQUEST["isoCategories"] != "") {
 	$isoCategories = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["inspireThemes"]) & $_REQUEST["inspireThemes"] != "") {
+if (isset($_REQUEST["inspireThemes"]) && $_REQUEST["inspireThemes"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["inspireThemes"];
 	$pattern = '/^[\d,]*$/';		
@@ -163,7 +163,7 @@ if (isset($_REQUEST["inspireThemes"]) & $_REQUEST["inspireThemes"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["customCategories"]) & $_REQUEST["customCategories"] != "") {
+if (isset($_REQUEST["customCategories"]) && $_REQUEST["customCategories"] != "") {
 	//validate to csv integer list
 	$testMatch = $_REQUEST["customCategories"];
 	$pattern = '/^[\d,]*$/';		
@@ -176,7 +176,7 @@ if (isset($_REQUEST["customCategories"]) & $_REQUEST["customCategories"] != "") 
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["timeBegin"]) & $_REQUEST["timeBegin"] != "") {
+if (isset($_REQUEST["timeBegin"]) && $_REQUEST["timeBegin"] != "") {
 	//validate to iso date format YYYY-MM-DD
 	$testMatch = $_REQUEST["timeBegin"];
 	$pattern = '/^(19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';		
@@ -188,7 +188,7 @@ if (isset($_REQUEST["timeBegin"]) & $_REQUEST["timeBegin"] != "") {
 	$timeBegin = $testMatch;
 	$testMatch = NULL;	
 }
-if (isset($_REQUEST["timeEnd"]) & $_REQUEST["timeEnd"] != "") {
+if (isset($_REQUEST["timeEnd"]) && $_REQUEST["timeEnd"] != "") {
 	$testMatch = $_REQUEST["timeEnd"];
 	$pattern = '/^(19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';		
  	if (!preg_match($pattern,$testMatch)){ 
@@ -199,7 +199,7 @@ if (isset($_REQUEST["timeEnd"]) & $_REQUEST["timeEnd"] != "") {
 	$timeEnd = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["regTimeBegin"]) & $_REQUEST["regTimeBegin"] != "") {
+if (isset($_REQUEST["regTimeBegin"]) && $_REQUEST["regTimeBegin"] != "") {
 	//validate to iso date format YYYY-MM-DD
 	$testMatch = $_REQUEST["regTimeBegin"];
 	$pattern = '/^(19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';		
@@ -211,7 +211,7 @@ if (isset($_REQUEST["regTimeBegin"]) & $_REQUEST["regTimeBegin"] != "") {
 	$regTimeBegin = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["regTimeEnd"]) & $_REQUEST["regTimeEnd"] != "") {
+if (isset($_REQUEST["regTimeEnd"]) && $_REQUEST["regTimeEnd"] != "") {
 	//validate to iso date format YYYY-MM-DD
 	$testMatch = $_REQUEST["regTimeEnd"];
 	$pattern = '/^(19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';		
@@ -223,7 +223,7 @@ if (isset($_REQUEST["regTimeEnd"]) & $_REQUEST["regTimeEnd"] != "") {
 	$regTimeEnd = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["maxResults"]) & $_REQUEST["maxResults"] != "") {
+if (isset($_REQUEST["maxResults"]) && $_REQUEST["maxResults"] != "") {
 	//validate integer to 100 - not more
 	$testMatch = $_REQUEST["maxResults"];
 	//give max 99 entries - more will be to slow
@@ -236,7 +236,7 @@ if (isset($_REQUEST["maxResults"]) & $_REQUEST["maxResults"] != "") {
 	$maxResults = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["searchBbox"]) & $_REQUEST["searchBbox"] != "") {
+if (isset($_REQUEST["searchBbox"]) && $_REQUEST["searchBbox"] != "") {
 	//validate to float/integer
 	$testMatch = $_REQUEST["searchBbox"];
 	//$pattern = '/^[-\d,]*$/';	
@@ -255,7 +255,7 @@ if (isset($_REQUEST["searchBbox"]) & $_REQUEST["searchBbox"] != "") {
 	$searchBbox = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["searchTypeBbox"]) & $_REQUEST["searchTypeBbox"] != "") {
+if (isset($_REQUEST["searchTypeBbox"]) && $_REQUEST["searchTypeBbox"] != "") {
 	//validate to inside / outside - TODO implement other ones than intersects which is default
 	$testMatch = $_REQUEST["searchTypeBbox"];	
  	if (!($testMatch == 'inside' or $testMatch == 'outside' or $testMatch == 'intersects')){ 
@@ -267,7 +267,7 @@ if (isset($_REQUEST["searchTypeBbox"]) & $_REQUEST["searchTypeBbox"] != "") {
 	$testMatch = NULL;
 }
 //possibility to force https
-if (isset($_REQUEST["protocol"]) & $_REQUEST["protocol"] != "") {
+if (isset($_REQUEST["protocol"]) && $_REQUEST["protocol"] != "") {
 	//validate to inside / outside - TODO implement other ones than intersects which is default
 	$testMatch = $_REQUEST["protocol"];	
  	if (!($testMatch == 'http' or $testMatch == 'https')){ 
@@ -285,11 +285,11 @@ if (isset($_REQUEST["protocol"]) & $_REQUEST["protocol"] != "") {
 	}
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["accessRestrictions"]) & $_REQUEST["accessRestrictions"] != "") {
+if (isset($_REQUEST["accessRestrictions"]) && $_REQUEST["accessRestrictions"] != "") {
 	//validate to ?
 	#TODO implement me //$accessRestrictions = $_REQUEST["accessRestrictions"];
 }
-if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
+if (isset($_REQUEST["languageCode"]) && $_REQUEST["languageCode"] != "") {
 	//validate to de, en, fr
 	$testMatch = $_REQUEST["languageCode"];	
  	if (!($testMatch == 'de' or $testMatch == 'en' or $testMatch == 'fr')){ 
@@ -300,7 +300,7 @@ if (isset($_REQUEST["languageCode"]) & $_REQUEST["languageCode"] != "") {
 	$languageCode = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
+if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$testMatch = $_REQUEST["outputFormat"];	
  	if (!($testMatch == 'json' or $testMatch == 'georss')){ 
 		//echo 'outputFormat: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -311,7 +311,7 @@ if (isset($_REQUEST["outputFormat"]) & $_REQUEST["outputFormat"] != "") {
 	$testMatch = NULL;
 }
 //$restrictToOpenData = false;
-if (isset($_REQUEST["restrictToOpenData"]) & $_REQUEST["restrictToOpenData"] != "") {
+if (isset($_REQUEST["restrictToOpenData"]) && $_REQUEST["restrictToOpenData"] != "") {
 	$testMatch = $_REQUEST["restrictToOpenData"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>restrictToOpenData</b> is not valid (true,false).<br/>'; 
@@ -329,7 +329,7 @@ if (isset($_REQUEST["restrictToOpenData"]) & $_REQUEST["restrictToOpenData"] != 
 }
 
 //$restrictToHvd = false;
-if (isset($_REQUEST["restrictToHvd"]) & $_REQUEST["restrictToHvd"] != "") {
+if (isset($_REQUEST["restrictToHvd"]) && $_REQUEST["restrictToHvd"] != "") {
 	$testMatch = $_REQUEST["restrictToHvd"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>restrictToHvd</b> is not valid (true,false).<br/>'; 
@@ -346,7 +346,7 @@ if (isset($_REQUEST["restrictToHvd"]) & $_REQUEST["restrictToHvd"] != "") {
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["resolveCoupledResources"]) & $_REQUEST["resolveCoupledResources"] != "") {
+if (isset($_REQUEST["resolveCoupledResources"]) && $_REQUEST["resolveCoupledResources"] != "") {
 	$testMatch = $_REQUEST["resolveCoupledResources"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
 		echo 'Parameter <b>resolveCoupledResources</b> is not valid (true,false (default to false)).<br/>'; 
@@ -363,7 +363,7 @@ if (isset($_REQUEST["resolveCoupledResources"]) & $_REQUEST["resolveCoupledResou
 	$testMatch = NULL;
 }
 
-if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
+if (isset($_REQUEST["hostName"]) && $_REQUEST["hostName"] != "") {
 	//validate to some hosts
 	$testMatch = $_REQUEST["hostName"];	
 	//look for whitelist in mapbender.conf
@@ -379,7 +379,7 @@ if (isset($_REQUEST["hostName"]) & $_REQUEST["hostName"] != "") {
 	$hostName = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["orderBy"]) & $_REQUEST["orderBy"] != "") {
+if (isset($_REQUEST["orderBy"]) && $_REQUEST["orderBy"] != "") {
 	$testMatch = $_REQUEST["orderBy"];	
  	if (!($testMatch == 'rank' or $testMatch == 'title' or $testMatch == 'id' or $testMatch == 'date')){ 
 		//echo 'orderBy: <b>'.$testMatch.'</b> is not valid.<br/>'; 
@@ -391,7 +391,7 @@ if (isset($_REQUEST["orderBy"]) & $_REQUEST["orderBy"] != "") {
 }// else {
 //$orderBy= 'rank';
 //}
-if (isset($_REQUEST["searchResources"]) & $_REQUEST["searchResources"] != "") {
+if (isset($_REQUEST["searchResources"]) && $_REQUEST["searchResources"] != "") {
 	//validate to wms,wfs,wmc,georss
 	$testMatch = $_REQUEST["searchResources"];
 	#$pattern = '/^(19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';
@@ -414,7 +414,7 @@ if (isset($_REQUEST["searchResources"]) & $_REQUEST["searchResources"] != "") {
 	$searchResources = $testMatch;
 	$testMatch = NULL;
 }
-if (isset($_REQUEST["searchPages"]) & $_REQUEST["searchPages"] != "") {
+if (isset($_REQUEST["searchPages"]) && $_REQUEST["searchPages"] != "") {
 	//validate to csv integer list with dimension of searchResources list
 	$testMatch = $_REQUEST["searchPages"];
 	$pattern = '/^[-\d,]*$/';		
@@ -434,7 +434,7 @@ if (isset($_REQUEST["searchPages"]) & $_REQUEST["searchPages"] != "") {
 	#$searchPages = split(',',$searchPages);
 	
 }
-if (isset($_REQUEST["resultTarget"]) & $_REQUEST["resultTarget"] != "") {
+if (isset($_REQUEST["resultTarget"]) && $_REQUEST["resultTarget"] != "") {
 	//validate to web,debug,file
 	$testMatch = $_REQUEST["resultTarget"];	
  	if (!($testMatch == 'web' or $testMatch == 'debug' or $testMatch == 'file'  or $testMatch == 'webclient' or $testMatch == 'internal' or $testMatch == "categories")){ 
@@ -449,7 +449,7 @@ if (isset($_REQUEST["resultTarget"]) & $_REQUEST["resultTarget"] != "") {
 //$e = new mb_exception("UserID from session (new): ".Mapbender::session()->get("mb_user_id"));
 //$e = new mb_exception("UserID from session (old): ".$_SESSION['mb_user_id']);
 
-if (isset($_REQUEST["userId"]) & $_REQUEST["userId"] != "") {
+if (isset($_REQUEST["userId"]) && $_REQUEST["userId"] != "") {
         //validate integer to 100 - not more
         $testMatch = $_REQUEST["userId"];
         //give max 99 entries - more will be to slow
@@ -830,9 +830,15 @@ Mapbender::session()->set("mb_lang",$languageCode);
 $queryJSON = new stdClass;
 $queryJSON->searchFilter = (object) array();
 $queryJSON->searchFilter->origURL = $searchURL;
-#$queryJSON->searchFilter->classes = (object) array();
+$queryJSON->searchFilter->classes = array();
+// PHP 8 no longer auto-vivifies object properties; pre-create the slots used below.
+$queryJSON->searchFilter->maxResults = new stdClass();
+$queryJSON->searchFilter->maxResults->item = array();
+$queryJSON->searchFilter->orderFilter = new stdClass();
+$queryJSON->searchFilter->orderFilter->item = array();
 for($i=0; $i<count($searchResourcesArray);$i++){
 //fill in the different search classes into the filter - the client can generate the headers out of this information
+	$queryJSON->searchFilter->classes[$i] = new stdClass();
 	$queryJSON->searchFilter->classes[$i]->title = $resourceCategories[$searchResourcesArray[$i]];
 	$queryJSON->searchFilter->classes[$i]->name = $searchResourcesArray[$i];
 }
@@ -841,12 +847,15 @@ for($i=0; $i<count($searchResourcesArray);$i++){
 for($i=0; $i < count($classificationElements); $i++){
 	//echo "<br> filter for element: ".$classificationElements[$i]['name']."<br>";
 	//echo "<br> variable for element: ". (string)${$classificationElements[$i]['name']}."<br>";
-	if (isset(${$classificationElements[$i]['name']}) & ${$classificationElements[$i]['name']} !='' & ${$classificationElements[$i]['name']} != NULL) {
+	if (isset(${$classificationElements[$i]['name']}) && ${$classificationElements[$i]['name']} !='' & ${$classificationElements[$i]['name']} != NULL) {
 		//echo "<br> found: ".$classificationElements[$i]['name']."<br>";
 		//pull register information out of database in arrays
 		if ($classificationElements[$i]['source'] == 'database') {
 			$funcName = "get_".$classificationElements[$i]['name']."Array";
 			${$classificationElements[$i]['name']."Array"} = $funcName(explode(',',${$classificationElements[$i]['name']}),$languageCode);
+		}
+		if (!isset($queryJSON->searchFilter->{$classificationElements[$i]['name']})) {
+			$queryJSON->searchFilter->{$classificationElements[$i]['name']} = new stdClass();
 		}
 		$queryJSON->searchFilter->{$classificationElements[$i]['name']}->title = $classificationElements[$i]['name2show'];
 		//check if the filter has subfilters - if not delete the whole filter from query
@@ -880,6 +889,7 @@ for($i=0; $i < count($classificationElements); $i++){
 			//loop for the subcategories
 			for($j=0; $j < count($queryArray); $j++){
 				//$e = new mb_exception('mod_callMetadata.php: queryArrayi: '.$queryArray[$j]);
+				$queryJSON->searchFilter->{$classificationElements[$i]['name']}->item[$j] = new stdClass();
 				if ($classificationElements[$i]['source'] == 'database') {
 					$identArray = ${$classificationElements[$i]['name']."Array"};
 					$identArray = flipDiagonally($identArray);
@@ -919,7 +929,9 @@ if ($_REQUEST["maxResults"] == '') {
 	$queryJSON->searchFilter->maxResults->header = $maxResultsTitle['header'];
 	$queryJSON->searchFilter->maxResults->title = $preDefinedMaxResults[0];
 	for ($i=0; $i<(count($preDefinedMaxResults)-1); $i++) {
+		if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 		$queryJSON->searchFilter->maxResults->item[$i]->title = $preDefinedMaxResults[$i+1];
+		if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 		$queryJSON->searchFilter->maxResults->item[$i]->url = $searchURL."&maxResults=".$preDefinedMaxResults[$i+1];
 	}
 } else {
@@ -929,14 +941,18 @@ if ($_REQUEST["maxResults"] == '') {
 		//delete entry from array
 		//$preDefinedMaxResultsRed = deleteEntry($preDefinedMaxResults, $maxResults);
 		for ($i=0; $i<(count($preDefinedMaxResults)); $i++) {
+			if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 			$queryJSON->searchFilter->maxResults->item[$i]->title = $preDefinedMaxResults[$i];
+			if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 			$queryJSON->searchFilter->maxResults->item[$i]->url = $searchURL."&maxResults=".$preDefinedMaxResults[$i];
 		} 
 	} else { // is some other value 
 		$queryJSON->searchFilter->maxResults->header = $maxResultsTitle['header'];
 		$queryJSON->searchFilter->maxResults->title = $maxResults;
 		for ($i=0; $i<(count($preDefinedMaxResults)); $i++) {
+			if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 			$queryJSON->searchFilter->maxResults->item[$i]->title = $preDefinedMaxResults[$i];
+			if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 			$queryJSON->searchFilter->maxResults->item[$i]->url = $searchURL."&maxResults=".$preDefinedMaxResults[$i];
 		} 
 	}
@@ -949,11 +965,17 @@ if ($_REQUEST["orderBy"] == '') {
 //echo "<br>orderBy:>".$_REQUEST["orderBy"]."<<br>";
 	$queryJSON->searchFilter->orderFilter->header = $orderByTitle['header'];
 	$queryJSON->searchFilter->orderFilter->title = $orderByTitle['rank'];
+	if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['title'];
+	if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[0]->url = $searchURL."&orderBy=title";
+	if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['id'];
+	if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[1]->url = $searchURL."&orderBy=id";
+	if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['date'];
+	if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[2]->url = $searchURL."&orderBy=date";
 
 
@@ -963,54 +985,78 @@ if ($_REQUEST["orderBy"] == '') {
 switch ($orderBy) {
 					case "rank":
 						$queryJSON->searchFilter->orderFilter->title = $orderByTitle['rank'];
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['id'];
 						
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->url = str_replace("orderBy=rank", "orderBy=id", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['title'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->url = str_replace("orderBy=rank", "orderBy=title", $searchURL);
+if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 $queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['date'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->url = str_replace("orderBy=rank", "orderBy=date", $searchURL);
 
 
 						break;
 					case "id":
 						$queryJSON->searchFilter->orderFilter->title = $orderByTitle['id'];
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['rank'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->url = str_replace("orderBy=id", "orderBy=rank", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['title'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->url = str_replace("orderBy=id", "orderBy=title", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['date'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->url = str_replace("orderBy=id", "orderBy=date", $searchURL);
 
 
 						break;
 					case "title":
 						$queryJSON->searchFilter->orderFilter->title = $orderByTitle['title'];
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['rank'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->url = str_replace("orderBy=title", "orderBy=rank", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['id'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->url = str_replace("orderBy=title", "orderBy=id", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['date'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->url = str_replace("orderBy=title", "orderBy=date", $searchURL);
 						break;
 					case "date":
 						$queryJSON->searchFilter->orderFilter->title = $orderByTitle['date'];
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['rank'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[0]->url = str_replace("orderBy=date", "orderBy=rank", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['id'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[1]->url = str_replace("orderBy=date", "orderBy=id", $searchURL);
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['title'];
 
+						if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 						$queryJSON->searchFilter->orderFilter->item[2]->url = str_replace("orderBy=date", "orderBy=title", $searchURL);
 						break;
 					

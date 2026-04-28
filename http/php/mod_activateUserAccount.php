@@ -31,7 +31,7 @@ if (defined("DJANGO_PORTAL") && DJANGO_PORTAL == true) {
 	$registerRedirectUrl = $loginRedirectUrl;
 }
 
-if (isset($_REQUEST["activationKey"]) & $_REQUEST["activationKey"] != "") {
+if (isset($_REQUEST["activationKey"]) && $_REQUEST["activationKey"] != "") {
 	$testMatch = $_REQUEST["activationKey"];
 	$pattern = '/^([a-z]|[0-9])*$/';
  	if (!preg_match($pattern,$testMatch)){
@@ -50,8 +50,9 @@ if(db_numrows($res) == 0){
 	$e = new mb_exception("php/mod_activateUserAccount.php: user with requested activation_key not found in mapbender database!");
 	$returnObject->success = false;
 	$returnObject->help = "mod_activateUserAccount.php";
+	$returnObject->error = new stdClass();
 	$returnObject->error->message = "php/mod_activateUserAccount.php: user with requested activation_key not found in mapbender database!";
-	$returnObject->error->{__type} = "Object not found";
+	$returnObject->error->{"'__type'"} = "Object not found";
 	header('Content-Type: application/json');
 	echo json_encode($this->returnObject);
 	//redirect to register
@@ -64,8 +65,9 @@ sleep(5);
 		$e = new mb_exception("php/mod_activateUserAccount.php: User account already activated!");
 		$returnObject->success = false;
 		$returnObject->help = "mod_activateUserAccount.php";
+		$returnObject->error = new stdClass();
 		$returnObject->error->message = "php/mod_activateUserAccount.php: User account already activated!";
-		$returnObject->error->{__type} = "Object not found";
+		$returnObject->error->{"'__type'"} = "Object not found";
 		header('Content-Type: application/json');
 		echo json_encode($this->returnObject);
 		//redirect to login?
@@ -82,8 +84,9 @@ sleep(5);
 			$e = new mb_exception("php/mod_activateUserAccount.php: Could not activate user account!");
 			$returnObject->success = false;
 			$returnObject->help = "mod_activateUserAccount.php";
+			$returnObject->error = new stdClass();
 			$returnObject->error->message = "php/mod_activateUserAccount.php: Could not activate user account!";
-			$returnObject->error->{__type} = "Object not found";
+			$returnObject->error->{"'__type'"} = "Object not found";
 			header('Content-Type: application/json');
 			echo json_encode($this->returnObject);
 			die();

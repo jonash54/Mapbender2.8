@@ -24,6 +24,11 @@ class WmcFactory extends OwsFactory {
 	 * @return wmc
 	 * @param $xml String
 	 */
+	public static function createFromXmlStatic ($xml, $auth=false) {
+		$factory = new WmcFactory();
+		return $factory->createFromXml($xml, $auth);
+	}
+
 	public function createFromXml ($xml, $auth=false) {
 		try {
 			$wmc = new wmc();
