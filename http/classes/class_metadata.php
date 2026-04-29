@@ -491,6 +491,7 @@ class searchMetadata
 		$l = 0; //index featuretype and or modul per wfs
 		$m = 0; //index modul per featuretype
 		for ($i = 0; $i < count($wfsMatrix); $i++) {
+			if (!isset($this->wfsJSON->wfs->srv[$i - $j]) || !is_object($this->wfsJSON->wfs->srv[$i - $j])) $this->wfsJSON->wfs->srv[$i - $j] = new stdClass();
 			$this->wfsJSON->wfs->srv[$i - $j]->id = $wfsMatrix[$i]['wfs_id'];
 			$this->wfsJSON->wfs->srv[$i - $j]->title = $wfsMatrix[$i]['wfs_title'];
 			$this->wfsJSON->wfs->srv[$i - $j]->abstract = $wfsMatrix[$i]['wfs_abstract'];
@@ -614,6 +615,7 @@ class searchMetadata
 		$wmcMatrix = $this->flipDiagonally($wmcMatrix);
 		//read out first server entry - maybe this a little bit timeconsuming TODO
 		for ($i = 0; $i < count($wmcMatrix); $i++) {
+			if (!isset($this->wmcJSON->wmc->srv[$i]) || !is_object($this->wmcJSON->wmc->srv[$i])) $this->wmcJSON->wmc->srv[$i] = new stdClass();
 			$this->wmcJSON->wmc->srv[$i]->id = $wmcMatrix[$i]['wmc_id'];
 			$this->wmcJSON->wmc->srv[$i]->title = $wmcMatrix[$i]['wmc_title'];
 			$this->wmcJSON->wmc->srv[$i]->abstract = $wmcMatrix[$i]['wmc_abstract'];
@@ -630,6 +632,7 @@ class searchMetadata
 			} else {
 				$spatialSource = $wmcMatrix[$i]['mb_group_stateorprovince'];
 			}
+			if (!isset($this->wmcJSON->wmc->srv[$i - $j]) || !is_object($this->wmcJSON->wmc->srv[$i - $j])) $this->wmcJSON->wmc->srv[$i - $j] = new stdClass();
 			$this->wmcJSON->wmc->srv[$i - $j]->iso3166 = $spatialSource;
 			$this->wmcJSON->wmc->srv[$i - $j]->bbox = array($wmcMatrix[$i]['bbox']); //TODO: read out bbox from wmc $wmcMatrix[$i][''];
 		}
@@ -657,6 +660,7 @@ class searchMetadata
 		$allCoupledFeaturetypes = array();
 		//read out first server entry - maybe this a little bit timeconsuming TODO
 		for ($i = 0; $i < count($datasetMatrix); $i++) {
+			if (!isset($this->datasetJSON->dataset->srv[$i]) || !is_object($this->datasetJSON->dataset->srv[$i])) $this->datasetJSON->dataset->srv[$i] = new stdClass();
 			$this->datasetJSON->dataset->srv[$i]->id = $datasetMatrix[$i]['dataset_id'];
 			$this->datasetJSON->dataset->srv[$i]->title = $datasetMatrix[$i]['title'];
 			$this->datasetJSON->dataset->srv[$i]->uuid = $datasetMatrix[$i]['fileidentifier'];
@@ -871,6 +875,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 		$applicationMatrix = $this->flipDiagonally($applicationMatrix);
 		//read out first server entry - maybe this a little bit timeconsuming TODO
 		for ($i = 0; $i < count($applicationMatrix); $i++) {
+			if (!isset($this->applicationJSON->application->srv[$i]) || !is_object($this->applicationJSON->application->srv[$i])) $this->applicationJSON->application->srv[$i] = new stdClass();
 			$this->applicationJSON->application->srv[$i]->id = $applicationMatrix[$i]['dataset_id'];
 			$this->applicationJSON->application->srv[$i]->title = $applicationMatrix[$i]['title'];
 			$this->applicationJSON->application->srv[$i]->uuid = $applicationMatrix[$i]['fileidentifier'];
@@ -973,6 +978,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 					}
 					array_push($layerIdArray, $rootLayerId);
 					//Create object for wms service level
+					if (!isset($this->wmsJSON->wms->srv[$j]) || !is_object($this->wmsJSON->wms->srv[$j])) $this->wmsJSON->wms->srv[$j] = new stdClass();
 					$this->wmsJSON->wms->srv[$j]->id = (int) $subLayers[$rootIndex]['wms_id'];
 					$this->wmsJSON->wms->srv[$j]->wmsRootLayerId = $wmsRootLayerId;
 					$this->wmsJSON->wms->srv[$j]->wmsGetCapabilitiesUrl = $this->protocol . "://" . $this->hostName . "/mapbender/php/wms.php?layer_id=" . $wmsRootLayerId . "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetCapabilities&withChilds=1";
@@ -1712,6 +1718,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 					}
 					shuffle($keywordCounts);
 					for ($j = 0; $j < count($keywordCounts); $j++) {
+						if (!isset($this->keyJSON->tagCloud->tags[$j]) || !is_object($this->keyJSON->tagCloud->tags[$j])) $this->keyJSON->tagCloud->tags[$j] = new stdClass();
 						$this->keyJSON->tagCloud->tags[$j]->title = $keywordCounts[$j]['keyword'];
 						$this->keyJSON->tagCloud->tags[$j]->weight = $keywordCounts[$j]['count'];
 						$paramValue = $this->getValueForParam('searchText', $this->searchURL);
@@ -1742,6 +1749,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 					$this->catJSON->searchMD->category = array();
 					for ($i = 0; $i < count($this->resourceClasses); $i++) {
 						//TODO: not to set the classification?
+						if (!isset($this->catJSON->searchMD->category[$i]) || !is_object($this->catJSON->searchMD->category[$i])) $this->catJSON->searchMD->category[$i] = new stdClass();
 						$this->catJSON->searchMD->category[$i]->title = $this->resourceClassifications[$i]['title'];
 						$sqlCat[$i] = "SELECT " . $this->resourceClassifications[$i]['tablename'];
 						$sqlCat[$i] .= "." . $this->resourceClassifications[$i]['tablename'] . "_id, ";
@@ -2139,6 +2147,7 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 			$servObject->layer = array();
 		}
 		foreach ($childLayers as $child) {
+			if (!isset($servObject->layer[$countsublayer]) || !is_object($servObject->layer[$countsublayer])) $servObject->layer[$countsublayer] = new stdClass();
 			$servObject->layer[$countsublayer]->id = $child['layer_id'];
 			$servObject->layer[$countsublayer]->title = $child['layer_title'];
 			$servObject->layer[$countsublayer]->name = $child['layer_name'];

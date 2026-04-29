@@ -195,6 +195,7 @@ foreach ($gazetteerObject->features as $feature) {
 	switch ($feature->properties->typ) {
 		//Landkreis/Gemeinde/Wohnplatz/Haus
 		case "Haus":
+			if (!isset($returnObject->geonames[$countGeonames]) || !is_object($returnObject->geonames[$countGeonames])) $returnObject->geonames[$countGeonames] = new stdClass();
 			$returnObject->geonames[$countGeonames]->title = $feature->properties->text." ("."Haus".")";	
 			$returnObject->geonames[$countGeonames]->category = "haus";
 			break;

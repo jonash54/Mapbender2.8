@@ -2336,6 +2336,7 @@ if (! isset ( $wfsid ) || $wfsid == "") {
     							    $geojsonBbox = array ();
     							    $geojsonBboxIndex = 0;
     							    foreach ($geojsonList->features as $feature) {
+    							        if (!isset($geojsonBbox[$geojsonBboxIndex]) || !is_object($geojsonBbox[$geojsonBboxIndex])) $geojsonBbox[$geojsonBboxIndex] = new stdClass();
     							        $geojsonBbox[$geojsonBboxIndex]->minx = $feature->bbox[1];
     							        $geojsonBbox[$geojsonBboxIndex]->miny = $feature->bbox[0];
     							        $geojsonBbox[$geojsonBboxIndex]->maxx = $feature->bbox[3];

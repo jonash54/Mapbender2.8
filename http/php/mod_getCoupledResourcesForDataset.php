@@ -340,6 +340,7 @@ if ($mbMetadata->hierarchyLevel == 'dataset' || $mbMetadata->hierarchyLevel == '
 					$numberOfMetadataRecords++;
 				}*/
 				//$e = new mb_exception("found service with fileIdentifier: ".$fileIdentifier." - date - ".$mdDateStamp);
+				if (!isset($serviceMetadata->service[$k]) || !is_object($serviceMetadata->service[$k])) $serviceMetadata->service[$k] = new stdClass();
 				$serviceMetadata->service[$k]->datasetId = $datasetId;
 				$serviceMetadata->service[$k]->serviceType = $mdServiceType;
 				$serviceMetadata->service[$k]->serviceTitle = $mdTitle;

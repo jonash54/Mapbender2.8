@@ -204,6 +204,7 @@ if ($operation == 'snapToGrid') {
 		//ordered??? - define discrete values to be ordered !!	
 		$newValue = getNearestValue($userValue, $discreteValues);
 		if ($fullYearExtent == true) {
+			if (!isset($result->data[0]) || !is_object($result->data[0])) $result->data[0] = new stdClass();
 			$result->data[0]->value = $newValue->format('Y');
 		} else {
 			$result->data[0]->value = $newValue->format('c');
@@ -305,6 +306,7 @@ if ($operation == 'snapToGrid') {
 				$result->data[0]->start = $startTime->format('c');
 				for ($i=1; $i < $numberOfDiscreteValues+1; $i++) {
 					$time = $startTime->add($duration);
+					if (!isset($result->data[$i]) || !is_object($result->data[$i])) $result->data[$i] = new stdClass();
 					$result->data[$i]->id = $i;
 					if ($fullYearExtent == true) {
 						$result->data[$i]->content = $time->format('Y');

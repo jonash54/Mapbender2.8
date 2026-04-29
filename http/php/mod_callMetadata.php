@@ -839,6 +839,7 @@ $queryJSON->searchFilter->orderFilter->item = array();
 for($i=0; $i<count($searchResourcesArray);$i++){
 //fill in the different search classes into the filter - the client can generate the headers out of this information
 	$queryJSON->searchFilter->classes[$i] = new stdClass();
+	if (!isset($queryJSON->searchFilter->classes[$i]) || !is_object($queryJSON->searchFilter->classes[$i])) $queryJSON->searchFilter->classes[$i] = new stdClass();
 	$queryJSON->searchFilter->classes[$i]->title = $resourceCategories[$searchResourcesArray[$i]];
 	$queryJSON->searchFilter->classes[$i]->name = $searchResourcesArray[$i];
 }
@@ -930,6 +931,7 @@ if ($_REQUEST["maxResults"] == '') {
 	$queryJSON->searchFilter->maxResults->title = $preDefinedMaxResults[0];
 	for ($i=0; $i<(count($preDefinedMaxResults)-1); $i++) {
 		if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
+		if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 		$queryJSON->searchFilter->maxResults->item[$i]->title = $preDefinedMaxResults[$i+1];
 		if (!isset($queryJSON->searchFilter->maxResults->item[$i]) || !is_object($queryJSON->searchFilter->maxResults->item[$i])) $queryJSON->searchFilter->maxResults->item[$i] = new stdClass();
 		$queryJSON->searchFilter->maxResults->item[$i]->url = $searchURL."&maxResults=".$preDefinedMaxResults[$i+1];
@@ -966,13 +968,16 @@ if ($_REQUEST["orderBy"] == '') {
 	$queryJSON->searchFilter->orderFilter->header = $orderByTitle['header'];
 	$queryJSON->searchFilter->orderFilter->title = $orderByTitle['rank'];
 	if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
+	if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[0]->title = $orderByTitle['title'];
 	if (!isset($queryJSON->searchFilter->orderFilter->item[0]) || !is_object($queryJSON->searchFilter->orderFilter->item[0])) $queryJSON->searchFilter->orderFilter->item[0] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[0]->url = $searchURL."&orderBy=title";
 	if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
+	if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[1]->title = $orderByTitle['id'];
 	if (!isset($queryJSON->searchFilter->orderFilter->item[1]) || !is_object($queryJSON->searchFilter->orderFilter->item[1])) $queryJSON->searchFilter->orderFilter->item[1] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[1]->url = $searchURL."&orderBy=id";
+	if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 	if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();
 	$queryJSON->searchFilter->orderFilter->item[2]->title = $orderByTitle['date'];
 	if (!isset($queryJSON->searchFilter->orderFilter->item[2]) || !is_object($queryJSON->searchFilter->orderFilter->item[2])) $queryJSON->searchFilter->orderFilter->item[2] = new stdClass();

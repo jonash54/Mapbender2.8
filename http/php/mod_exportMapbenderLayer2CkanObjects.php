@@ -143,13 +143,16 @@ function buildCkanPackage ($mbArray) {
 	//for v1/v2 - only $package->groups[0] = "gdi-rp"; //constant
 	//$package->groups[0] = CKAN_GROUP_NAME;
 	//for v3:
+	if (!isset($package->groups[0]) || !is_object($package->groups[0])) $package->groups[0] = new stdClass();
 	$package->groups[0]->name = CKAN_GROUP_NAME; //constant
+	if (!isset($package->groups[1]) || !is_object($package->groups[1])) $package->groups[1] = new stdClass();
 	$package->groups[1]->name = "geo"; //constant
 	if ($mbArray['categories']) {
 		//add categories as groups
 		$numberOfCategories = 2;
 		for ($i=0; $i < count($mbArray['categories']); $i++){
 			if ($mbArray['categories'][$i] != "geo") {
+				if (!isset($package->groups[$numberOfCategories]) || !is_object($package->groups[$numberOfCategories])) $package->groups[$numberOfCategories] = new stdClass();
 				$package->groups[$numberOfCategories]->name = $mbArray['categories'][$i];
 				$numberOfCategories++;
 			}
@@ -159,6 +162,7 @@ function buildCkanPackage ($mbArray) {
 		$package->tags = array();
 		$keywordArray = explode(',',$mbArray['resource_keywords']);
 		for ($i=0; $i < count($keywordArray); $i++){
+			if (!isset($package->tags[$i]) || !is_object($package->tags[$i])) $package->tags[$i] = new stdClass();
 			$package->tags[$i]->name = $keywordArray[$i];
 		}
 	}
@@ -189,23 +193,27 @@ function buildCkanPackage ($mbArray) {
 	}
 	$package->resources = array();
 
+	if (!isset($package->resources[0]) || !is_object($package->resources[0])) $package->resources[0] = new stdClass();
 	$package->resources[0]->description = "Anzeige im GeoPortal.rlp";//$mbArray['mb_user_id'];// "Link zur WMS-Darstellung im GeoPortal.rlp, die Darstellung erfolgt ab einem Maßstab 1:500.000"; //fix: "".id.id?
 	$package->resources[0]->format = "Kartenviewer"; //constant
 	$package->resources[0]->url = $wrapperUrl."?LAYER[zoom]=1&LAYER[id]=".$mbArray['resource_id'];// "http://www.geoportal.rlp.de/portal/karten.html?LAYER[zoom]=1&LAYER[id]=36699"; //constant .. ids
 	$package->resources[0]->resource_type = "visualization"; //constant
 
+	if (!isset($package->resources[1]) || !is_object($package->resources[1])) $package->resources[1] = new stdClass();
 	$package->resources[1]->description = "WMS Capabilities Link zur Integration in GIS oder Webapplikationen";//$mbArray['mb_user_id'];// "Link zur WMS-Darstellung im GeoPortal.rlp, die Darstellung erfolgt ab einem Maßstab 1:500.000"; //fix: "".id.id?
 	$package->resources[1]->format = "WMS"; //constant
 	$package->resources[1]->url = $mapbenderUrl."/php/wms.php?layer_id=".$mbArray['resource_id']."&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS";// "http://www.geoportal.rlp.de/portal/karten.html?LAYER[zoom]=1&LAYER[id]=36699"; //constant .. ids
 	$package->resources[1]->resource_type = "visualization"; //constant
 
 	if ($mbArray['downloadoptions'] != '') {
+		if (!isset($package->resources[2]) || !is_object($package->resources[2])) $package->resources[2] = new stdClass();
 		$package->resources[2]->description = "GDI Downloadoptionen (EU Standard)";//$mbArray['mb_user_id'];// "Link zur WMS-Darstellung im GeoPortal.rlp, die Darstellung erfolgt ab einem Maßstab 1:500.000"; //fix: "".id.id?
 		$package->resources[2]->format = "GDI Download"; //constant
 		$package->resources[2]->url = $mapbenderUrl."/php/mod_getDownloadOptions.php?outputFormat=html&id=".str_replace('{','',str_replace('}','',str_replace('}{',',',$mbArray["downloadoptions"])));
 		$package->resources[2]->resource_type = "download"; //constant
 
 
+		if (!isset($package->resources[3]) || !is_object($package->resources[3])) $package->resources[3] = new stdClass();
 		$package->resources[3]->description = "Metadaten zur WMS Kartenebene";//$mbArray['mb_user_id'];// "Link zur WMS-Darstellung im GeoPortal.rlp, die Darstellung erfolgt ab einem Maßstab 1:500.000"; //fix: "".id.id?
 		$package->resources[3]->format = "HTML"; //constant
 		$package->resources[3]->url = $mapbenderUrl."/php/mod_showMetadata.php?languageCode=de&resource=layer&layout=tabs&id=".$mbArray['resource_id'];// "http://www.geoportal.rlp.de/portal/karten.html?LAYER[zoom]=1&LAYER[id]=36699"; //constant .. ids

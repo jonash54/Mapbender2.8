@@ -246,6 +246,7 @@ if ($outputFormat == 'json'){
 	);
 	//shuffle($tags); - only for html view - not for json!
 	for($i=0; $i<count($tags);$i++){
+    		if (!isset($tagCloudJSON->tagCloud->tags[$i]) || !is_object($tagCloudJSON->tagCloud->tags[$i])) $tagCloudJSON->tagCloud->tags[$i] = new stdClass();
     		$tagCloudJSON->tagCloud->tags[$i]->title = $tags[$i]['tagname'];
 		$tagCloudJSON->tagCloud->tags[$i]->url = $tags[$i]['url'];
 		$tagCloudJSON->tagCloud->tags[$i]->weight = $tags[$i]['weight'];

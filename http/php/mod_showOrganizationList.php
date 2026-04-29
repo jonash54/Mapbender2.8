@@ -83,6 +83,7 @@ $jsonOutput = new stdClass();
 $jsonOutput->organizations = array();
 $numberOfOrgas = 0;
 while($row = db_fetch_array($res)){
+	if (!isset($jsonOutput->organizations[$numberOfOrgas]) || !is_object($jsonOutput->organizations[$numberOfOrgas])) $jsonOutput->organizations[$numberOfOrgas] = new stdClass();
 	$jsonOutput->organizations[$numberOfOrgas]->{'id'} = $row['mb_group_id'];
 	$jsonOutput->organizations[$numberOfOrgas]->{'uuid'} = $row['uuid'];
 	$jsonOutput->organizations[$numberOfOrgas]->{'name'} = $row['mb_group_name'];

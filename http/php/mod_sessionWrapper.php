@@ -78,6 +78,7 @@ switch ($operation) {
     case "get":
 	$resultObj['success'] = true;
 	$resultObj['message'] = 'Extracted session variable successfully!';
+    	if (!isset($resultObj['result']) || !is_object($resultObj['result'])) $resultObj['result'] = new stdClass();
     	$resultObj['result']->key = $key;
 	$resultObj['result']->value = Mapbender::session()->get($key);
     	echo json_encode($resultObj);

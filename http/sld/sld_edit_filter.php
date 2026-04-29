@@ -186,6 +186,7 @@ else
 	}
 	if ($filterObj != "")
 	{
+		if (!isset($sld_objects[$sld_objects_rule_id]) || !is_object($sld_objects[$sld_objects_rule_id])) $sld_objects[$sld_objects_rule_id] = new stdClass();
 		$sld_objects[$sld_objects_rule_id]->filter = $filterObj->generateXml();
 	}
 	else

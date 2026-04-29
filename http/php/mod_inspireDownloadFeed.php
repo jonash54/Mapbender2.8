@@ -1099,6 +1099,7 @@ function generateFeed($feedDoc, $recordId, $generateFrom) {
 	$uniqueResourceIdentifierCodespace = $admin->getIdentifierCodespaceFromRegistry($departmentMetadata, $metadataArray);
 
 	//overwrite datasetid_codespace
+	if (!isset($mapbenderMetadata[$m]) || !is_object($mapbenderMetadata[$m])) $mapbenderMetadata[$m] = new stdClass();
 	$mapbenderMetadata[$m]->datasetid_codespace = $uniqueResourceIdentifierCodespace;
 
 	//qualifying id of the referenced ressource: Either dataset id or the id of the metadata record 
@@ -2238,6 +2239,7 @@ function fillMapbenderMetadata($dbResult, $generateFrom) {
 		$row = db_fetch_assoc($dbResult);
 		//to generate an atom feed from mb_metadata there must be some information avaiable, that is normally used from service metadata
 		//owner, group, bbox, ... - the mb_metadata table have to be filled with the geometry from the layer/featuretype - of which it has been coupled with
+		if (!isset($mapbenderMetadata[$indexMapbenderMetadata]) || !is_object($mapbenderMetadata[$indexMapbenderMetadata])) $mapbenderMetadata[$indexMapbenderMetadata] = new stdClass();
 		$mapbenderMetadata[$indexMapbenderMetadata]->origin = $row['origin']; 
 		if (isset($row['bbox2d']) && $row['bbox2d'] != '') {
 				$bbox = $row['bbox2d'];

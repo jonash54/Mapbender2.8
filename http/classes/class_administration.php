@@ -840,6 +840,7 @@ SQL;
     	    $t = array('i', 's', 's', 's');
 	    }
 	    $res = db_prep_query($sql,$v,$t);
+	    $logId = array();
 	    while ($row = db_fetch_array($res)){
 	        $logId[] = $row['log_id'];
 	    }
@@ -900,6 +901,7 @@ SQL;
 	    );
 	    $t = array('s',i,i);
 	    $res = db_prep_query($sql,$v,$t);
+	    $logId = array();
 	    while ($row = db_fetch_array($res)){
 	        $logId[] = $row['log_id'];
 	    }
@@ -959,7 +961,8 @@ SQL;
 		);
 		$t = array('s',i,i);
 		$res = db_prep_query($sql,$v,$t);
-		while ($row = db_fetch_array($res)){
+		$logId = array();
+	    while ($row = db_fetch_array($res)){
 			$logId[] = $row['log_id'];	
 		}
 		if (count($logId) > 0) {
@@ -2631,6 +2634,7 @@ SQL;
 	$jsonResult->mapviewer_types = array();
 	$i = 0;
 	while($row = db_fetch_array($res)){
+	    if (!isset($jsonResult->mapviewer_types[$i]) || !is_object($jsonResult->mapviewer_types[$i])) $jsonResult->mapviewer_types[$i] = new stdClass();
 	    $jsonResult->mapviewer_types[$i]->id = $row["mapviewer_id"];
 	    $jsonResult->mapviewer_types[$i]->name = $row["mapviewer_name"];
             $jsonResult->mapviewer_types[$i]->description = $row["mapviewer_description"];

@@ -153,6 +153,7 @@ if ($outputFormat == 'json'){
 	$wmcJSON = new stdClass;
 	$wmcJSON->initialWmcDocs = array();
 	for($i=0; $i<count($initialWmc);$i++){
+    		if (!isset($wmcJSON->initialWmcDocs[$i]) || !is_object($wmcJSON->initialWmcDocs[$i])) $wmcJSON->initialWmcDocs[$i] = new stdClass();
     		$wmcJSON->initialWmcDocs[$i]->id = $initialWmc[$i]['id'];
 		$wmcJSON->initialWmcDocs[$i]->title = $initialWmc[$i]['title'];
 		$wmcJSON->initialWmcDocs[$i]->abstract = $initialWmc[$i]['abstract'];

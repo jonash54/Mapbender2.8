@@ -122,6 +122,7 @@ class Wfs_2_0_Factory extends WfsFactory {
 		
 		$m = 0;
 		foreach($array['storedQuery'] as $storedQuery) {
+			if (!isset($storedQueryArray[$m]) || !is_object($storedQueryArray[$m])) $storedQueryArray[$m] = new stdClass();
 			$storedQueryArray[$m]->id = $storedQuery['Id'];
 			$storedQueryArray[$m]->title = $storedQuery['Title'];
 			$storedQueryArray[$m]->returnFeaturetype = $storedQuery['ReturnFeatureType'];
@@ -460,6 +461,7 @@ class Wfs_2_0_Factory extends WfsFactory {
 					$i_mdu = 0;
 					foreach ($metadataURLArray as $metadataURL) {
 						//$e = new mb_exception("other srs: ".$otherSRS);
+						if (!isset($featuretype_metadataUrl[$i_mdu]) || !is_object($featuretype_metadataUrl[$i_mdu])) $featuretype_metadataUrl[$i_mdu] = new stdClass();
 						$featuretype_metadataUrl[$i_mdu]->href = $this->getValue($xpath, './@xlink:href', $metadataURL);
 						$e = new mb_notice("metadataurl: ".$featuretype_metadataUrl[$i_mdu]->href);
 						$featuretype_metadataUrl[$i_mdu]->type = $this->getValue($xpath, './@type', $metadataURL);
@@ -513,6 +515,7 @@ class Wfs_2_0_Factory extends WfsFactory {
 				foreach ($capOperations as $operation) {
 					//debug
 					#$e = new mb_notice("wfs operation: ".$operation->asXML());
+					if (!isset($wfsOperations[$k]) || !is_object($wfsOperations[$k])) $wfsOperations[$k] = new stdClass();
 					$wfsOperations[$k]->name = html_entity_decode($this->getValue($xpath, './@name', $operation));
 					$wfsOperations[$k]->httpGet = html_entity_decode($this->getValue($xpath, './ows:DCP/ows:HTTP/ows:Get/@xlink:href', $operation));
 					$wfsOperations[$k]->httpPost = html_entity_decode($this->getValue($xpath, './ows:DCP/ows:HTTP/ows:Post/@xlink:href', $operation));

@@ -292,6 +292,7 @@ $ckanPackage->name = $ckanPackageRemote->result->id;
 $ckanPackage->owner_org = $orga_ident;	
 $ckanPackage->notes = "notes...";
 
+if (!isset($ckanPackage->groups[0]) || !is_object($ckanPackage->groups[0])) $ckanPackage->groups[0] = new stdClass();
 $ckanPackage->groups[0]->name = "transparenzgesetz";
 $ckanPackage->state = "active";
 $ckanPackage->type = "dataset";
@@ -325,6 +326,7 @@ $ckanPackage->license_id = "odc-odbl";
 	}
 
 	/*$resourcesArray[0]->url = "http://www.geoportal.rlp.de";
+	if (!isset($resourcesArray[0]) || !is_object($resourcesArray[0])) $resourcesArray[0] = new stdClass();
 	$resourcesArray[0]->format = "PDF";*/
 
 	$ckanPackage->resources = $resourcesArray;
@@ -488,6 +490,7 @@ $e = new mb_exception("classes/class_syncCkan.php: parameter departmentId: ".$de
 	$catalogues = json_decode($departmentsArray[$index]["ckan_catalogues"])->ckan_catalogues;
         foreach ($catalogues as $catalogue) { //only one in this case
 
+	    if (!isset($syncListResultRemoteCkan->external_ckan[$numberOfCatalogue]) || !is_object($syncListResultRemoteCkan->external_ckan[$numberOfCatalogue])) $syncListResultRemoteCkan->external_ckan[$numberOfCatalogue] = new stdClass();
 	    $syncListResultRemoteCkan->external_ckan[$numberOfCatalogue]->name = $catalogue->ckan_name;
 	    $syncListResultRemoteCkan->external_ckan[$numberOfCatalogue]->orga_filter = $catalogue->ckan_organisation_filter;
 	    $syncListResultRemoteCkan->external_ckan[$numberOfCatalogue]->ckan_server_ip = $catalogue->ckan_server_ip;
@@ -675,6 +678,7 @@ $e = new mb_exception("classes/class_syncCkan.php: uuid from departmentArray: ".
 	$organization = $departmentsArray[0];
 	$catalogues = json_decode($departmentsArray[0]["csw_catalogues"])->csw_catalogues;
         foreach ($catalogues as $catalogue) { //only one in this case
+	    if (!isset($syncListResultCsw->external_csw[$numberOfCatalogue]) || !is_object($syncListResultCsw->external_csw[$numberOfCatalogue])) $syncListResultCsw->external_csw[$numberOfCatalogue] = new stdClass();
 	    $syncListResultCsw->external_csw[$numberOfCatalogue]->id = $catalogue->catalogue_id;
 	    $syncListResultCsw->external_csw[$numberOfCatalogue]->orga_filter = $catalogue->organisation_filter;
 	    $syncListResultCsw->external_csw[$numberOfCatalogue]->ckan_filter = $catalogue->ckan_filter;
@@ -851,6 +855,7 @@ $e = new mb_exception("classes/class_syncCkan.php: uuid from departmentArray: ".
         $syncList->function = "getSyncListJson";
         $numberGeoportalOrga = 0;
         foreach ($departmentsArray as $organization) {
+            if (!isset($syncListResult->geoportal_organization[$numberGeoportalOrga]) || !is_object($syncListResult->geoportal_organization[$numberGeoportalOrga])) $syncListResult->geoportal_organization[$numberGeoportalOrga] = new stdClass();
             $syncListResult->geoportal_organization[$numberGeoportalOrga]->name = $organization["name"];
             $syncListResult->geoportal_organization[$numberGeoportalOrga]->id = $organization["id"];
             $syncListResult->geoportal_organization[$numberGeoportalOrga]->title = $organization["title"];
@@ -1301,6 +1306,7 @@ SQL;
 		$keywordIndex = 0;
 	    for ($i=0; $i < count($keywords); $i++) {
 	        if ($keywords[$i] !== "" && isset($keywords[$i]) && strpos($keywords[$i], " ") === false && strpos($keywords[$i], "(") === false) {
+                if (!isset($ckanPackage->tags[$keywordIndex]) || !is_object($ckanPackage->tags[$keywordIndex])) $ckanPackage->tags[$keywordIndex] = new stdClass();
                 $ckanPackage->tags[$keywordIndex]->name = (string)$keywords[$i];
 				$keywordIndex++;
 			}
@@ -1323,6 +1329,7 @@ SQL;
 		//Add further resource (name/id/description/url/format)
 		$viewArray = [];
 
+		if (!isset($resourcesArray[1]) || !is_object($resourcesArray[1])) $resourcesArray[1] = new stdClass();
 		$resourcesArray[1]->name = "Originäre Metadaten";// für ".$row['layer_title'];
 		$resourcesArray[1]->id = $fileIdentifier."_iso19139";
 		$resourcesArray[1]->description = $ckanPackage->title." - Anzeige der originären Metadaten";
@@ -1424,6 +1431,7 @@ SQL;
     	//$ckanPackage->groups = ""; //[{"name":"opendatagesetz"},{"name":"transparenzgesetz"}]
     	$ckanPackage->groups[0]->name = "transparenzgesetz";
             if ($row['isopen'] == 1) {
+    	    if (!isset($ckanPackage->groups[1]) || !is_object($ckanPackage->groups[1])) $ckanPackage->groups[1] = new stdClass();
     	    $ckanPackage->groups[1]->name = "opendata";
     	    $ckanPackage->isopen = true;
             } else {
@@ -1472,6 +1480,7 @@ SQL;
     	$indexResourceArray = 0;
     	$indexViewArray = 0;
     	//add html preview for metadata
+    	if (!isset($resourcesArray[$indexResourceArray]) || !is_object($resourcesArray[$indexResourceArray])) $resourcesArray[$indexResourceArray] = new stdClass();
     	$resourcesArray[$indexResourceArray]->name = "Originäre Metadaten";// für ".$row['layer_title'];
     	$resourcesArray[$indexResourceArray]->id = $metadataUuid."_iso19139";
     	$resourcesArray[$indexResourceArray]->description = $ckanPackage->title." - Anzeige der originären Metadaten";
@@ -1748,6 +1757,7 @@ SQL;
                 }
             }
             for ($i=0; $i < count($keywordArray); $i++) {
+                if (!isset($ckanPackage->tags[$i]) || !is_object($ckanPackage->tags[$i])) $ckanPackage->tags[$i] = new stdClass();
                 $ckanPackage->tags[$i]->name = $keywordArray[$i];
             }
         }
@@ -1766,6 +1776,7 @@ SQL;
         //delete all existing resource_views an recreate them afterwards
         $numberOfResources = 0;
         foreach ($result->result->resources as $resource) {
+            if (!isset($returnObject->resources[$numberOfResources]) || !is_object($returnObject->resources[$numberOfResources])) $returnObject->resources[$numberOfResources] = new stdClass();
             $returnObject->resources[$numberOfResources]->id = $resource->id;
             $result = $ckan->action_resource_view_list("{\"id\":\"".$resource->id."\"}");
             if ($result->success == true) {

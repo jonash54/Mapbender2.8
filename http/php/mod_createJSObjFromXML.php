@@ -46,6 +46,7 @@ else {
     // Setzt das geledene WMS in Sichtbar
     $mywms->gui_wms_visible = 1;
     for($i=0; $i<count($mywms->objLayer); $i++){
+        if (!isset($mywms->objLayer[$i]) || !is_object($mywms->objLayer[$i])) $mywms->objLayer[$i] = new stdClass();
         $mywms->objLayer[$i]->gui_layer_visible = 1;
     }
     if ($noHtml) {

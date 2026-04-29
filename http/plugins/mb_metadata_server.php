@@ -569,6 +569,7 @@ SQL;
 		$sql .= " mb_metadata.metadata_id = relation.fkey_metadata_id WHERE relation.relation_type IN"; 
 		$sql .= " ('capabilities','external','metador','upload', 'internal') ORDER BY metadata_id DESC";
 		$res = db_query($sql);
+		if (!isset($resultObj["md_metadata"]) || !is_object($resultObj["md_metadata"])) $resultObj["md_metadata"] = new stdClass();
 		$resultObj["md_metadata"]->metadata_id = array();
 		$resultObj["md_metadata"]->uuid = array();
 		$resultObj["md_metadata"]->origin = array();
@@ -1818,6 +1819,7 @@ SQL;
 		$resultObj = array();
 		$i = 0;
 		while ($row = db_fetch_assoc($res)) {
+			if (!isset($resultObj[$i]) || !is_object($resultObj[$i])) $resultObj[$i] = new stdClass();
 			$resultObj[$i]->metadataId = $row['metadata_id']; //integer
 			$resultObj[$i]->metadataTitle = $row["title"]; //char
 			$i++;

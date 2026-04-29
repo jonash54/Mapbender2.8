@@ -151,6 +151,8 @@ function parseSld($data)
 					$parent[] = $parentactual;
 					$objects[count($parent)-1] = new NamedLayer();
 					//Experimental:
+					if (!isset($objects[count($parent)-1]) || !is_object($objects[count($parent)-1])) $objects[count($parent)-1] = new stdClass();
+					if (!isset($objects[count($parent)-1]) || !is_object($objects[count($parent)-1])) $objects[count($parent)-1] = new stdClass();
 					$objects[count($parent)-1]->id = count($parent)-1;
 					$objects[count($parent)-1]->parent = $parentactual;
 					//END Experimental
@@ -174,6 +176,7 @@ function parseSld($data)
 					//echo $element["value"]."\n";
 					//$element["value"] = str_replace("<","&lt;",$element["value"]);
 					//$element["value"] = str_replace(">","&gt;",$element["value"]);
+					if (!isset($objects[$parentactual]) || !is_object($objects[$parentactual])) $objects[$parentactual] = new stdClass();
 					$objects[$parentactual]->name = $element["value"];
 				}
 				break;

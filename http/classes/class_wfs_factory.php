@@ -156,6 +156,7 @@ abstract class WfsFactory extends OwsFactory {
 				$this->featureTypeArray[count($this->featureTypeArray)] = new WfsFeatureType($aWfs);
 				$fe_cnt = count($this->featureTypeArray)-1;
 	
+				if (!isset($this->featureTypeArray[$fe_cnt]) || !is_object($this->featureTypeArray[$fe_cnt])) $this->featureTypeArray[$fe_cnt] = new stdClass();
 				$this->featureTypeArray[$fe_cnt]->uuid = $row["uuid"];
 				$this->featureTypeArray[$fe_cnt]->id = $row["featuretype_id"];
 	

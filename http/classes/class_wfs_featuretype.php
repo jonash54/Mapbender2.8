@@ -51,6 +51,7 @@ class WfsFeatureType {
 	public function hasNamespace ($key, $value) {
 		for ($i = 0; $i < count($this->namespaceArray); $i++) {
 			if ($this->namespaceArray[$i]->name == $key && 
+				if (!isset($this->namespaceArray[$i]) || !is_object($this->namespaceArray[$i])) $this->namespaceArray[$i] = new stdClass();
 				$this->namespaceArray[$i]->value == $value) 
 			{
 				return true;

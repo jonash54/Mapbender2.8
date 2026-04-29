@@ -89,6 +89,8 @@ function parseFilter($data)
 				{
 					$parent[] = $parentactual;
 					$objects[count($parent)-1] = new BinaryLogicOp("Or");
+					if (!isset($objects[count($parent)-1]) || !is_object($objects[count($parent)-1])) $objects[count($parent)-1] = new stdClass();
+					if (!isset($objects[count($parent)-1]) || !is_object($objects[count($parent)-1])) $objects[count($parent)-1] = new stdClass();
 					$objects[count($parent)-1]->id = count($parent)-1;
 					$objects[count($parent)-1]->parent = $parentactual;
 					$objects[$parentactual]->operations[] = &$objects[count($parent)-1];
@@ -321,6 +323,7 @@ function parseFilter($data)
 				{
 					if ($boundary == "upper")
 					{
+						if (!isset($objects[$parentactual]) || !is_object($objects[$parentactual])) $objects[$parentactual] = new stdClass();
 						$objects[$parentactual]->upperBoundary = $element["value"];
 					}
 					else if ($boundary == "lower")

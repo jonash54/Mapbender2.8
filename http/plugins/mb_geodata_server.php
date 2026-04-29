@@ -284,6 +284,7 @@ WHERE fkey_layer_id = $layerId ) as relation ON
 mb_metadata.metadata_id = relation.fkey_metadata_id WHERE mb_metadata.origin IN ('capabilities','external','metador','upload')
 SQL;
 		$res = db_query($sql);
+		if (!isset($resultObj["md_metadata"]) || !is_object($resultObj["md_metadata"])) $resultObj["md_metadata"] = new stdClass();
 		$resultObj["md_metadata"]->metadata_id = array();
 		$resultObj["md_metadata"]->uuid = array();
 		$resultObj["md_metadata"]->origin = array();

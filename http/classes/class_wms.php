@@ -184,6 +184,7 @@ class wms {
 	    foreach ($originalJsonArray as $layerRecord) {
 	    	if (!in_array($layerRecord['layerId'], $layerIdArray)) {
 	    	    //get all entries for metadataId
+		    if (!isset($returnObject->layer[$layerCount]) || !is_object($returnObject->layer[$layerCount])) $returnObject->layer[$layerCount] = new stdClass();
 		    $returnObject->layer[$layerCount]->id = $layerRecord['layerId'];
 		    $reducedLayerArray = $this->array_filter_by_value($originalJsonArray, 'layerId', $layerRecord['layerId']);
 		    foreach ($reducedLayerArray as $metadataRecord) {
@@ -957,6 +958,7 @@ class wms {
 					$parent[$element['level']+1] = $cnt_layer;
 					$myParent[$cnt_layer]= $parent[$element['level']];
 					$this->addLayer($cnt_layer,$myParent[$cnt_layer]);
+					if (!isset($this->objLayer[$cnt_layer]) || !is_object($this->objLayer[$cnt_layer])) $this->objLayer[$cnt_layer] = new stdClass();
 					$this->objLayer[$cnt_layer]->layer_queryable = $element['attributes']['queryable'];
 				}
 				if ($element['type'] == "close") {
@@ -1345,6 +1347,7 @@ class wms {
 		/*if the rootlayer has no epsg...read them from following layer TODO what if this layer have also no SRS?*/
 		$testVar = $this->objLayer[0]->layer_epsg[0]["epsg"];
 		if($this->objLayer[0]->layer_epsg[0]["epsg"] == "" || empty($testVar)){
+			if (!isset($this->objLayer[0]) || !is_object($this->objLayer[0])) $this->objLayer[0] = new stdClass();
 			$this->objLayer[0]->layer_epsg = $this->objLayer[1]->layer_epsg;
 			for($i=0;$i<count($this->objLayer[0]->layer_epsg);$i++){
 				for($j=1; $j<count($this->objLayer); $j++){
@@ -1367,6 +1370,7 @@ class wms {
 		}
 		for($i=0;$i<count($this->objLayer);$i++){
 			if(count($this->objLayer[$i]->layer_epsg) == 0 && count($this->objLayer[0]->layer_epsg) > 0){
+				if (!isset($this->objLayer[$i]) || !is_object($this->objLayer[$i])) $this->objLayer[$i] = new stdClass();
 				$this->objLayer[$i]->layer_epsg = $this->objLayer[0]->layer_epsg; 
 			}
 			if(!is_int($this->objLayer[$i]->layer_parent)){
@@ -1563,11 +1567,13 @@ class wms {
 		$newLayer->gui_layer_title = $currentLayer["title"];
 		//if layer is built from wmc, there will only be a string given for each dataurl/metadataurl
 		if (is_string($currentLayer["layer_dataurl"])) {
+			if (!isset($newLayer->layer_dataurl[0]) || !is_object($newLayer->layer_dataurl[0])) $newLayer->layer_dataurl[0] = new stdClass();
 			$newLayer->layer_dataurl[0]->href = $currentLayer["layer_dataurl"];
 		} else {
 			$newLayer->layer_dataurl = $currentLayer["layer_dataurl"];
 		}
 		if (is_string($currentLayer["layer_metadataurl"])) {
+			if (!isset($newLayer->layer_metadataurl[0]) || !is_object($newLayer->layer_metadataurl[0])) $newLayer->layer_metadataurl[0] = new stdClass();
 			$newLayer->layer_metadataurl[0]->href = $currentLayer["layer_metadataurl"];
 		} else {
 			$newLayer->layer_metadataurl = $currentLayer["layer_metadataurl"];
@@ -1702,6 +1708,7 @@ class wms {
 		for ($i = 0; $i < count($currentLayer['dimension']); $i++) {
 			//$newLayer->layer_dimension[$i] = array();
 			foreach ($dimensionAttributes as $attributeName) {
+				if (!isset($newLayer->layer_dimension[$i]) || !is_object($newLayer->layer_dimension[$i])) $newLayer->layer_dimension[$i] = new stdClass();
 				$newLayer->layer_dimension[$i]->{$attributeName} = $currentLayer['dimension'][$i][$attributeName];
 			}
 		}
@@ -3719,6 +3726,7 @@ SQL;
 			while($row2 = db_fetch_array($res_layer)){
 				$this->addLayer($row2["layer_pos"],$row2["layer_parent"]);
 				$layer_cnt=count($this->objLayer)-1;
+				if (!isset($this->objLayer[$layer_cnt]) || !is_object($this->objLayer[$layer_cnt])) $this->objLayer[$layer_cnt] = new stdClass();
 				$this->objLayer[$layer_cnt]->layer_uid = $layer_id;
 				$this->objLayer[$layer_cnt]->layer_name = administration::convertIncomingString($row2["layer_name"]);
 				$this->objLayer[$layer_cnt]->layer_title = administration::convertIncomingString($row2["layer_title"]);			

@@ -317,6 +317,7 @@ $row['wmc'] = $wmcDocSession;
 	//build object
 	//build background part
 	/*$wmcObject->backGroundLayer[0]->serviceType = "WMTS";
+	if (!isset($wmcObject->backGroundLayer[0]) || !is_object($wmcObject->backGroundLayer[0])) $wmcObject->backGroundLayer[0] = new stdClass();
 	$wmcObject->backGroundLayer[0]->name = "Hybrid";
 	$wmcObject->backGroundLayer[0]->url = "http://www.gdi-rp-dienste2.rlp.de/mapcache/wmts/";
 	$wmcObject->backGroundLayer[0]->layer = "test";
@@ -324,6 +325,7 @@ $row['wmc'] = $wmcDocSession;
 	$wmcObject->backGroundLayer[0]->format = "image/jpeg";
 	$wmcObject->backGroundLayer[0]->active = true;
 
+	if (!isset($wmcObject->backGroundLayer[1]) || !is_object($wmcObject->backGroundLayer[1])) $wmcObject->backGroundLayer[1] = new stdClass();
 	$wmcObject->backGroundLayer[1]->serviceType = "WMS";
 	$wmcObject->backGroundLayer[1]->name = "Luftbild";
 	$wmcObject->backGroundLayer[1]->url = "http://geo4.service24.rlp.de/wms/dop40_geo4.fcgi?";
@@ -389,6 +391,7 @@ $row['wmc'] = $wmcDocSession;
 		if ($withHierarchy == true) {
 			if (in_array($crs, $layerSRS)) {
 				if (!isset($layerId) || $layerId == '') {
+					if (!isset($wmcObject->layerList[$layerCount]) || !is_object($wmcObject->layerList[$layerCount])) $wmcObject->layerList[$layerCount] = new stdClass();
 					$wmcObject->layerList[$layerCount]->internal = false; 
 					$wmcObject->layerList[$layerCount]->layerName = (string)$layerArray[$i]->Name;
 					$wmcObject->layerList[$layerCount]->opacity = (integer)$mbExtensions->gui_wms_opacity;

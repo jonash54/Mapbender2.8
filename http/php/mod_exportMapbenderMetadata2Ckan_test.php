@@ -1320,6 +1320,7 @@ if ($forceCache && $cache->isActive && $cache->cachedVariableExists("mapbender:"
             $featuretypeArray = array();
             $downloadArray = array();
             $package[$j] = new stdClass();
+            if (!isset($package[$j]) || !is_object($package[$j])) $package[$j] = new stdClass();
             $package[$j]->maintainer = $orgaObject->title;
             $package[$j]->point_of_contact = $orgaObject->title;
             $package[$j]->point_of_contact_email = str_replace(" (at) ", "@", $orgaObject->department_email);
