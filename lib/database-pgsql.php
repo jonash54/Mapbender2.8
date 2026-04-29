@@ -174,11 +174,12 @@ function db_prep_query($qstring, $params, $types){
 		}
 	}
 	else{
-		$result = pg_prepare($conn, "", $qstring);
+		$result = @pg_prepare($conn, "", $qstring);
 		if(!$result){
 			$e = new mb_exception("Error while preparing statement in ".$_SERVER['SCRIPT_FILENAME'].": Sql: ".$qstring.", Error: ".db_error());
+			return false;
 		}
-		$r = pg_execute($conn, "", $params);
+		$r = @pg_execute($conn, "", $params);
 		if(!$r){
 			$e = new mb_exception("Error while executing prepared statement in ".$_SERVER['SCRIPT_FILENAME'].": Sql: ".$qstring.", Error: ".db_error());
 		}

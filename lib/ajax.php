@@ -48,14 +48,14 @@ class AjaxRequest {
 	}
 
 	protected function initializeFromArray ($requestArray) {
-		if ($requestArray["id"]) {
+		if (!empty($requestArray["id"])) {
 			$this->id = intval($requestArray["id"]);
 		}
-		
-		if ($requestArray["method"]) {
+
+		if (!empty($requestArray["method"])) {
 			$this->method = $requestArray["method"];
-			
-			if ($requestArray["params"]) {
+
+			if (!empty($requestArray["params"])) {
 				$obj = $this->json->decode($requestArray["params"]);
 				$this->paramObject = $obj;
 			}

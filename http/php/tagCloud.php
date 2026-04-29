@@ -194,6 +194,10 @@ while($row = db_fetch_array($res)){
 }
 //normalize the tag cloud with some max value for pixelsize or set them to linear scale!
 
+if (!isset($scale)) { $scale = 'linear'; }
+if (!isset($inc)) { $inc = 1; }
+if (!isset($maxFontSize)) { $maxFontSize = 30; }
+if (!isset($maxWeight) || $maxWeight == 0) { $maxWeight = 1; }
 for($i=0; $i<count($tags); $i++){
 	switch ($scale) {
 		case "linear":
@@ -250,7 +254,7 @@ if ($outputFormat == 'json'){
     		$tagCloudJSON->tagCloud->tags[$i]->title = $tags[$i]['tagname'];
 		$tagCloudJSON->tagCloud->tags[$i]->url = $tags[$i]['url'];
 		$tagCloudJSON->tagCloud->tags[$i]->weight = $tags[$i]['weight'];
-		$tagCloudJSON->tagCloud->tags[$i]->id = $tags[$i]['mbId'];
+		$tagCloudJSON->tagCloud->tags[$i]->id = $tags[$i]['mbId'] ?? null;
 		//$tagCloudJSON->tagCloud->tags[$i]->symbol = $tags[$i]['symbol'];
 
 		//if ($type == 'inspireCategories') {

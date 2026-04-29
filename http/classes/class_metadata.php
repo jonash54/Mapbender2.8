@@ -66,13 +66,42 @@ class searchMetadata
 	var $hvdInspireCats;
 	var $hvdCustomCats;
 	var $internalProcessCoupledWMS = false;
-	function __construct($userId, $searchId, $searchText, $registratingDepartments, $isoCategories, $inspireThemes, $timeBegin, $timeEnd, $regTimeBegin, $regTimeEnd, $maxResults, $searchBbox, $searchTypeBbox, $accessRestrictions, $languageCode, $searchEPSG, $searchResources, $searchPages, $outputFormat, $resultTarget, $searchURL, $customCategories, $hostName, $orderBy, $resourceIds, $restrictToOpenData, $originFromHeader, $resolveCoupledResources = false, $https = false, $restrictToHvd)
+	// Properties set dynamically — declared here so PHP 8.2+ does not warn.
+	var $registratingDepartmentsArray;
+	var $internalResult;
+	var $json;
+	var $accessableLayers;
+	var $maxObjects;
+	var $maxFontSize;
+	var $maxWeight;
+	var $scale;
+	var $minFontSize;
+	var $resourceClassifications;
+	var $resourceCategories;
+	var $keywordTitle;
+	var $e;
+	var $databaseIdColumnName;
+	var $databaseTableName;
+	var $whereStrCatExtension;
+	var $resourceClasses;
+	var $applicationJSON;
+	var $datasetJSON;
+	var $wmcJSON;
+	var $wmsJSON;
+	var $wfsJSON;
+	var $keyJSON;
+	var $wmsDoc;
+	var $wfsDoc;
+	var $wmcDoc;
+	var $datasetDoc;
+	var $applicationDoc;
+	function __construct($userId, $searchId, $searchText, $registratingDepartments, $isoCategories, $inspireThemes, $timeBegin, $timeEnd, $regTimeBegin, $regTimeEnd, $maxResults, $searchBbox, $searchTypeBbox, $accessRestrictions, $languageCode, $searchEPSG, $searchResources, $searchPages, $outputFormat, $resultTarget, $searchURL, $customCategories, $hostName, $orderBy, $resourceIds, $restrictToOpenData, $originFromHeader, $resolveCoupledResources = false, $https = false, $restrictToHvd = false)
 	{
 		$this->userId = (int) $userId;
 		$this->searchId = $searchId;
 		$this->searchText = $searchText;
 		$this->registratingDepartments = $registratingDepartments; //array with ids of the registrating groups in the mb database
-		$this->registratingDepartmentsArray = explode(",", $this->registratingDepartments);
+		$this->registratingDepartmentsArray = explode(",", (string) ($this->registratingDepartments ?? ''));
 		$this->isoCategories = $isoCategories;
 		$this->inspireThemes = $inspireThemes;
 		$this->customCategories = $customCategories;
@@ -459,7 +488,9 @@ class searchMetadata
 	private function flipDiagonally($arr)
 	{
 		$out = array();
+		if (!is_array($arr) && !is_object($arr)) { return $out; }
 		foreach ($arr as $key => $subarr) {
+			if (!is_array($subarr) && !is_object($subarr)) { continue; }
 			foreach ($subarr as $subkey => $subvalue) {
 				$out[$subkey][$key] = $subvalue;
 			}
@@ -1655,9 +1686,9 @@ $layer_id_sorted wird befüllt mit der obigen getMetadata Abfrage
 		}
 		//Get total number of results 
 		$count = db_prep_query($sqlN, $v, $t);
-		$n = db_fetch_all($count);
+		$n = $count ? db_fetch_all($count) : array();
 		#echo "<br>N: ".var_dump($n)."<br>";
-		$n = $n[0]['count'];
+		$n = isset($n[0]['count']) ? $n[0]['count'] : 0;
 		$e = new mb_notice("class_metadata.php: Search => SQL-Request of " . $this->searchResources . " service metadata N: " . $sqlN . " Number of found objects: " . $n);
 		if ($this->searchId != 'dummysearch') { //searchId is not the default id! - it has been explicitly defined 
 			//check if cat file already exists:

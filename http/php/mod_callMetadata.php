@@ -85,9 +85,11 @@ $searchURL = urldecode($searchURL);
 $checkForNullRequests = array("registratingDepartments","isoCategories","inspireThemes","customCategories","regTimeBegin","regTimeEnd","timeBegin","timeEnd","searchBbox","searchTypeBbox","searchResources","orderBy","hostName","resourceIds","restrictToOpenData", "restrictToHvd");
 
 for($i=0; $i < count($checkForNullRequests); $i++){
-	if (!$_REQUEST[$checkForNullRequests[$i]] or $_REQUEST[$checkForNullRequests[$i]] == 'false' or $_REQUEST[$checkForNullRequests[$i]] == 'undefined') {
-		$_REQUEST[$checkForNullRequests[$i]] = "";
-		$searchURL = delTotalFromQuery($checkForNullRequests[$i],$searchURL);
+	$key = $checkForNullRequests[$i];
+	$val = $_REQUEST[$key] ?? null;
+	if (!$val or $val == 'false' or $val == 'undefined') {
+		$_REQUEST[$key] = "";
+		$searchURL = delTotalFromQuery($key,$searchURL);
 	}
 }
 
@@ -310,7 +312,7 @@ if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
 	$outputFormat = $testMatch;
 	$testMatch = NULL;
 }
-//$restrictToOpenData = false;
+$restrictToOpenData = "";
 if (isset($_REQUEST["restrictToOpenData"]) && $_REQUEST["restrictToOpenData"] != "") {
 	$testMatch = $_REQUEST["restrictToOpenData"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
@@ -328,7 +330,7 @@ if (isset($_REQUEST["restrictToOpenData"]) && $_REQUEST["restrictToOpenData"] !=
 	$testMatch = NULL;
 }
 
-//$restrictToHvd = false;
+$restrictToHvd = "";
 if (isset($_REQUEST["restrictToHvd"]) && $_REQUEST["restrictToHvd"] != "") {
 	$testMatch = $_REQUEST["restrictToHvd"];	
  	if (!($testMatch == 'true' or $testMatch == 'false')){ 
@@ -519,7 +521,7 @@ if ($resultTarget == 'web' or $resultTarget == 'debug') {
 
 if (DEFINED("SEARCH_LOG") && SEARCH_LOG == true) {
     $admin = new administration();
-    $admin->logSearchInterfaceUsage ($_SERVER['HTTP_REFERER'], delTotalFromQuery("searchId", $searchURL), $searchText, $_SERVER['HTTP_USER_AGENT'], null);
+    $admin->logSearchInterfaceUsage ($_SERVER['HTTP_REFERER'] ?? '', delTotalFromQuery("searchId", $searchURL), $searchText, $_SERVER['HTTP_USER_AGENT'] ?? '', null);
 }
 
 //convert the respources and the pagenumbers into arrays

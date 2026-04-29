@@ -29,6 +29,7 @@ if (file_exists(dirname(__FILE__)."/../../conf/linkedDataProxy.json")) {
 
 //get language parameter out of mapbender session if it is set else set default language to de_DE
 $sessionLang = Mapbender::session()->get("mb_lang");
+$languageCode = "de";
 
 if (isset($sessionLang) && ($sessionLang!='')) {
 	$e = new mb_notice("mod_showMetadata.php: language found in session: ".$sessionLang);
@@ -85,6 +86,7 @@ foreach($_REQUEST as $key => $val) {
 	$_REQUEST[strtoupper($key)] = $val;
 }
 //validate request params
+$idList = array();
 if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//validate cs list of uuids or other identifiers - which?
 	$testMatch = $_REQUEST["ID"];
@@ -205,7 +207,7 @@ SQL;
 
 	//initialize array for result
 
-	//$downloadOptions = new stdClass();
+	$downloadOptions = new stdClass();
 	$idList = is_array($idList ?? null) ? $idList : [];
 	for ($i = 0; $i < count($idList); $i++) {
 		$v = array($idList[$i]);
@@ -575,7 +577,7 @@ if ($downloadOptions != "null" && $outputFormat == "html") {
 	} else {
 		$mapbenderUrl = "http://www.geoportal.rlp.de/mapbender";
 	}
-	$script .= '<script type="text/javascript">';
+	$script = '<script type="text/javascript">';
 	$script .= '$(function() {';
 	$script .= '	$("#tabs").tabs();';
 	$script .= '});';
