@@ -62,7 +62,7 @@ Gazetteer Configuration<br>
 <a href="mod_gazetteer_edit.php">edit</a><br>
 <?php
 $aWFS = new wfs_conf();
-$aWFS->getallwfs();	
+$aWFS->getallwfs(Mapbender::session()->get('mb_user_id'));
 
 /* save gazetteer properties */
 

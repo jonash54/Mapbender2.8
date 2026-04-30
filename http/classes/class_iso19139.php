@@ -99,6 +99,8 @@ class Iso19139 {
 	var $fkeyMapviewerId;
 	//Following attribute classifies if a minimum of given attributes are set to identify it as metadata
 	var $xmlHasMinimalAttributes; //title, description, bbox are good values to be checked
+	var $inspireLegislation;
+	var $inspireRegulations;
 
 	function __construct() {
 		//initialize empty iso19139 object
@@ -159,11 +161,15 @@ class Iso19139 {
 		$this->resourceResponsibleParty = null;
 		$this->resourceContactEmail = null;
 		$this->previewImage = null;
-		$this->codeListUpdateFrequencyArray = $codeListUpdateFrequencyArray;
+		$this->codeListUpdateFrequencyArray = isset($codeListUpdateFrequencyArray) ? $codeListUpdateFrequencyArray : array();
 		//read inspire legislation info from json file - enhancement for INSPIRE - maybe to be defined as an extension of the class in further developments!
 		//source: http://inspire.ec.europa.eu/inspire-legislation/
 		$inspireLegislationConf = realpath(dirname(__FILE__) ."/../../conf/inspire_legislation.json");
-		$this->inspireLegislation = json_decode(file_get_contents($inspireLegislationConf));
+		if ($inspireLegislationConf && file_exists($inspireLegislationConf)) {
+			$this->inspireLegislation = json_decode(file_get_contents($inspireLegislationConf));
+		} else {
+			$this->inspireLegislation = null;
+		}
 		$this->inspireRegulations = $this->getRelevantInspireRegulations();
 		//default the searchability in the mapbender catalogue to true
 		$this->searchable = 't';
@@ -202,6 +208,9 @@ class Iso19139 {
 
 	public function getRelevantInspireRegulations($withAmendmentAndCorrigendum = true) {
 		//use $this->hierarchyLevel and give back all relevant regulations (only the newest of each type) with their dates in the requested language
+		if (!is_object($this->inspireLegislation)) {
+			return array();
+		}
 		$language = $this->inspireLegislation->default_language;
 		$countInspireRegulations = 0;
 		$regulations = array();

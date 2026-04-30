@@ -206,7 +206,7 @@ class OwsConstraints {
 		//if fees exists,
 		//if licences are defined,
 		//if network access is restricted - only services
-		if ((isset($row[$this->type.'_proxylog']) && $row[$this->type.'_proxylog'] != 0) or strtoupper($row['accessconstraints']) != "NONE" or strtoupper($row['fees']) != "NONE" or isset($row['termsofuse_id']) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0)) {
+		if ((isset($row[$this->type.'_proxylog']) && $row[$this->type.'_proxylog'] != 0) or strtoupper((string) ($row['accessconstraints'] ?? '')) != "NONE" or strtoupper((string) ($row['fees'] ?? '')) != "NONE" or isset($row['termsofuse_id']) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0)) {
 			$html = "";
 			//generate text for json object if restrictions exists
 			if ($this->withHeader && $this->outputFormat != "iso19139") {
@@ -224,7 +224,7 @@ class OwsConstraints {
 					$discPrivacy .= "<a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a>";
 					$html .= $t_a.$htmlHeader['discPrivacyHeader'].$t_b.$discPrivacy.$t_c;
 				}
-				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
+				if ((strtoupper((string) ($row['accessconstraints'] ?? '')) != "NONE" && (str_replace(" ", "", (string) ($row['accessconstraints'] ?? '')) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
 					$accessConstraintsHeader = $htmlHeader['accessConstraintsHeader'];
 					if (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) {
 						$accessConstraints = $htmlHeader['networkAccess'];
@@ -235,7 +235,7 @@ class OwsConstraints {
 					$accessConstraints .= $this->display_text($row['accessconstraints']);
 					$html .= $t_a.$htmlHeader['accessConstraintsHeader'].$t_b.$accessConstraints.$t_c;
 				}
-				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
+				if (isset($row['termsofuse_id']) or (strtoupper((string) ($row['fees'] ?? '')) != "NONE" && (str_replace(" ", "", (string) ($row['fees'] ?? '')) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
 					$feesPart = $t_a.$htmlHeader['feesHeader'].$t_b;
 					if (isset($row['termsofuse_id'])) {
 						$fees = $htmlHeader['licences'];
@@ -290,7 +290,7 @@ class OwsConstraints {
 					$discPrivacy .= "<a href=\"mailto:".$rowOwner['mb_user_email']."\">".$rowOwner['mb_user_email']."</a>";
 					$html .= $discPrivacy."<br>";
 				}
-				if ((strtoupper($row['accessconstraints']) != "NONE" & (str_replace(" ", "", $row['accessconstraints']) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
+				if ((strtoupper((string) ($row['accessconstraints'] ?? '')) != "NONE" && (str_replace(" ", "", (string) ($row['accessconstraints'] ?? '')) != "")) or (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) ) {
 					$accessConstraintsHeader = $htmlHeader['accessConstraintsHeader'];
 					if (isset($row[$this->type.'_network_access']) && $row[$this->type.'_network_access'] != 0) {
 						$accessConstraints .= $htmlHeader['networkAccess'];
@@ -301,7 +301,7 @@ class OwsConstraints {
 					$accessConstraints .= "<h2>".$htmlHeader['accessConstraintsHeader']."</h2>".$this->display_text($row['accessconstraints']);
 					$html .= $accessConstraints."<br>";
 				}
-				if (isset($row['termsofuse_id']) or (strtoupper($row['fees']) != "NONE" & (str_replace(" ", "", $row['fees']) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
+				if (isset($row['termsofuse_id']) or (strtoupper((string) ($row['fees'] ?? '')) != "NONE" && (str_replace(" ", "", (string) ($row['fees'] ?? '')) != "")) or ($this->type == "wms" && isset($row['wms_pricevolume']) && $row['wms_pricevolume'] != 0) or ($this->type == "wfs" && isset($row['wfs_pricevolume']) && $row['wfs_pricevolume'] != 0)) {
 					$fees .= "<h2>".$htmlHeader['feesHeader']."</h2>";
 					if (isset($row['termsofuse_id'])) {
 						$fees .= $htmlHeader['licences'];
@@ -471,7 +471,7 @@ class OwsConstraints {
 		}
 		//All information about the license and costs, ... are now concatenated in the freetextfield 
 		//$e = new mb_exception($useLimitationTextString);
-		switch(strtolower($useLimitationTextString)) {
+		switch(strtolower((string) ($useLimitationTextString ?? ''))) {
 			case "none":
 				$useLimitationTextString = "no conditions to access and use";
 				$useLimitationTextString_de = "Es gelten keine Bedingungen";

@@ -20,7 +20,7 @@ require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
 
 //parse ajax params
 //activateRegistratingGroupFilter
-$activateRegistratingGroupFilter = $_REQUEST["activateRegistratingGroupFilter"];
+$activateRegistratingGroupFilter = $_REQUEST["activateRegistratingGroupFilter"] ?? null;
 
 $user_id = Mapbender::session()->get("mb_user_id");
 //select mb_user_id from mb_user_mb_group inner join mb_user on mb_user_mb_group.fkey_mb_user_id = mb_user.mb_user_id where mb_user_mb_group.fkey_mb_group_id = 36;

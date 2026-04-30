@@ -196,8 +196,8 @@ class Element {
 				$openTag .= stripslashes($this->replaceSessionStringByUrlParameters($this->attributes)) . " ";
 			}
 			
-			if ($this->element === "img" && !preg_match("/alt( )*=/", $this->attributes)) {
-				$openTag .= "alt='" . htmlentities($this->title, ENT_QUOTES, CHARSET) . "' ";
+			if ($this->element === "img" && !preg_match("/alt( )*=/", (string) ($this->attributes ?? ''))) {
+				$openTag .= "alt='" . htmlentities((string) ($this->title ?? ''), ENT_QUOTES, CHARSET) . "' ";
 			}
 			
 			// title

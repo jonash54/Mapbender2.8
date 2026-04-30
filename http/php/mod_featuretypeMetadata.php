@@ -20,11 +20,12 @@
 require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
 
 function display_text($string) {
-    $string = preg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", "<a href=\"\\0\" target=_blank>\\0</a>", $string);   
-    $string = preg_replace("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@([0-9a-z](-?[0-9a-z])*\.)+[a-z]{2}([zmuvtg]|fo|me)?$", "<a href=\"mailto:\\0\" target=_blank>\\0</a>", $string);   
-    $string = preg_replace("\n", "<br>", $string);
+    $string = (string) ($string ?? '');
+    $string = preg_replace('#[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]#', '<a href="\\0" target=_blank>\\0</a>', $string);
+    $string = preg_replace('#^[_a-z0-9-]+(\.[_a-z0-9-]+)*@([0-9a-z](-?[0-9a-z])*\.)+[a-z]{2}([zmuvtg]|fo|me)?$#', '<a href="mailto:\\0" target=_blank>\\0</a>', $string);
+    $string = preg_replace("/\n/", '<br>', $string);
     return $string;
-}  
+}
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
@@ -47,7 +48,11 @@ function display_text($string) {
 	
 
 <?php
-	$wfs_conf_id = $_GET['wfs_conf_id'];
+	$wfs_conf_id = $_GET['wfs_conf_id'] ?? null;
+	if ($wfs_conf_id === null) {
+		echo "<p>wfs_conf_id required</p></body></html>";
+		exit;
+	}
 	//for testing only
 	#$wfs_conf_id = 1;
 	
@@ -56,6 +61,10 @@ function display_text($string) {
 	$t_id = array('i');
 	$res_id = db_prep_query($sql_id,$v_id,$t_id);
 	$row_id = db_fetch_array($res_id);
+	if (!is_array($row_id)) {
+		echo "<p>No featuretype found for wfs_conf_id=$wfs_conf_id</p></body></html>";
+		exit;
+	}
 	$wfs_id = $row_id['fkey_wfs_id'];
 	$featuretype_id = $row_id['fkey_featuretype_id'];
 		
@@ -83,12 +92,17 @@ function display_text($string) {
 	echo db_error();
 	$wfs = array();
 	$row = db_fetch_array($res);
-	
+	if (!is_array($row)) {
+		echo "<p>No metadata for wfs_conf_id=$wfs_conf_id</p></body></html>";
+		exit;
+	}
+
 	$sql_dep = "SELECT mb_group_name FROM mb_group AS a, mb_user AS b, mb_user_mb_group AS c WHERE b.mb_user_id = $1  AND b.mb_user_id = c.fkey_mb_user_id AND c.fkey_mb_group_id = a.mb_group_id AND b.mb_user_department = a.mb_group_description LIMIT 1";
 	$v_dep = array($row['wfs_owner']);
 	$t_dep = array('i');
 	$res_dep = db_prep_query($sql_dep, $v_dep, $t_dep);
 	$row_dep = db_fetch_array($res_dep);
+	if (!is_array($row_dep)) { $row_dep = array(); }
 	
 	$featuretype['ID'] = $featuretype_id;
 	$featuretype['Titel'] = $row['featuretype_title'];
@@ -103,7 +117,7 @@ function display_text($string) {
 	else {
 		$layer['Datum der Registrierung'] = "Keine Angabe"; 
 	}
-	$featuretype['Registrierende Stelle'] = $row_dep['mb_group_name'];
+	$featuretype['Registrierende Stelle'] = $row_dep['mb_group_name'] ?? '';
 	$featuretype['WFS ID'] = $row['wfs_id'];
 	$featuretype['WFS Titel'] = $row['wfs_title'];
 	$featuretype['WFS Zusammenfassung'] = $row['wfs_abstract'];
@@ -126,7 +140,7 @@ function display_text($string) {
 
 	$keys = array_keys($featuretype);
 	for ($j=0; $j<count($featuretype); $j++) {
-		echo $t_a . utf8_encode($keys[$j]) . $t_b . display_text($featuretype[$keys[$j]]) . $t_c;
+		echo $t_a . mb_convert_encoding($keys[$j], 'UTF-8', 'ISO-8859-1') . $t_b . display_text($featuretype[$keys[$j]]) . $t_c;
 	}
 	
 	echo "</td></tr></table>\n";

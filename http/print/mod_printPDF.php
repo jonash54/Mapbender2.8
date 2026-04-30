@@ -19,7 +19,7 @@
 
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 
-$confFile = basename($_REQUEST["conf"]);
+$confFile = basename($_REQUEST["conf"] ?? "");
 if (!preg_match("/^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9]+)$/", $confFile) || 
 	!file_exists($confFile)) {
 

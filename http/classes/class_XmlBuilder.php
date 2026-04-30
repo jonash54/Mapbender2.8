@@ -88,8 +88,8 @@ class XmlBuilder
         } else if ($node->nodeType == XML_TEXT_NODE) {
             $node->parentNode->nodeValue = $this->getString($value);
         } else if ($node->nodeType == XML_ELEMENT_NODE) {
-            if (is_string($value)) {
-                $node->nodeValue = $this->getString($value);
+            if ($value === null || is_scalar($value)) {
+                $node->nodeValue = $this->getString((string) $value);
             } elseif ($value instanceof DOMAttr) {
                 $node->setAttributeNode($this->doc->importNode($value, true));
             } elseif ($value instanceof DOMElement) {

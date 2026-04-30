@@ -26,7 +26,7 @@ security_patch_log(__FILE__,__LINE__);
 extract($_GET, EXTR_OVERWRITE);extract($_POST, EXTR_OVERWRITE);
 include(dirname(__FILE__).'/../include/dyn_js.php');
 
-echo "var mod_target = '".$e_target[0]."';";
+echo "var mod_target = '" . (isset($e_target[0]) ? $e_target[0] : '') . "';";
 ?>
 function mb_swapWmsByIndex(mapObj_ind, indexA, indexB) {
 	if (indexA != indexB && indexA >= 0 && indexA < mb_mapObj[mapObj_ind].wms.length && indexB >= 0 && indexB < mb_mapObj[mapObj_ind].wms.length) {

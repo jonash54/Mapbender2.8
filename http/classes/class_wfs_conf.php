@@ -312,6 +312,7 @@ class wfs_conf{
 	var $features;
 	var $elements;
 	var $namespaces;
+	var $wfs_version;
 		
 
 	function getallwfs($userid){

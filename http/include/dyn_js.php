@@ -22,7 +22,7 @@ require_once(dirname(__FILE__)."/../classes/class_mb_exception.php");
 if(isset($gui_id))
 {
 	$sql = "SELECT * FROM gui_element_vars WHERE fkey_e_id = $1 AND fkey_gui_id = $2 and var_type='var'";
-	$v = array($e_id,$gui_id);
+	$v = array($e_id ?? '', $gui_id);
 	$t = array('s','s');
    	$res = db_prep_query($sql,$v,$t);
 	$arrays = array();

@@ -10,6 +10,7 @@ class XpathWalker
     protected $xpath;
     protected $pointer;
     protected $created;
+    protected $added;
 
     public function __construct($xpath)
     {

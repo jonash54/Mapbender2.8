@@ -2572,9 +2572,11 @@ SQL;
 	$t = array('i');
 	$res = db_prep_query($sql,$v,$t);
 	$userMetadata = db_fetch_array($res);
-	$e = new mb_notice("classes/class_administration.php (getOrgaInfoFromRegistry): mb_group_name  : ".$departmentMetadata['mb_group_name']);
-	$departmentMetadata['mb_user_email'] = $userMetadata['mb_user_email'];
-        $departmentMetadata['mb_user_timestamp'] = $userMetadata['timestamp'];
+	if (!is_array($departmentMetadata)) { $departmentMetadata = array(); }
+	if (!is_array($userMetadata)) { $userMetadata = array(); }
+	$e = new mb_notice("classes/class_administration.php (getOrgaInfoFromRegistry): mb_group_name  : ".($departmentMetadata['mb_group_name'] ?? ''));
+	$departmentMetadata['mb_user_email'] = $userMetadata['mb_user_email'] ?? '';
+        $departmentMetadata['mb_user_timestamp'] = $userMetadata['timestamp'] ?? '';
 	return $departmentMetadata;
     }
 

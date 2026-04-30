@@ -88,9 +88,11 @@ if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	$testMatch = NULL;
 }
 
-if ($_REQUEST['SERVICETYPE'] == "wfs" || $_REQUEST['SERVICETYPE'] == "ogcapifeatures" |  $_REQUEST['SERVICETYPE'] == "ogcapifeatures_wfs" ) {
+$_REQUEST['SERVICETYPE'] = $_REQUEST['SERVICETYPE'] ?? '';
+$_REQUEST['OUTPUTFORMAT'] = $_REQUEST['OUTPUTFORMAT'] ?? '';
+if ($_REQUEST['SERVICETYPE'] == "wfs" || $_REQUEST['SERVICETYPE'] == "ogcapifeatures" || $_REQUEST['SERVICETYPE'] == "ogcapifeatures_wfs" ) {
     $serviceType = $_REQUEST['SERVICETYPE'];
-    if ($serviceType == 'ogcapifeatures' | $_REQUEST['SERVICETYPE'] == "ogcapifeatures_wfs") {
+    if ($serviceType == 'ogcapifeatures' || $_REQUEST['SERVICETYPE'] == "ogcapifeatures_wfs") {
         $serviceTypeTitle = "OGC API Features";
     }
 }
@@ -115,7 +117,7 @@ if ($_REQUEST['OUTPUTFORMAT'] == "iso19139" || $_REQUEST['OUTPUTFORMAT'] == "rdf
 	die();
 }
 
-if (!($_REQUEST['CN'] == "false")) {
+if (!((($_REQUEST['CN'] ?? '') == "false"))) {
 	//overwrite outputFormat for special headers:
 	switch ($_SERVER["HTTP_ACCEPT"]) {
 		case "application/rdf+xml":
@@ -764,7 +766,7 @@ function exchangeConstraintsAndConformity($metadataXml, $recordId) {
 			//importing namespaces
 			$xpath = new DOMXPath($metadataDomObject);
 			$rootNamespace = $metadataDomObject->lookupNamespaceUri($metadataDomObject->namespaceURI);
-			$xpath->registerNamespace('defaultns', $rootNamespace); 
+			$xpath->registerNamespace('defaultns', (string) ($rootNamespace ?? ''));
 			//$xpath->registerNamespace('georss','http://www.georss.org/georss');
 			$xpath->registerNamespace("csw", "http://www.opengis.net/cat/csw/2.0.2");
 			$xpath->registerNamespace("gml", "http://www.opengis.net/gml");
@@ -871,7 +873,7 @@ function guid(){
 }
 
 //do all the other things which had to be done ;-)
-if ($_REQUEST['VALIDATE'] == "true"){
+if (($_REQUEST['VALIDATE'] ?? '') == "true"){
 	$xml = fillISO19139($xmlBuilder, $recordId);
 	validateInspire($xml);
 } else {

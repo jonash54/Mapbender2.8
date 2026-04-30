@@ -23,7 +23,7 @@ include (dirname(__FILE__)."/../classes/class_stripRequest.php");
 include (dirname(__FILE__)."/../classes/class_weldMaps2PNG.php");
 include (dirname(__FILE__)."/../classes/class_weldOverview2PNG.php");
 
-$confFile = basename($_REQUEST["conf"]);
+$confFile = basename($_REQUEST["conf"] ?? "");
 if (!preg_match("/^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9]+)$/", $confFile) || 
 	!file_exists($confFile)) {
 
