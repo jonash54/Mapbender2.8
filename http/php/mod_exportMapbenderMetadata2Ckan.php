@@ -498,7 +498,7 @@ if (isset($_REQUEST["outputFormat"]) && $_REQUEST["outputFormat"] != "") {
     $testMatch = NULL;
 }
 
-function createDistributionElement($rdfXmlDoc, $uri, $title, $description=false, $format, $accessUrl, $originalAccessUrl=false, $license_id, $license_source_note, $format_mapping, $is_hvd) {
+function createDistributionElement($rdfXmlDoc, $uri, $title, $description, $format, $accessUrl, $originalAccessUrl, $license_id, $license_source_note, $format_mapping, $is_hvd) {
     $license_map = array(
         "cc-zero" => "http://dcat-ap.de/def/licenses/cc-zero",
         "dl-de-by-2.0" => "http://dcat-ap.de/def/licenses/dl-by-de/2.0",

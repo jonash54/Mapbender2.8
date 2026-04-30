@@ -1363,7 +1363,7 @@ class WfsToDb {
 	 * @return Boolean
 	 * @param $aWfsFeatureType WfsFeatureType
 	 */
-	private static function updateFeatureType ($aWfsFeatureType, $updateMetadataOnly=false, $overwrite) {
+	private static function updateFeatureType ($aWfsFeatureType, $updateMetadataOnly, $overwrite) {
 		$aWfsFeatureType->id = WfsToDb::getFeatureTypeId($aWfsFeatureType);
 		
 		$sql = "SELECT featuretype_id, featuretype_searchable, inspire_download FROM wfs_featuretype WHERE fkey_wfs_id = $1 AND featuretype_name = $2";

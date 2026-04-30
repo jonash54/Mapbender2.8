@@ -97,7 +97,7 @@ class Wfs_2_0_Factory extends WfsFactory {
 		
 		#$e = new mb_notice("class_wfs_2_0_factory.php: Got following StoredQuery XML: ".$xml);
 		
-		$parser = new XMLParser();
+		$parser = new MbXmlParser();
 		$parser->loadXMLFromString($xml);
 		$parser->loadJsonSchemaFromString('{
 		    "cmd": {
@@ -266,7 +266,7 @@ class Wfs_2_0_Factory extends WfsFactory {
 		//parse result to get storedQuery attributes
 		$e = new mb_notice("class_wfs_2_0_factory.php: Got following StoredQuery DescribeStoredQueries XML: ".$xml);
 		
-		$parser = new XMLParser();
+		$parser = new MbXmlParser();
 		$parser->loadXMLFromString($xml);
 		$parser->loadJsonSchemaFromString('{
 		    "cmd": {

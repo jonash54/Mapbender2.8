@@ -7,7 +7,7 @@
  * @version 0.1
  */
 
-class XMLParser {
+class MbXmlParser {
     private static $xp;
     private static $doc;
     private static $schema = array();
@@ -110,20 +110,20 @@ class XMLParser {
 
         foreach($object as $key => $val) {
             switch($key) {
-                case "cmd" : 
-                    continue;
-                case "path" : 
+                case "cmd" :
+                    continue 2;
+                case "path" :
                     $path .= $val;
-                    continue;
-                case "asArray" : 
+                    continue 2;
+                case "asArray" :
                     $asArray = $val;
-                    continue;
+                    continue 2;
                 case "recursive":
                     $recursive = true;
-                    continue;
+                    continue 2;
                 case "data" :
                     $result = self::parseData($val, $name, $path, $context, $recursive, $asArray);
-                    continue;
+                    continue 2;
                 default :
                     if(is_object($val)) {
                         $tmp = self::parseRecursive($val, $key, $context, $path, $recursive);
@@ -149,7 +149,7 @@ class XMLParser {
                     }
                     
                     if(self::$removeEmptyValues && ($tmp === "" || $tmp === array())) {
-                        continue;
+                        continue 2;
                     }
                     
                     $result[$key] = $tmp;

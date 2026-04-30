@@ -1868,7 +1868,7 @@ class wms {
 		return $str;
 	  }
 	  
-	  function createJsLayerObjFromWMS($parent=0, $layer_name){
+	  function createJsLayerObjFromWMS($parent, $layer_name){
 	  	if(!$this->wms_title || $this->wms_title == ""){
 			echo " alert('Error: no valid capabilities-document !!');";
 			die; exit;

@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/../classes/class_user.php");
 
-$command = $_POST["command"];
+$command = $_POST["command"] ?? "";
 $pattern = "/[a-z]/i";
 if (!preg_match($pattern, $command)) {
 	echo "Command not valid!";

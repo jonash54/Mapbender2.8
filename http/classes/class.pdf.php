@@ -1,4 +1,13 @@
 <?php
+// Shim for functions removed in PHP 5.4 / 7 / 8 that this vendored R&OS PDF
+// library still calls. They were no-ops once magic_quotes_runtime was off,
+// which has been the only sane configuration for ~15 years.
+if (!function_exists('get_magic_quotes_runtime')) {
+    function get_magic_quotes_runtime() { return 0; }
+}
+if (!function_exists('set_magic_quotes_runtime')) {
+    function set_magic_quotes_runtime($n) { return true; }
+}
 /**
 * Cpdf
 *
@@ -2962,7 +2971,7 @@ function addImage(&$img,$x,$y,$w=0,$h=0,$quality=75){
 *
 * @access private
 */
-function addJpegImage_common(&$data,$x,$y,$w=0,$h=0,$imageWidth,$imageHeight,$channels=3){
+function addJpegImage_common(&$data,$x,$y,$w,$h,$imageWidth,$imageHeight,$channels=3){
   // note that this function is not to be called externally
   // it is just the common code between the GD and the file options
   $this->numImages++;

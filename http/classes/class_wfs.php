@@ -1029,7 +1029,7 @@ $bboxFilter = '<fes:Filter xmlns:fes="http://www.opengis.net/fes/2.0"><fes:BBOX>
 				"</wfs:Update>";
 	}
 	
-	public function getFeatureById($featureTypeName, $outputFormat = false, $id, $version = false, $srsName = false, $prioritizeResourceId = false) {
+	public function getFeatureById($featureTypeName, $outputFormat, $id, $version = false, $srsName = false, $prioritizeResourceId = false) {
 
 		if ($version == false) {
 			$version = $this->getVersion();

@@ -29,12 +29,12 @@ foreach($_GET as $key => $val) {
 	$_GET[strtoupper($key)] = $val;
 }
 
-$requestType = $_GET["REQUEST"];
-$version = $_GET["VERSION"];
-$service = strtoupper($_GET["SERVICE"]);
-$layerId = $_GET["LAYER_ID"];
-$updateSequence = intval($_GET["UPDATESEQUENCE"]);
-$inspire = $_GET["INSPIRE"];
+$requestType = $_GET["REQUEST"] ?? "";
+$version = $_GET["VERSION"] ?? "";
+$service = strtoupper($_GET["SERVICE"] ?? "");
+$layerId = $_GET["LAYER_ID"] ?? null;
+$updateSequence = intval($_GET["UPDATESEQUENCE"] ?? 0);
+$inspire = $_GET["INSPIRE"] ?? null;
 $validateSchema = true;
 if (isset($_GET["VALIDATESCHEMA"]) && $_GET["VALIDATESCHEMA"] == 0) {
 	$validateSchema = false;
@@ -52,7 +52,7 @@ if (isset($_SERVER["HTTPS"])){
 if (isset($_REQUEST["withChilds"]) && $_REQUEST["withChilds"] === "1") {
 	$withChilds = true;
 }
-$sessionId = $_GET[strtoupper(session_name())];
+$sessionId = $_GET[strtoupper(session_name())] ?? "";
 //if session id not set, set a dummy id!
 if (!isset($sessionId) || $sessionId =="") {
 	$sessionId = "00000000000000000000000000000000";
@@ -155,7 +155,7 @@ $t = array("i");
 $res_wms_sql = db_prep_query($wms_sql, $v, $t);
 $wms_row = db_fetch_array($res_wms_sql);
 
-if (!$wms_row["wms_id"]) {
+if (empty($wms_row["wms_id"])) {
 	// TODO: create exception XML
 	header ( "Content-type: application/xhtml+xml; charset=UTF-8" );
 	header ( "Access-Control-Allow-Origin: *" );

@@ -55,7 +55,7 @@ foreach ( $_REQUEST as $key => $val ) {
 	$_REQUEST [strtoupper ( $key )] = $val;
 }
 // validate request params
-if (isset ( $_REQUEST ['ID'] ) & $_REQUEST ['ID'] != "") {
+if (isset ( $_REQUEST ['ID'] ) && $_REQUEST ['ID'] != "") {
 	// validate integer
 	$testMatch = $_REQUEST ["ID"];
 	$pattern = '/^[\d]*$/';
@@ -68,6 +68,7 @@ if (isset ( $_REQUEST ['ID'] ) & $_REQUEST ['ID'] != "") {
 	$testMatch = NULL;
 }
 
+$_REQUEST['OUTPUTFORMAT'] = $_REQUEST['OUTPUTFORMAT'] ?? '';
 if ($_REQUEST ['OUTPUTFORMAT'] == "iso19139" || $_REQUEST ['OUTPUTFORMAT'] == "rdf" || $_REQUEST ['OUTPUTFORMAT'] == 'html' || $_REQUEST ['OUTPUTFORMAT'] == 'html-rdf-a') {
 	// Initialize XML document
 	$iso19139Doc = new DOMDocument ( '1.0' );
@@ -81,7 +82,7 @@ if ($_REQUEST ['OUTPUTFORMAT'] == "iso19139" || $_REQUEST ['OUTPUTFORMAT'] == "r
 	die ();
 }
 
-if (! ($_REQUEST ['CN'] == "false")) {
+if (! ((($_REQUEST ['CN'] ?? '') == "false"))) {
 	// overwrite outputFormat for special headers:
 	switch ($_SERVER ["HTTP_ACCEPT"]) {
 		case "application/rdf+xml" :
@@ -132,7 +133,12 @@ function fillISO19139($iso19139, $recordId) {
 	);
 	$res = db_prep_query ( $sql, $v, $t );
 	$mapbenderMetadata = db_fetch_array ( $res );
-	
+	if (!is_array($mapbenderMetadata)) {
+		header ( "HTTP/1.0 404 Not Found" );
+		echo "No metadata found for the requested layer.";
+		exit;
+	}
+
 	// Get other needed information out of mapbender database (if not already defined in the view):
 	// service data
 	if ($wmsView != '') {
@@ -667,7 +673,7 @@ function fillISO19139($iso19139, $recordId) {
 	$constraints->outputFormat = 'iso19139';
 	$tou = $constraints->getDisclaimer ();
 	// constraints - after descriptive keywords
-	if (isset ( $tou ) && $tou !== '' && $tou !== false) {
+	if (isset ( $tou ) && is_string($tou) && $tou !== '' && $tou !== false) {
 		// load xml from constraint generator
 		$licenseDomObject = new DOMDocument ();
 		$licenseDomObject->loadXML ( $tou );
@@ -1109,7 +1115,7 @@ substr ( $charid, 0, 8 ) . $hyphen . substr ( $charid, 8, 4 ) . $hyphen . substr
 }
 
 // do all the other things which had to be done ;-)
-if ($_REQUEST ['VALIDATE'] == "true") {
+if (($_REQUEST ['VALIDATE'] ?? '') == "true") {
 	$xml = fillISO19139 ( $iso19139Doc, $recordId );
 	validateInspire ( $xml );
 } else {

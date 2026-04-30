@@ -2086,7 +2086,7 @@ SQL;
 	// deprecated! use User->isLayerAccessible
 	function getLayerPermission($wms_id, $layer_name, $user_id){
 		//prohibit problems with layer names
-		$layer_name = urldecode($layer_name);
+		$layer_name = urldecode((string) ($layer_name ?? ''));
 		$layer_id = $this->getLayerIdByLayerName($wms_id,$layer_name);
 		if (!is_int($layer_id)) {//TODO: do this also in User->isLayerAccessible
 			$e = new mb_exception("No id for the requested layer with name ".$layer_name." found in database!");

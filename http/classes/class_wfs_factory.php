@@ -48,9 +48,6 @@ abstract class WfsFactory extends OwsFactory {
 		throw new Exception("WFS version could not be determined from XML.");
 	}
 
-	protected function createFeatureTypeFromUrl () {
-	}
-	
 	/**
 	 * Retrieves the data of a WFS from the database and initiates the object.
 	 *

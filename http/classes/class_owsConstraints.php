@@ -10,6 +10,8 @@ class OwsConstraints {
 	var $asTable;
 	var $outputFormat;
 	var $returnDirect;
+	var $accessLimitationCodes;
+	var $accessLimitationDescription;
 
 	function __construct() {
 		$this->type = "wms";
