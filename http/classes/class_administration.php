@@ -2390,7 +2390,7 @@ SQL;
 	    }
 	    else
 	    {
-	        return (utf8_encode(utf8_decode($string)) == $string);
+	        return (mb_convert_encoding(mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8'), 'UTF-8', 'ISO-8859-1') == $string);
 	    }  
     /*
     		return preg_match('%(?:
@@ -2415,31 +2415,33 @@ SQL;
 	
 	public static function convertIncomingString ($str) {
 		if (CHARSET == "ISO-8859-1") {
-			$e = new mb_notice("Conversion to UTF-8: " . $str . " to " . utf8_encode($str));
-			return utf8_encode($str);
+			$converted = mb_convert_encoding($str, 'UTF-8', 'ISO-8859-1');
+			$e = new mb_notice("Conversion to UTF-8: " . $str . " to " . $converted);
+			return $converted;
 		}
 		return $str;
 	}
-	
+
 	public static function convertOutgoingString ($str) {
 		if (CHARSET == "ISO-8859-1") {
-			$e = new mb_notice("Conversion to ISO-8859-1: " . $str . " to " . utf8_decode($str));
-			return utf8_decode($str);
+			$converted = mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
+			$e = new mb_notice("Conversion to ISO-8859-1: " . $str . " to " . $converted);
+			return $converted;
 		}
 		return $str;
 	}
-	
+
 	function char_encode($data) {
 		if (CHARSET == "UTF-8") {
 			if (!$this->is_utf8($data)) {
 				$e = new mb_notice("Conversion: ISO-8859-1 to UTF-8");
-				return utf8_encode($data);
+				return mb_convert_encoding($data, 'UTF-8', 'ISO-8859-1');
 			}
 		}
 		else {
 			if ($this->is_utf8($data)) {
 				$e = new mb_notice("Conversion: UTF-8 to ISO-8859-1");
-				return utf8_decode($data);
+				return mb_convert_encoding($data, 'ISO-8859-1', 'UTF-8');
 			}
 		}
 		$e = new mb_notice("No conversion: is " . CHARSET);
@@ -2450,7 +2452,7 @@ SQL;
 		if (CHARSET == "UTF-8") {
 			if ($this->is_utf8($data)) {
 				$e = new mb_notice("Conversion: UTF-8 to ISO-8859-1");
-				return utf8_decode($data);
+				return mb_convert_encoding($data, 'ISO-8859-1', 'UTF-8');
 			}
 		}
 		$e = new mb_notice("no conversion: is " . CHARSET);
