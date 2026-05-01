@@ -6,7 +6,7 @@ $languageCode = "de";
 //e.g. tabs and their content
 $html = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.$languageCode.'">';
 $html .= '<body onload="getStatisticsFromServer(\'NUTS_1\');">';
-$metadataStr .= '<head>' . 
+$metadataStr = '<head>' .
 		'<title>'._mb("").'</title>' . 
 		'<meta name="description" content="'._mb("").'" xml:lang="'.$languageCode.'" />'.
 		'<meta name="keywords" content="'._mb('').'" xml:lang="'.$languageCode.'" />'	.	

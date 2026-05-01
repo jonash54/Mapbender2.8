@@ -80,7 +80,7 @@ if(isset($gui_id) && $gui_id != ""){
 	#
 	#
 	$sql = "SELECT * FROM gui_element_vars WHERE fkey_e_id = $1 AND fkey_gui_id = $2 and var_type='php_var'";
-   	$v = array($e_id_css,$gui_id);
+   	$v = array($e_id_css ?? '',$gui_id);
 	$t = array('s','s');
 	$res = db_prep_query($sql,$v,$t);
 
@@ -99,7 +99,7 @@ if(isset($gui_id) && $gui_id != ""){
 	#
 	#
 	$sql = "SELECT * FROM gui_element_vars WHERE fkey_e_id = $1 AND fkey_gui_id = $2 and var_type='var'";
-   	$v = array($e_id_css,$gui_id);
+   	$v = array($e_id_css ?? '',$gui_id);
 	$t = array('s','s');
 	$res = db_prep_query($sql,$v,$t);
 

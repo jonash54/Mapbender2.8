@@ -40,9 +40,18 @@
 	 * $Textsize, $Glossar, $mb_user_spatial_suggest, $mb_user_allow_survey, $mb_user_newsletter,
 	 * 
 	 */
-	//mapping of values 
-	if ($mb_user_newsletter == "ja") {$mb_user_newsletter = "t";} else {$mb_user_newsletter = "f";}
-	if ($mb_user_allow_survey == "ja") {$mb_user_allow_survey = "t";} else {$mb_user_allow_survey = "f";}
+	// Default the user-data variables expected from the calling application,
+	// so direct hits do not warn under PHP 8.
+	foreach (['mb_user_name','mb_user_password','mb_user_description','mb_user_email',
+		'mb_user_phone','mb_user_organisation_name','mb_user_position_name',
+		'mb_user_city','mb_user_postal_code','mb_user_department',
+		'Textsize','Glossar','mb_user_spatial_suggest',
+		'mb_user_allow_survey','mb_user_newsletter'] as $___k) {
+		if (!isset($$___k)) { $$___k = ''; }
+	}
+	//mapping of values
+	if (($mb_user_newsletter ?? '') == "ja") {$mb_user_newsletter = "t";} else {$mb_user_newsletter = "f";}
+	if (($mb_user_allow_survey ?? '') == "ja") {$mb_user_allow_survey = "t";} else {$mb_user_allow_survey = "f";}
 	//check that the current user is not the anonymous one (guest)
 	//build user object from information in the current session
 	$user = new User(); //if no id is given, object will be instantiated from current session

@@ -59,6 +59,7 @@ $v = array($gui_id);
 $t = array('s');
 $res = db_prep_query($sql, $v, $t);
 $cnt = 0;
+$e_target = '';
 while($row = db_fetch_array($res)){
 	$e_target = $row["e_target"];
 	$cnt++;

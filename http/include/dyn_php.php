@@ -20,7 +20,7 @@
 if(isset($gui_id))
 {
 	$sql = "SELECT * FROM gui_element_vars WHERE fkey_gui_id = $1 and fkey_e_id = $2 and var_type='php_var' ORDER BY var_name";
-	$v = array($gui_id, $e_id);
+	$v = array($gui_id, $e_id ?? '');
 	$t = array('s', 's');
    	$res = db_prep_query($sql,$v,$t);
 

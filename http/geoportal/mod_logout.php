@@ -29,11 +29,13 @@ if (isset($_COOKIE[session_name()])) {
     setcookie(session_name(), '', time()-42000, '/');
 }
 
-session_destroy();
+if (session_status() === PHP_SESSION_ACTIVE) {
+    session_destroy();
+}
 
 $dir = preg_replace("/\\\/","/", dirname($_SERVER['SCRIPT_NAME']));
 
-if ($_GET['L'] == "en") {
+if (($_GET['L'] ?? '') == "en") {
 	$logout_location = "/portal/en/logout.html";
 }
 else {

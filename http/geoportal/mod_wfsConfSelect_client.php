@@ -20,8 +20,8 @@
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 
 $gui_id = Mapbender::session()->get("mb_user_gui");
-$e_target = $_REQUEST["e_target"];
-$e_id_css = $_REQUEST["e_id_css"];
+$e_target = $_REQUEST["e_target"] ?? '';
+$e_id_css = $_REQUEST["e_id_css"] ?? '';
 
 $con = db_connect($DBSERVER,$OWNER,$PW);
 db_select_db($DB,$con);
@@ -37,8 +37,8 @@ include '../include/dyn_css.php';
 ?>
 <script type="text/javascript">
 <?php 
-	echo "var targetString = '" . $e_target . "';";
-	echo "var wfsConfIdString = '" . $wfsConfIdString . "';";
+	echo "var targetString = '" . ($e_target ?? '') . "';";
+	echo "var wfsConfIdString = '" . ($wfsConfIdString ?? '') . "';";
 ?>
 
 // Element var maxHighlightedPoints

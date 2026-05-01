@@ -3,6 +3,7 @@ require_once dirname(__FILE__) . "/../../core/globalSettings.php";
 $registratingDepartments = null;
 $sessionLang = Mapbender::session()->get("mb_lang");
 $withCounts = true;
+$languageCode = "en";
 if (defined("MAPBENDER_PATH") && MAPBENDER_PATH != '') { 
 	$mapbenderUrl = MAPBENDER_PATH;
 } else {
@@ -104,12 +105,14 @@ switch ($languageCode) {
 		$translation['inspireDownloadServices'] = 'INSPIRE Downloaddienste';
 }
 //Do html output
+$metadataStr = '';
+if (!isset($translation) || !is_array($translation)) { $translation = array('header' => ''); }
 $html = '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.$languageCode.'">';
 $html .= '<body>';
 $metadataStr .= '<head>' . 
-		'<title>'.$translation['header'].'</title>' . 
-		'<meta name="description" content="'.$translation['header'].'" xml:lang="'.$languageCode.'" />'.
-		'<meta name="keywords" content="'.$translation['header'].'" xml:lang="'.$languageCode.'" />'	.	
+		'<title>'.($translation['header'] ?? '').'</title>' . 
+		'<meta name="description" content="'.($translation['header'] ?? '').'" xml:lang="'.$languageCode.'" />'.
+		'<meta name="keywords" content="'.($translation['header'] ?? '').'" xml:lang="'.$languageCode.'" />'	.	
 		'<meta http-equiv="cache-control" content="no-cache">'.
 		'<meta http-equiv="pragma" content="no-cache">'.
 		'<meta http-equiv="expires" content="0">'.

@@ -17,13 +17,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 (isset($_SERVER["argv"][1]))? ($user_id = $_SERVER["argv"][1]) : ($e = new mb_exception("geom: user lacks!"));
 (isset($_SERVER["argv"][2]))? ($sstr = $_SERVER["argv"][2]) : ($e = new mb_exception("geom: string lacks!"));
 (isset($_SERVER["argv"][3]))? ($epsg = $_SERVER["argv"][3]) : ($e = new mb_exception("geom: epsg lacks!"));
-
-
-require_once(dirname(__FILE__)."/../../core/globalSettings.php");
-require_once(dirname(__FILE__)."/../../conf/geoportal.conf");
+$gpConf = dirname(__FILE__)."/../../conf/geoportal.conf";
+if (!file_exists($gpConf)) {
+	header("HTTP/1.0 503 Service Unavailable");
+	echo "geoportal.conf is required for this endpoint and was not found.";
+	exit;
+}
+require_once($gpConf);
 require_once(dirname(__FILE__)."/../classes/class_mb_exception.php");
 
 $con = pg_connect("host=".GEOMDB_HOST." port=".GEOMDB_PORT." dbname=".GEOMDB_NAME." user=".GEOMDB_USER." password=".GEOMDB_PASSWORD)

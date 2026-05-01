@@ -1,8 +1,14 @@
 <?php
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/../classes/class_connector.php");
-require_once(dirname(__FILE__)."/../../conf/bkgGeocoding.conf");
-if ($_REQUEST['resultTarget'] != 'web') {
+$bkgConf = dirname(__FILE__)."/../../conf/bkgGeocoding.conf";
+if (!file_exists($bkgConf)) {
+	header("HTTP/1.0 503 Service Unavailable");
+	echo "bkgGeocoding.conf is required for this endpoint and was not found.";
+	exit;
+}
+require_once($bkgConf);
+if (($_REQUEST['resultTarget'] ?? '') != 'web') {
 	(isset($_SERVER["argv"][1]))? ($user_id = $_SERVER["argv"][1]) : ($e = new mb_exception("geom: user lacks!"));
 	(isset($_SERVER["argv"][2]))? ($sstr = $_SERVER["argv"][2]) : ($e = new mb_exception("geom: string lacks!"));
 	(isset($_SERVER["argv"][3]))? ($epsg = $_SERVER["argv"][3]) : ($e = new mb_exception("geom: epsg lacks!"));

@@ -1,16 +1,15 @@
+<?php
+require_once(dirname(__FILE__)."/../../core/globalSettings.php");
+require_once(dirname(__FILE__)."/../classes/class_administration.php");
+require_once dirname(__FILE__) . "/../classes/class_Uuid.php";
+require_once dirname(__FILE__) . "/../classes/class_user.php";
+?>
 <html>
 
 <head>
 
 <?php
 echo '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'">';
-#require_once(dirname(__FILE__)."/../../conf/mapbender.conf");
-#require_once(dirname(__FILE__)."/../classes/class_administration.php");
-#require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
-require_once(dirname(__FILE__)."/../../core/globalSettings.php");
-require_once(dirname(__FILE__)."/../classes/class_administration.php");
-require_once dirname(__FILE__) . "/../classes/class_Uuid.php";
-require_once dirname(__FILE__) . "/../classes/class_user.php";
 ?>
 
 <title>BPlanID f&uuml;r Verb&auml;nde</title>

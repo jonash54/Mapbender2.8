@@ -34,8 +34,15 @@
 	{
 	    $mb_user_password .= substr($pool,(rand()%(strlen ($pool))), 1);
 	}
+	// Default the user-data variables expected from the calling application,
+	// so direct hits do not warn under PHP 8.
+	foreach (['mb_user_name','mb_user_description','mb_user_email','mb_user_phone',
+		'mb_user_department','mb_user_organisation_name','mb_user_position_name',
+		'mb_user_city','mb_user_postal_code'] as $___k) {
+		if (!isset($$___k)) { $$___k = ''; }
+	}
 	//Check if user will register as 'guest'
-	$registerAsGuest = false;	
+	$registerAsGuest = false;
 	if ($mb_user_name == 'guest') {
 		$registerAsGuest = true;
 	}
@@ -46,7 +53,7 @@
 		$mb_user_owner = "1"; //default to mapbenders root user
 	}
 	//Trimmen des Nutzernamens um Leerstellen - gibt sonst Probleme 
-	$mb_user_name = trim($mb_user_name);
+	$mb_user_name = trim((string) ($mb_user_name ?? ''));
 	//überprüfen ob User und oder Mail bereits existieren
 		//$sql = "SELECT * FROM mb_user WHERE mb_user_name = $1 AND mb_user_email = $2";
 		//Neu seit 2015-09-10 - Nutzernamen jetzt nur noch eindeutig möglich!

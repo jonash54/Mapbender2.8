@@ -61,7 +61,7 @@ class administration {
      * @return <boolean> answer to "is the passed over email valid?""
      */
 	function isValidEmail($email) {
-        if(mb_eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
+        if(mb_eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", (string) ($email ?? ''))) {
             return true;
 		}
 		return false;

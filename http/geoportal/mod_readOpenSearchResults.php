@@ -6,7 +6,13 @@
 
 #***things to be done first (globals, ...)
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
-require_once(dirname(__FILE__)."/../../conf/geoportal.conf");
+$gpConf = dirname(__FILE__)."/../../conf/geoportal.conf";
+if (!file_exists($gpConf)) {
+	header("HTTP/1.0 503 Service Unavailable");
+	echo "geoportal.conf is required for this endpoint and was not found.";
+	exit;
+}
+require_once($gpConf);
 #require_once(dirname(__FILE__)."/../classes/class_mb_exception.php");
 #require_once(dirname(__FILE__)."/../../conf/geoportal.conf");
 $resdir = RESULT_DIR;

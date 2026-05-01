@@ -106,6 +106,7 @@ if (isset( $_REQUEST['iDisplayLength']) && $_REQUEST['iDisplayLength'] != '-1') 
 	
 
 $sLimit = "";
+$sOrder = "";
 if ( isset( $_REQUEST['iDisplayStart'] ) && $_REQUEST['iDisplayLength'] != '-1' )
 {
 	$sLimit = "OFFSET ".pg_escape_string( $_REQUEST['iDisplayStart'] )." LIMIT ".
@@ -142,7 +143,7 @@ if ( isset( $_REQUEST['iDisplayStart'] ) && $_REQUEST['iDisplayLength'] != '-1' 
 * on very large tables, and MySQL's regex functionality is very limited
  */
 $sWhere = "";
-if ( $_REQUEST['sSearch'] != "" )
+if ( ($_REQUEST['sSearch'] ?? '') != "" )
 {
 	//$e = new mb_exception($_REQUEST['sSearch']);
 	$sWhere = "WHERE (";
@@ -157,7 +158,7 @@ if ( $_REQUEST['sSearch'] != "" )
 /* Individual column filtering */
 for ( $i=0 ; $i<count($aColumns) ; $i++ )
 {
-	if ( $_REQUEST['bSearchable_'.$i] == "true" && $_REQUEST['sSearch_'.$i] != '' )
+	if ( ($_REQUEST['bSearchable_'.$i] ?? '') == "true" && ($_REQUEST['sSearch_'.$i] ?? '') != '' )
 	{
 		if ( $sWhere == "" )
 		{
@@ -233,8 +234,8 @@ select fkey_metadata_id as metadata_id from  mb_metadata_custom_category where f
 SQL;
 
 $resultCount = db_query($sqlCount);
-$rowCount = db_fetch_array($resultCount);
-$resultCount = $rowCount['count'];
+$rowCount = is_resource($resultCount) || is_object($resultCount) ? db_fetch_array($resultCount) : false;
+$resultCount = is_array($rowCount) ? ($rowCount['count'] ?? 0) : 0;
 
 $iTotal = $resultCount;
 }
@@ -327,8 +328,8 @@ while ($row = db_fetch_array($result)) {
 	}
 }
 $groupOwnerArray = array();
-$groupOwnerArray[0] = $sqlTable['service_group'];
-$groupOwnerArray[1] = $sqlTable['service_owner'];
+$groupOwnerArray[0] = $sqlTable['service_group'] ?? array();
+$groupOwnerArray[1] = $sqlTable['service_owner'] ?? array();
 //get orga information
 $groupOwnerArray = getOrganizationInfoForServices($groupOwnerArray);
 //exchange category ids with titles and keys
@@ -336,17 +337,18 @@ $groupOwnerArray = getOrganizationInfoForServices($groupOwnerArray);
 //3 - metadatapointofcontactorgname
 //multisort?
 //push information from groupOwnerArray to sqlTable
-$sqlTable['organization'] = $groupOwnerArray[3];
+$sqlTable['organization'] = $groupOwnerArray[3] ?? array();
 //$sqlTable['userId'] = $groupOwnerArray[2];
-$sqlTable['orgaId'] = $groupOwnerArray[4];
-$sqlTable['orgaEmail'] = $groupOwnerArray[5];
-$sqlTable['adminCode'] = $groupOwnerArray[6];
+$sqlTable['orgaId'] = $groupOwnerArray[4] ?? array();
+$sqlTable['orgaEmail'] = $groupOwnerArray[5] ?? array();
+$sqlTable['adminCode'] = $groupOwnerArray[6] ?? array();
 //TODO: check sorting
 //$wfsMatrix = $this->flipDiagonally($wfsMatrix); //- see class_metadata.php
 //array_multisort($sqlTable['uuid'], SORT_STRING);
 //array_multisort($sqlTable['uuid'], SORT_STRING, $sqlTable['resource_type'], SORT_STRING);
 //debug output option:
 
+if (!isset($sqlTable['uuid']) || !is_array($sqlTable['uuid'])) { $sqlTable['uuid'] = array(); }
 switch ($outputFormat) {
 	case 'table':
 	for ($i=0; $i < count($sqlTable['uuid']); $i++){
@@ -764,14 +766,14 @@ switch ($outputFormat) {
 		if (isset($iTotal)) {
 			//$e = new mb_exception("iTotal= ".$iTotal);
 			$output = array(
-				"sEcho" => intval($_REQUEST['sEcho']),
+				"sEcho" => intval($_REQUEST['sEcho'] ?? 0),
 				"iTotalRecords" => $iTotal,
 				"iTotalDisplayRecords" => $iTotal,
 				"aaData" => array()
 			);
 		} else {
 			$output = array(
-				"sEcho" => intval($_REQUEST['sEcho']),
+				"sEcho" => intval($_REQUEST['sEcho'] ?? 0),
 				"iTotalRecords" => $iTotal,
 				"iTotalDisplayRecords" => $iTotal,
 				"aaData" => array()
@@ -848,6 +850,8 @@ function getOrganizationInfoForServices($groupOwnerArray) {
 	$listGroupIds = array();
 	$listOwnerIds = array();
 	//echo "<br>count groupOwnerArray: ".count($groupOwnerArray[0]);
+	if (!isset($groupOwnerArray[0]) || !is_array($groupOwnerArray[0])) { $groupOwnerArray[0] = array(); }
+	if (!isset($groupOwnerArray[1]) || !is_array($groupOwnerArray[1])) { $groupOwnerArray[1] = array(); }
 	for ($i=0; $i < count($groupOwnerArray[0]); $i++){
 		$key = $i;
 		if (!isset($groupOwnerArray[0][$i]) || is_null($groupOwnerArray[0][$i]) || $groupOwnerArray[0][$i] == 0){

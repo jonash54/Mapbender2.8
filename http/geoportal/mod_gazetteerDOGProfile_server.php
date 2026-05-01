@@ -35,10 +35,10 @@ function sendErrorMessage($data) {
 	die;
 }
 
-$command = $_POST["command"];
+$command = $_POST["command"] ?? '';
 $pattern = "/[a-z]/i";
 if (!preg_match($pattern, $command)) {
-	sendErrorMessage("Invalid command " . htmlentities($command, ENT_QUOTES, CHARSET));
+	sendErrorMessage("Invalid command " . htmlentities((string) $command, ENT_QUOTES, CHARSET));
 }
 
 switch ($command) {

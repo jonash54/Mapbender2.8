@@ -11,14 +11,21 @@ require_once(dirname(__FILE__) . "/../php/mb_validateSession.php");
 require_once(dirname(__FILE__) . "/../classes/class_administration.php");
 require_once(dirname(__FILE__) . "/../classes/class_json.php");
 include(dirname(__FILE__) . "/../geoportal/class_gml3.php");
-include(dirname(__FILE__) . "/../../conf/gazetteerFlst.conf");
-include_once dirname(__FILE__) . "/geoJSONadditions.php";
+$flstConf = dirname(__FILE__) . "/../../conf/gazetteerFlst.conf";
+$geoJsonAdditions = dirname(__FILE__) . "/geoJSONadditions.php";
+if (!file_exists($flstConf) || !file_exists($geoJsonAdditions)) {
+    header("HTTP/1.0 503 Service Unavailable");
+    echo "gazetteerFlst.conf and geoJSONadditions.php are required for this endpoint and were not found.";
+    exit;
+}
+include($flstConf);
+include_once($geoJsonAdditions);
 
 //db connection
 $con = db_connect($DBSERVER, $OWNER, $PW) or die("Error while connecting database $dbname");
 db_select_db(DB, $con);
 
-$command = $_REQUEST['command'];
+$command = $_REQUEST['command'] ?? '';
 $checkCommand = array(
     "getGmkNr",
     "getGmkName",

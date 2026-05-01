@@ -7,7 +7,7 @@
 
 require_once(dirname(__FILE__) . "/../php/mb_validateSession.php");
 
-$e_target = $_GET["e_target"];
+$e_target = $_GET["e_target"] ?? '';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

@@ -20,7 +20,8 @@
 require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 $gui_id = Mapbender::session()->get("mb_user_gui");
 
-$target = $_REQUEST["target"];
+$target = $_REQUEST["target"] ?? '';
+$e_id = $_REQUEST["e_id"] ?? '';
 //$e_id_css = $_REQUEST["e_id_css"];
 
 $con = db_connect($DBSERVER,$OWNER,$PW);
@@ -33,7 +34,7 @@ function setWfsConfString() {
 <?php
 echo "\tvar gazetteerFrameId = '" . $e_id . "';\n";
 // if services were selected in search, append them to the wfs gazetteer
-echo "\tvar gazetteerWfsConfFromPortal = '" . $_REQUEST["portal_services_wfs"] . "';\n";
+echo "\tvar gazetteerWfsConfFromPortal = '" . ($_REQUEST["portal_services_wfs"] ?? '') . "';\n";
 ?>
 
 // now done somewhere else

@@ -330,7 +330,7 @@ class User implements RPCObject{
 		if ($this->createDigest !== 't') {$this->createDigest = 'f';}
 		
 		if ($this->wantsNewsletter !== 't') {$this->wantsNewsletter = 'f';}
-		if ($this->wantsSpatialSuggest !== 't') {$this->cwantsSpatialSuggest = 'f';}
+		if ($this->wantsSpatialSuggest !== 't') {$this->wantsSpatialSuggest = 'f';}
 		if ($this->allowsSurvey !== 't') {$this->allowsSurvey = 'f';}
 		if ($this->wantsGlossar !== 't') {$this->wantsGlossar = 'f';}
 		

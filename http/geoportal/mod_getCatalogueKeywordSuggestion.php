@@ -45,6 +45,7 @@ if (isset($_REQUEST["maxResults"]) && $_REQUEST["maxResults"] != "") {
 $t = array('s', 's', 'i');
 //$normSearch = str_replace("ä","AE",strtoupper($searchText));*/
 
+$searchText = (string) ($searchText ?? '');
 $normSearch = str_replace('ß', 'SS', str_replace('Ü', 'UE', str_replace('Ä', 'AE', strtoupper(str_replace('Ö', 'OE', mb_strtoupper($searchText))))));
 
 $sql = "SELECT keyword, keyword_upper FROM keyword_search_view WHERE keyword_upper LIKE $1 ORDER BY keyword LIMIT $2";
@@ -61,11 +62,9 @@ $i = 0;
 while($row = db_fetch_array($res)){
 	$resultList[$i]['keyword'] = trim($row['keyword']);
 	//find pos of searchText in keyword - lowercase
-	$posOfString = strpos(mb_strtolower($row['keyword_upper']), mb_strtolower($searchText));
+	$posOfString = strpos(mb_strtolower((string) ($row['keyword_upper'] ?? '')), mb_strtolower($searchText));
 	$lengthOfSearchtext = strlen($searchText);
-//$e = new mb_exception($lengthOfSearchtext);
-//$e = new mb_exception(gettype($searchText));	
-	$lengthOfKeyword = count($row['keyword']);
+	$lengthOfKeyword = strlen((string) ($row['keyword'] ?? ''));
 	$resultList[$i]['keywordHigh'] = trim(substr($row['keyword'], 0, $posOfString)."<b>".substr($row['keyword'], $posOfString, $lengthOfSearchtext)."</b>".substr($row['keyword'], ($posOfString + $lengthOfSearchtext)));
 	//$resultList[$i]['keywordHigh'] = str_replace($searchText, "<b>".$searchText."</b>", $row['keyword']);
 	$i++;
@@ -77,6 +76,7 @@ $resultList = array_filter($resultList, function ($key, $value) use ($ids) {
     return in_array($value, array_keys($ids));
 }, ARRAY_FILTER_USE_BOTH);
 
+$result = new stdClass();
 $result->results = $i;
 $timeEnd = microtime(1000000);
 $timeDiff = $timeEnd - $timeBegin;
