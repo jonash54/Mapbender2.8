@@ -44,6 +44,11 @@ $width = 400;
 $height = 400;
 /* * *** conf **** */
 
+// PHP 8: default missing keys so the rest of the file does not warn
+$_REQUEST['wms']     = $_REQUEST['wms']     ?? '';
+$_REQUEST['sid']     = $_REQUEST['sid']     ?? '';
+$_REQUEST['service'] = $_REQUEST['service'] ?? '';
+$reqParams = array();
 $owsproxyService = $_REQUEST['wms']; //ToDo: change this to 'service' in the apache url-rewriting
 
 //test for existing post data
@@ -64,14 +69,14 @@ if ($reqParams['service'] == 'WFS') {
 	//$typeNameParameter = "typename"; //lowercase
 	switch ($reqParams['version']) {
 		case "2.0.0":
-			if (strtolower($reqParams['request']) == 'describefeaturetype') {
+			if (strtolower((string) ($reqParams['request'] ?? '')) == 'describefeaturetype') {
 			    $typeNameParameter = "typename";
                         } else {
 			    $typeNameParameter = "typenames";
 			}
 			break;
 		case "2.0.2":
-			if (strtolower($reqParams['request']) == 'describefeaturetype') {
+			if (strtolower((string) ($reqParams['request'] ?? '')) == 'describefeaturetype') {
 			    $typeNameParameter = "typename";
                         } else {
 			    $typeNameParameter = "typenames";
@@ -83,7 +88,7 @@ if ($reqParams['service'] == 'WFS') {
 	}
 	//initialize typename parameter with false - not given
 	//check for featuretype name
-	if (isset($reqParams[$typeNameParameter]) & $reqParams[$typeNameParameter] != "") {
+	if (isset($reqParams[$typeNameParameter]) && $reqParams[$typeNameParameter] != "") {
         	//validate featuretype_name
         	$testMatch = $reqParams[$typeNameParameter];
         	//simple pattern - without blanks!
@@ -245,7 +250,7 @@ if (count($_REQUEST) > 0) {
     }
 }
 //check for kind of service
-switch (strtolower($reqParams['service'])) {
+switch (strtolower((string) ($reqParams['service'] ?? ''))) {
 	case 'wms':
 		$wmsId = $n->getWmsIdFromOwsproxyString($query->getOwsproxyServiceId());
 		$owsproxyString = $query->getOwsproxyServiceId();
@@ -278,9 +283,9 @@ $userId = $_SESSION['mb_user_id'];
 
 /* ************ main workflow *********** */
 
-switch (strtolower($reqParams['request'])) {
+switch (strtolower((string) ($reqParams['request'] ?? ''))) {
     case 'getcapabilities':
-	switch (strtolower($reqParams['service'])) {
+	switch (strtolower((string) ($reqParams['service'] ?? ''))) {
 		case 'wfs':
 			$arrayOnlineresources = checkWfsPermission($query->getOwsproxyServiceId(), false, $userId);
         		$query->setOnlineResource($arrayOnlineresources['wfs_getcapabilities']);

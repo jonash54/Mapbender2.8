@@ -29,11 +29,13 @@ $height = 400;
 $tmpSession = false;
 $corsAllowedFor = false;
 //parse url
-$query = new QueryHandler();
+$postData = file_get_contents("php://input");
+if (!isset($postData) || $postData === '') { $postData = false; }
+$query = new QueryHandler($postData, $_REQUEST, $_SERVER['REQUEST_METHOD'] ?? 'GET');
 $reqParams = $query->getRequestParams();
 //echo $query->getRequest();
 //check request for id
-if (isset($_REQUEST["wmsid"]) & $_REQUEST["wmsid"] != "") {
+if (isset($_REQUEST["wmsid"]) && $_REQUEST["wmsid"] != "") {
         $testMatch = $_REQUEST["wmsid"];
         $pattern = '/^[0-9]*$/';  
         if (!preg_match($pattern,$testMatch)){
@@ -88,7 +90,7 @@ if ($auth['auth_type']==''){
 }
 $e = new mb_exception("userId: ".$userId);
 //check header - see invoking server
-switch (strtolower($reqParams['request'])) {
+switch (strtolower((string) ($reqParams['request'] ?? ''))) {
 	case 'getmap':
 		$arrayOnlineresources = checkWmsPermission($wmsId, $userId);
 		$query->setOnlineResource($arrayOnlineresources['wms_getmap']);

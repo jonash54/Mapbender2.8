@@ -177,12 +177,13 @@ class QueryHandler{
 	  function getQueryString(){
 		$mykeys = array_keys($this->reqParams);
 		$cnt = 0;
+		$qstring = "";
 		for($i=0; $i<count($mykeys);$i++){
-			if($this->isValidParam($mykeys[$i])){	
-				if($cnt > 0){ 
-					$qstring .= "&"; 
+			if($this->isValidParam($mykeys[$i])){
+				if($cnt > 0){
+					$qstring .= "&";
 				}
-				$qstring .= $mykeys[$i]."=".rawurlencode(stripslashes($this->reqParams[$mykeys[$i]]));
+				$qstring .= $mykeys[$i]."=".rawurlencode(stripslashes((string) ($this->reqParams[$mykeys[$i]] ?? '')));
 				$cnt++;
 			}
 		}
@@ -221,19 +222,18 @@ class QueryHandler{
 	    * gets the conjunction character between url and query string
 	    */
 	    function getConjunctionCharacter($url){
-			if(strpos($url,"?")){ 
-				if(strpos($url,"?") == strlen($url)){ 
-				$cchar = "";
+			$url = (string) ($url ?? '');
+			$cchar = "?";
+			if(strpos($url,"?") !== false){
+				if(strpos($url,"?") == strlen($url)){
+					$cchar = "";
 				}else if(strpos($url,"&") == strlen($url)){
 					$cchar = "";
 				}else{
 					$cchar = "&";
 				}
 			}
-			if(strpos($url,"?") === false){
-				$cchar = "?";
-			} 
-			return $cchar;  
+			return $cchar;
 		}
 		function getOwsproxyServiceId(){
 			return $this->owsproxyServiceId;

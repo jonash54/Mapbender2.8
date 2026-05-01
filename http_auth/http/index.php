@@ -99,7 +99,7 @@ if (isset($postData) && $postData !== '') {
     $postData = false;
 }
 
-if (isset($_REQUEST["layer_id"]) & $_REQUEST["layer_id"] != "") {
+if (isset($_REQUEST["layer_id"]) && $_REQUEST["layer_id"] != "") {
     $testMatch = $_REQUEST["layer_id"];
     $pattern = '/^[0-9]*$/';
     if (!preg_match($pattern, $testMatch)) {
@@ -109,7 +109,7 @@ if (isset($_REQUEST["layer_id"]) & $_REQUEST["layer_id"] != "") {
     $layerId = $testMatch;
     $testMatch = NULL;
 }
-if (isset($_REQUEST["wfs_id"]) & $_REQUEST["wfs_id"] != "") {
+if (isset($_REQUEST["wfs_id"]) && $_REQUEST["wfs_id"] != "") {
     $testMatch = $_REQUEST["wfs_id"];
     $pattern = '/^[0-9]*$/';
     if (!preg_match($pattern, $testMatch)) {
@@ -127,14 +127,14 @@ if ($wfsId !== false) {
     $typeNameParameter = "typename";
     switch ($reqParams['version']) {
         case "2.0.0":
-            if (strtolower($reqParams['request']) == 'describefeaturetype') {
+            if (strtolower((string) ($reqParams['request'] ?? '')) == 'describefeaturetype') {
                 $typeNameParameter = "typename";
             } else {
                 $typeNameParameter = "typenames";
             }
             break;
         case "2.0.2":
-            if (strtolower($reqParams['request']) == 'describefeaturetype') {
+            if (strtolower((string) ($reqParams['request'] ?? '')) == 'describefeaturetype') {
                 $typeNameParameter = "typename";
             } else {
                 $typeNameParameter = "typenames";
@@ -145,7 +145,7 @@ if ($wfsId !== false) {
             break;
     }
 
-    if (isset($reqParams[$typeNameParameter]) & $reqParams[$typeNameParameter] != "") {
+    if (isset($reqParams[$typeNameParameter]) && $reqParams[$typeNameParameter] != "") {
         $testMatch = $reqParams[$typeNameParameter];
         //simple pattern - without blanks!
         $pattern = '/^[0-9a-zA-Z\.\-_:,]*$/';
@@ -207,19 +207,21 @@ if ($wfsId !== false) {
 }*/
 
 //check if proxy is enabled for requested resource
-$layerId = $_REQUEST['layer_id'];
-$wfsId = $_REQUEST['wfs_id'];
+$layerId = $_REQUEST['layer_id'] ?? '';
+$wfsId = $_REQUEST['wfs_id'] ?? '';
 $withChilds = false;
 if (isset($_REQUEST["withChilds"]) && $_REQUEST["withChilds"] === "1") {
     $withChilds = true;
 }
 //$e = new mb_exception("http_auth/http/index.php: wfsId: ".$wfsId);
 $n = new administration();
-if (!(isset($reqParams['service'])) and (strtolower($reqParams['request']) == 'getmap' || strtolower($reqParams['request']) == 'getlegendgraphic')) {
+if (!(isset($reqParams['service'])) and (strtolower((string) ($reqParams['request'] ?? '')) == 'getmap' || strtolower((string) ($reqParams['request'] ?? '')) == 'getlegendgraphic')) {
     $reqParams['service'] = 'wms';
 }
+$owsproxyString = '';
+$auth = false;
 //check for type of ows requested
-switch (strtolower($reqParams['service'])) {
+switch (strtolower($reqParams['service'] ?? '')) {
     case 'wms':
         $wmsId = getWmsIdByLayerId($layerId);
         $owsproxyString = $n->getWMSOWSstring($wmsId);
@@ -356,7 +358,7 @@ if (($anonymousAccess && $proxyEnabled) || ($proxyEnabled == false)) {
 //$e = new mb_exception("user: " . $userId);
 
 //get authentication infos if they are available in wms table! if not $auth = false
-if ($auth['auth_type'] == '') {
+if (!isset($auth) || !is_array($auth) || ($auth['auth_type'] ?? '') == '') {
     unset($auth);
 }
 /*if ($proxyEnabled) {
@@ -366,10 +368,10 @@ $numberOfTest++;
 $e = new mb_notice($numberOfTest.". test - index.php userId: ".$userId);*/
 /* ************ main workflow *********** */
 
-switch (strtolower($reqParams['request'])) {
+switch (strtolower($reqParams['request'] ?? '')) {
 
     case 'getcapabilities':
-        switch (strtolower($reqParams['service'])) {
+        switch (strtolower((string) ($reqParams['service'] ?? ''))) {
             case 'wfs':
                 if ($proxyEnabled) {
                     $arrayOnlineresources = checkWfsPermission($owsproxyString, false, $userId);
@@ -750,7 +752,7 @@ function throwE($e)
 {
     global $reqParams, $imageformats;
     header ( "Access-Control-Allow-Origin: " . "*");
-    if (in_array($reqParams['format'], $imageformats)) {
+    if (in_array($reqParams['format'] ?? '', $imageformats)) {
         throwImage($e);
     } else {
         throwText($e);
