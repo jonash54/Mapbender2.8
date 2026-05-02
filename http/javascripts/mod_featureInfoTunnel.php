@@ -38,9 +38,9 @@ var mod_featureInfoTunnel_frameName = "";
 var mod_featureInfoTunnel_target = "<?php echo $e_target[0]; ?>";
 var mod_featureInfoTunnel_map = null;
 
-var mod_featureInfoTunnel_img_on = new Image(); mod_featureInfoTunnel_img_on.src =  "<?php  echo preg_replace("/_off/","_on",$e_src);  ?>";
+var mod_featureInfoTunnel_img_on = new Image(); mod_featureInfoTunnel_img_on.src =  "<?php  echo preg_replace("/_off/","_on",($e_src ?? ''));  ?>";
 var mod_featureInfoTunnel_img_off = new Image(); mod_featureInfoTunnel_img_off.src ="<?php  echo $e_src;  ?>";
-var mod_featureInfoTunnel_img_over = new Image(); mod_featureInfoTunnel_img_over.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+var mod_featureInfoTunnel_img_over = new Image(); mod_featureInfoTunnel_img_over.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 eventInit.register(function () {
 	mb_regButton(function init_featureInfoTunnel(ind){

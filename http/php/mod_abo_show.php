@@ -154,8 +154,8 @@ if ($checkboxes > 0 || isset($_POST['wmslist'])){
 					$user_email[$cnt], 
 					$mail_user_recipient,
 					$mail_user_topic . " " . date("F j, Y, G:i:s"), 
-					utf8_decode(strip_tags($_POST['emailtext']) . "\n\n" . $further_inquiry_text . 
-					": " . $mail_wms_owner . "\n" . $body_urllist));
+					mb_convert_encoding(strip_tags($_POST['emailtext']) . "\n\n" . $further_inquiry_text . 
+					": " . $mail_wms_owner . "\n" . $body_urllist, 'ISO-8859-1', 'UTF-8'));
 				$cnt++;
 			}
 			//controll mail for wms_owner
@@ -165,9 +165,9 @@ if ($checkboxes > 0 || isset($_POST['wmslist'])){
 				$mail_wms_owner, 
 				$mail_admin_recipient,
 				$mail_admin_topic . " " . date("F j, Y, G:i:s"), 
-				utf8_decode(_mb($mail_admin_body, $cnt).
+				mb_convert_encoding(_mb($mail_admin_body, $cnt).
 				"\n\n" . 
-				strip_tags($_POST['emailtext']) . $body_urllist));
+				strip_tags($_POST['emailtext']) . $body_urllist, 'ISO-8859-1', 'UTF-8'));
 		
 		
 			echo "<br>" . 

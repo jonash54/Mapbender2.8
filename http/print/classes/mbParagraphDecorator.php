@@ -34,7 +34,7 @@ class mbParagraphDecorator extends mbTemplatePdfDecorator
         $this->pdf->objPdf->setFont($this->conf->font_family, "", $this->conf->font_size);
         #$this->pdf->objPdf->Cell($this->conf->width, $this->conf->height, utf8_decode($this->value), $this->conf->border, 0, $this->conf->align, $this->conf->fill);
         //use MultiCell for line breaks after cell end is reached
-        $this->pdf->objPdf->MultiCell($this->conf->width, $this->conf->height, utf8_decode($this->value), $this->conf->border, $this->conf->align, $this->conf->fill);
+        $this->pdf->objPdf->MultiCell($this->conf->width, $this->conf->height, mb_convert_encoding($this->value, 'ISO-8859-1', 'UTF-8'), $this->conf->border, $this->conf->align, $this->conf->fill);
     }
 }
 

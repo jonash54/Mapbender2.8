@@ -9,7 +9,7 @@ $con = db_connect(DBSERVER,OWNER,PW);
 db_select_db(DB,$con);
 
 $json = new Services_JSON();
-$obj = $json->decode(stripslashes($_REQUEST['obj']));
+$obj = $json->decode(stripslashes(($_REQUEST['obj'] ?? '')));
 
 //workflow:
 switch($obj->action){

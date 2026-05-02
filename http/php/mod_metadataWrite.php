@@ -27,5 +27,6 @@ $orderBy = $_SERVER["argv"][24];
 $resourceIds = $_SERVER["argv"][25];
 $restrictToOpenData = $_SERVER["argv"][26];
 
-$metadata = new searchMetadata($userId, $searchId, $searchText, $registratingDepartments, $isoCategories, $inspireThemes, $timeBegin, $timeEnd, $regTimeBegin, $regTimeEnd, $maxResults, $searchBbox, $searchTypeBbox, $accessRestrictions, $languageCode, $searchEPSG, $searchResources, $searchPages, $outputFormat, $resultTarget, $searchURL, $customCategories, $hostName, $orderBy, $resourceIds, $restrictToOpenData);
+$originFromHeader = $_SERVER["argv"][27] ?? false;
+$metadata = new searchMetadata($userId, $searchId, $searchText, $registratingDepartments, $isoCategories, $inspireThemes, $timeBegin, $timeEnd, $regTimeBegin, $regTimeEnd, $maxResults, $searchBbox, $searchTypeBbox, $accessRestrictions, $languageCode, $searchEPSG, $searchResources, $searchPages, $outputFormat, $resultTarget, $searchURL, $customCategories, $hostName, $orderBy, $resourceIds, $restrictToOpenData, $originFromHeader);
 ?>

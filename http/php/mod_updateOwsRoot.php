@@ -21,7 +21,10 @@ require_once(dirname(__FILE__) . "/../classes/class_universal_wfs_factory.php");
 //give back every result as json
 header('Content-Type: application/json; charset=utf-8');
 
+$resultObject = new stdClass();
 $resultObject->success = false;
+$resultObject->error = new stdClass();
+$resultObject->result = new stdClass();
 //check if invoked from localhost
 $whitelist = array(
     '127.0.0.1',
@@ -91,7 +94,7 @@ if (isset($_REQUEST["serviceType"]) && $_REQUEST["serviceType"] != "") {
     $serviceType = $testMatch;
     $testMatch = NULL;
 }
-$serviceType= strtoupper($serviceType);
+$serviceType= strtoupper(($serviceType ?? ''));
 
 if (isset($_REQUEST["serviceId"]) && $_REQUEST["serviceId"] != "") {
     $testMatch = $_REQUEST["serviceId"];

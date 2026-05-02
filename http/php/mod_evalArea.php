@@ -25,8 +25,8 @@ $x = $_REQUEST["x"];
 $y = $_REQUEST["y"];
 $epsg = $_REQUEST["srs"];
 $length = $_REQUEST["length"];
-$posX = explode (",", $x);
-$posY = explode (",", $y);
+$posX = explode (",", ($x ?? ''));
+$posY = explode (",", ($y ?? ''));
 
 echo "{";
 if(SYS_DBTYPE=='pgsql' && count($posX) > 3){

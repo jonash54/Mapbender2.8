@@ -54,7 +54,7 @@ if(db_numrows($res) == 0){
 	$returnObject->error->message = "php/mod_activateUserAccount.php: user with requested activation_key not found in mapbender database!";
 	$returnObject->error->{"'__type'"} = "Object not found";
 	header('Content-Type: application/json');
-	echo json_encode($this->returnObject);
+	echo json_encode($returnObject);
 	//redirect to register
 sleep(5);
 	header("Location: ".$registerRedirectUrl);
@@ -69,7 +69,7 @@ sleep(5);
 		$returnObject->error->message = "php/mod_activateUserAccount.php: User account already activated!";
 		$returnObject->error->{"'__type'"} = "Object not found";
 		header('Content-Type: application/json');
-		echo json_encode($this->returnObject);
+		echo json_encode($returnObject);
 		//redirect to login?
 sleep(5);
 		header("Location: ".$loginRedirectUrl);
@@ -88,7 +88,7 @@ sleep(5);
 			$returnObject->error->message = "php/mod_activateUserAccount.php: Could not activate user account!";
 			$returnObject->error->{"'__type'"} = "Object not found";
 			header('Content-Type: application/json');
-			echo json_encode($this->returnObject);
+			echo json_encode($returnObject);
 			die();
 		} else {
 

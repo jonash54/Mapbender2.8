@@ -96,9 +96,9 @@ if($cnt_target > 1){
 echo "<script type='text/javascript'>";
 echo "var gui_id = '".$logged_gui_id."';";
 echo "var mod_addWMS_data = '".$e_require."';";
-$target = explode(",", $e_target);
+$target = explode(",", ($e_target ?? ''));
 echo "var mod_addWMS_target1 = '".trim($target[0])."';";
-echo "var mod_addWMS_target2 = '".trim($target[1])."';";
+echo "var mod_addWMS_target2 = '".trim(($target[1] ?? ''))."';";
 echo "</script>";
 /*get infos from gui_element ********************************************************************************************/
 

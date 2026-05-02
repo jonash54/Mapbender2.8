@@ -73,7 +73,7 @@ function mod_highlightPOI_init(){
 		var myPOI = "<?php if (CHARSET == 'UTF-8'){
 				echo addslashes(preg_replace("/\n/", "<br>", Mapbender::session()->get("mb_myPOI")));
 			}else{
-				echo addslashes(preg_replace("/\n/", "<br>", utf8_decode(Mapbender::session()->get("mb_myPOI"))));
+				echo addslashes(preg_replace("/\n/", "<br>", mb_convert_encoding(Mapbender::session()->get("mb_myPOI"), 'ISO-8859-1', 'UTF-8')));
 			} 
 			?>";
 

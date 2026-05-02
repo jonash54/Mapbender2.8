@@ -567,7 +567,7 @@ if(isset($myURL) && $myURL != ''){
 			$error_msg = "";
 $e = new mb_exception("replyto: ". $replyto. " - from: ".$from);
 			for ($i=0; $i<count($notification_mail_addresses); $i++) {
-				if (!$admin->sendEmail($replyto, $from, $notification_mail_addresses[$i], $notification_mail_addresses[$i], _mb("Update of an observed WMS"), utf8_decode($body), $error)) {
+				if (!$admin->sendEmail($replyto, $from, $notification_mail_addresses[$i], $notification_mail_addresses[$i], _mb("Update of an observed WMS"), mb_convert_encoding($body, 'ISO-8859-1', 'UTF-8'), $error)) {
 					if ($error){
 						$error_msg .= $error . " ";
 					}

@@ -1681,7 +1681,7 @@ function generateFeed($feedDoc, $recordId, $generateFrom) {
 						//use first output format which have been found - TODO - check if it should be pulled from featuretype instead from wfs 
 						$gFLink .= "&outputFormat=".rawurlencode($mapbenderMetadata[$i]->output_formats[0]);
 					}
-					$gFLink .= "&FILTER=".rawurlencode(utf8_decode($bboxFilter));
+					$gFLink .= "&FILTER=".rawurlencode(mb_convert_encoding($bboxFilter, 'ISO-8859-1', 'UTF-8'));
 					$getFeatureLink[] = $gFLink;
 					$featureTypeName[] = $mapbenderMetadata[$i]->featuretype_name;
 					$featureTypeBbox[] = $bboxWfs[$mapbenderMetadata[$i]->featuretype_name][$l];

@@ -17,9 +17,10 @@
 var Mapbender = {};
 
 <?php
-echo "var global_mb_log_js = '".LOG_JS."';";
-echo "var global_mb_log_level = '".LOG_LEVEL."';";
-echo "var global_log_levels = '".LOG_LEVEL_LIST."';";
+require_once(dirname(__FILE__)."/../../core/globalSettings.php");
+echo "var global_mb_log_js = '".(defined('LOG_JS')?LOG_JS:'')."';";
+echo "var global_mb_log_level = '".(defined('LOG_LEVEL')?LOG_LEVEL:'')."';";
+echo "var global_log_levels = '".(defined('LOG_LEVEL_LIST')?LOG_LEVEL_LIST:'')."';";
 
 require_once "../../lib/ajax.js";
 require_once "../../lib/exception.js";

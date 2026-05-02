@@ -93,7 +93,7 @@ if ($command == "getGmkNr") {
 }
 
 if ($command == "getGmkName") {
-    $searchString = utf8_encode($_REQUEST['term']);
+    $searchString = mb_convert_encoding($_REQUEST['term'], 'UTF-8', 'ISO-8859-1');
     $searchFeaturetype = $featuretypeGmkNr;
     $filter = '<Filter xmlns="http://www.opengis.net/ogc" xmlns:app="http://www.deegree.org/app"><PropertyIsLike wildCard="*" singleChar="?" escape="#" matchCase="false">
             				<PropertyName>' . $gmkNameAttr . '</PropertyName>

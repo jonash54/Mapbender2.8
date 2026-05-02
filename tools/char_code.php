@@ -15,10 +15,10 @@
 <textarea rows="10" cols="100">
 <?php
 if($_REQUEST["encode"]){
-echo utf8_encode($_REQUEST["c"]);
+echo mb_convert_encoding($_REQUEST["c"], 'UTF-8', 'ISO-8859-1');
 }
 if($_REQUEST["decode"]){
-echo utf8_decode($_REQUEST["c"]);	
+echo mb_convert_encoding($_REQUEST["c"], 'ISO-8859-1', 'UTF-8');	
 }
 ?>
 </textarea>

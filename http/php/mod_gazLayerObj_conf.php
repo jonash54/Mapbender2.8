@@ -68,7 +68,7 @@ echo "<input type='hidden' name='layer' value='".$_REQUEST["layer"]."'>";
 
 
 $aWFS = new wfs_conf();
-$aWFS->getallwfs();	
+$aWFS->getallwfs(Mapbender::session()->get("mb_user_id"));
 
 /* save gazetteer properties */
 

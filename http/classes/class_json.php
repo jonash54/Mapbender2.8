@@ -79,7 +79,7 @@ class Mapbender_JSON {
                 }
             } elseif (is_string($var)) {
 				if(mb_detect_encoding($var) != "UTF-8"){
-                	$var = utf8_encode($var);
+                	$var = mb_convert_encoding($var, 'UTF-8', 'ISO-8859-1');
 				}
             }
             return $var;
@@ -117,7 +117,7 @@ class Mapbender_JSON {
 			return $pear->decode($aString);
 		}
 		$e = new mb_notice("using native JSON");
-		return json_decode($aString);
+		return json_decode(($aString ?? ''));
 	}
 }
 ?>

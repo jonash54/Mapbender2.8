@@ -49,7 +49,7 @@ class mbLegendDecorator extends mbTemplatePdfDecorator
                 // Title
                 $titleFontSize = $this->conf->font_size + 1;
                 $this->pdf->objPdf->setFont($this->conf->font_family, "", $titleFontSize);
-                $this->pdf->objPdf->Text($currentX, $currentY, html_entity_decode(utf8_decode($title)));
+                $this->pdf->objPdf->Text($currentX, $currentY, html_entity_decode(mb_convert_encoding($title, 'ISO-8859-1', 'UTF-8')));
 //				$currentY += $mmPerPt * $this->conf->font_size;
                 $currentY += $titleFontSize;
 
@@ -58,7 +58,7 @@ class mbLegendDecorator extends mbTemplatePdfDecorator
                     // Legend
                     $currentLegendObj = $layerLegendArray[$j];
 
-                    $this->pdf->objPdf->Text($currentX, $currentY, html_entity_decode(utf8_decode($currentLegendObj->title)));
+                    $this->pdf->objPdf->Text($currentX, $currentY, html_entity_decode(mb_convert_encoding($currentLegendObj->title, 'ISO-8859-1', 'UTF-8')));
                     //$currentY += $mmPerPt * $this->conf->font_size;
                     $currentY += $this->conf->font_size;
                     // store current legend image temporarily

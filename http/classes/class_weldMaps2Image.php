@@ -30,7 +30,8 @@ require_once(dirname(__FILE__)."/class_connector.php");
  class weldMaps2Image{
  	
 	var $urls = array();
-	var $filename; 	
+	var $filename;
+	var $array_file;
  	
  	function __construct($urls, $array_file){
  		$this->urls = $urls;

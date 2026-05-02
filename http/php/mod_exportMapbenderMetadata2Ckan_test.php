@@ -658,7 +658,7 @@ if ($outputFormat == 'rdfxml') {
                 $orgaIdArray[] = (integer)$orga->id;
             } 
             if (!in_array($id, $orgaIdArray)) {
-                header(header: 'Content-Type: application/json');
+                header('Content-Type: application/json');
                 echo '{"success": false, "help": "There is no organization with requested id in the catalogue!"}';
                 die();
             }

@@ -30,7 +30,7 @@ var loadKmlImg = new Image();
 loadKmlImg.src = "<?php echo $e_src; ?>";
 
 var loadKmlImgOver = new Image(); 
-loadKmlImgOver.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+loadKmlImgOver.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 var mpbn_loadKml = function () {
 	windowKml = window.open("../php/mb_listKMLs.php?<?php echo $urlParameters;?>","displayKml","width=500, height=600, scrollbars=yes, dependent=yes");

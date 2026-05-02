@@ -19,7 +19,7 @@ if ($searchColumnsLayer && !preg_match("/^[a-zA-Z_\-, ]+$/", $searchColumnsLayer
 	echo "[]"; die;
 }
 
-if (!preg_match("/^[a-zA-Z_\- ]+$/", $query)) {
+if (!preg_match("/^[a-zA-Z_\- ]+$/", ($query ?? ''))) {
 	echo "[]"; die;
 }
 

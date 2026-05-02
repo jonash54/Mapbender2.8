@@ -109,6 +109,7 @@ $wfsId = $row["fkey_wfs_id"];
 
 $myWfsFactory = new UniversalWfsFactory();
 $myWfs = $myWfsFactory->createFromDb($wfsId);
+if (!is_object($myWfs)) die('{}');
 $data = $myWfs->getFeature($typename, $filter,$destSrs);
 
 if ($data === null) die('{}');

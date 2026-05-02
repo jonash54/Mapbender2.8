@@ -750,13 +750,13 @@ if ($legend == true && $_REQUEST["mylegend"]=='true'){
 	
 	//Requests
 	if(CHARSET=="UTF-8"){
-		$new_wms_title=utf8_decode($_REQUEST["wms_title"]);
+		$new_wms_title=mb_convert_encoding($_REQUEST["wms_title"], 'ISO-8859-1', 'UTF-8');
 	}else{
 		$new_wms_title=$_REQUEST["wms_title"];
 	}
 	
 	if(CHARSET=="UTF-8"){
-		$new_layers=utf8_decode($_REQUEST["layers"]);
+		$new_layers=mb_convert_encoding($_REQUEST["layers"], 'ISO-8859-1', 'UTF-8');
 	}else{
 		$new_layers=$_REQUEST["layers"];
 	}

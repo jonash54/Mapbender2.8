@@ -188,7 +188,12 @@ function interval2Seconds($duration) {
 }
 
 //Variable for result object
+$result = new stdClass();
 $result->data = array();
+$result->data[0] = new stdClass();
+$result->result = new stdClass();
+$result->options = new stdClass();
+$result->options->editable = new stdClass();
 //define default timezone:
 date_default_timezone_set('UTC');
 //what do we need further for timeline:

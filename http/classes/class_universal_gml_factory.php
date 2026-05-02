@@ -93,7 +93,7 @@ class UniversalGmlFactory extends GmlFactory {
 	 * @return Wfs
 	 * @param $xml String
 	 */
-	public function createFromXml ($xml, $wfsConf) {
+	public function createFromXml ($xml, $wfsConf, $gml = null, $myWfs = false, $myFeatureType = false, $geomColumnName = false) {
 		try {
 			$version = $this->getVersionFromXml($xml);
 

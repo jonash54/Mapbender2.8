@@ -402,7 +402,7 @@ function string2html($string) {
 }
 function delTotalFromQuery($paramName, $url) {
 	$query = explode ( "?", $url );
-	parse_str ( $query [1], $vars );
+	parse_str ( ($query [1] ?? ''), $vars );
 	if (is_array ( $paramName )) {
 		foreach ( $paramName as $param ) {
 			unset ( $vars [$param] );
@@ -1341,6 +1341,7 @@ if (! isset ( $wfsid ) || $wfsid == "") {
 	$res = db_prep_query ( $sql, $v, $t );
 	$i = 0;
 	while ( $row = db_fetch_array ( $res ) ) {
+		$returnObject->service [$i] = new stdClass();
 		$returnObject->service [$i]->id = $row ['wfs_id'];
 		$returnObject->service [$i]->title = $row ['wfs_title'];
 		$returnObject->service [$i]->version = $row ['wfs_version'];
@@ -2365,7 +2366,7 @@ if (! isset ( $wfsid ) || $wfsid == "") {
     							// $memBeforeGmlParsing = memory_get_usage();
     							// $e = new mb_exception("Memory before GML Object: ".((memory_get_usage() - $startmem) / 1000)." MB");
     							//$e = new mb_exception($wfs." - ".$myFeatureType." - ".$geomColumnName);
-    							$gml3Object = $gml3Class->createFromXml ( $features, null, $wfs, $myFeatureType, $geomColumnName );
+    							$gml3Object = $gml3Class->createFromXml ( $features, null, null, $wfs, $myFeatureType, $geomColumnName );
     							// $e = new mb_exception("Memory for GML Object: ".((memory_get_usage() - $memBeforeGmlParsing) / 1000)." MB");
     							// $e = new mb_exception("geojson from mb class: ".json_encode($gml3Object));
     							$geojsonList = new stdClass ();
@@ -2649,7 +2650,7 @@ if (! isset ( $wfsid ) || $wfsid == "") {
     						$gml3Class = new Gml_3_Factory ();
     						// create featuretype object
     						// TODO
-    						$gml3Object = $gml3Class->createFromXml ( $features, null, $wfs, $myFeatureType, $geomColumnName );
+    						$gml3Object = $gml3Class->createFromXml ( $features, null, null, $wfs, $myFeatureType, $geomColumnName );
     						//$e = new mb_exception("after creation of object!");
     						$geojsonList = new stdClass ();
     						$geojsonList->type = "FeatureCollection";

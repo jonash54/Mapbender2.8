@@ -72,9 +72,9 @@ while($row = db_fetch_array($res)){
    $cnt++;
 }
 if($cnt > 1){ echo "alert('WMS_preferences: ID not unique!');";}
-$e_target = explode(",", $e_target);
+$e_target = explode(",", ($e_target ?? ''));
 echo "var mod_WMSpreferences_target1 = '".trim($e_target[0])."';";
-echo "var mod_WMSpreferences_target2 = '".trim($e_target[1])."';";
+echo "var mod_WMSpreferences_target2 = '".trim(($e_target[1] ?? ''))."';";
 echo "</script>";
 
 $sql_visible = "SELECT * FROM gui_wms WHERE fkey_gui_id = $1";

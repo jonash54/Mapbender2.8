@@ -8,7 +8,7 @@
 require_once dirname(__FILE__) . "/../../core/globalSettings.php";
 require_once dirname(__FILE__) . "/../classes/class_iso19139.php";
 //show html from a given url
-$url = urldecode($_REQUEST['url']);
+$url = urldecode(($_REQUEST['url'] ?? ''));
 $mbMetadata = new Iso19139();
 $mbMetadata->readFromUrl($url);
 $html = $mbMetadata->transformToHtml('tabs','de');

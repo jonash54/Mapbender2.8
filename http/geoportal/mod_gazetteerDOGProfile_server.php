@@ -133,7 +133,7 @@ function startSearch($command) {
             xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
             xmlns:wfs="http://www.opengis.net/wfs" xmlns:dog="http://www.lverma.nrw.de/namespaces/dog"
             xmlns:iso19112="http://www.opengis.net/iso19112">
-        <Filter xmlns="http://www.opengis.net/ogc">' . utf8_encode($propertyConditionsString) . '</Filter>
+        <Filter xmlns="http://www.opengis.net/ogc">' . mb_convert_encoding($propertyConditionsString, 'UTF-8', 'ISO-8859-1') . '</Filter>
     </wfs:Query>
 </wfs:GetFeature>';
 	

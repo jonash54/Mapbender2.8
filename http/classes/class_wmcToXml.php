@@ -62,13 +62,16 @@ class WmcToXml {
 
 	private function toXml () {
 		// generate XML
+		if (!is_object($this->wmc) || !is_object($this->wmc->mainMap)) {
+			return;
+		}
 		$this->doc = new DOMDocument("1.0", CHARSET);
 		$this->doc->preserveWhiteSpace = false;
 
 		// ViewContext
 		$e_view_context = $this->doc->createElementNS("http://www.opengis.net/context", "ViewContext");
 		$e_view_context->setAttribute("version", "1.1.0");
-		$e_view_context->setAttribute("id", $this->wmc->wmc_id);
+		$e_view_context->setAttribute("id", ($this->wmc->wmc_id ?? ''));
 		$e_view_context->setAttribute("xsi:schemaLocation", "http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd");
 		$e_view_context->setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		$e_view_context->setAttribute("xmlns:" . $this->wmc->extensionNamespace, $this->wmc->extensionNamespaceUrl);
@@ -148,7 +151,7 @@ class WmcToXml {
          * TODO: maybe it will be better to alter the client not to write the geometries to mainMap?
          * 
          */
-        if($this->wmc->mainMap->getKmls()) {
+        if(is_object($this->wmc->mainMap) && $this->wmc->mainMap->getKmls()) {
             $e = new mb_notice("classes/class_wmcToXml.php: found kmls in mainMap");
             /*
              * Store them in base64 encoding to allow complex geosjon - somehow otherwise they are not stored !!!!
@@ -158,7 +161,7 @@ class WmcToXml {
             $e = new mb_notice("classes/class_wmcToXml.php: don't found kmls in mainMap!");
         }
         
-        if($this->wmc->mainMap->getKmlOrder()) {
+        if(is_object($this->wmc->mainMap) && $this->wmc->mainMap->getKmlOrder()) {
             $e = new mb_notice("classes/class_wmcToXml.php: found kmlOrder in mainMap");
             $extensionData['kmlOrder'] = json_encode($this->wmc->mainMap->getKmlOrder());
         } else {
@@ -166,7 +169,7 @@ class WmcToXml {
         }
         
 		// store epsg and bbox of root layer of 0th WMS
-		$firstWms = $this->wmc->mainMap->getWms(0);
+		$firstWms = is_object($this->wmc->mainMap) ? $this->wmc->mainMap->getWms(0) : null;
 		if ($firstWms !== null) {
 			$_firstWmsLayer0Epsg = $firstWms->objLayer[0]->layer_epsg ?? [];
 			for ($i = 0; $i < count($_firstWmsLayer0Epsg); $i++) {

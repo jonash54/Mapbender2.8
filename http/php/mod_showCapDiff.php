@@ -83,6 +83,6 @@ switch ($serviceType) {
 }
 $res = db_prep_query($sql,$v,$t);
 $cap_diff_row = db_fetch_row($res);
-$html = urldecode($cap_diff_row[0]);
+$html = urldecode(($cap_diff_row[0] ?? ''));
 echo $html;
 ?>

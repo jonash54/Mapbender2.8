@@ -86,6 +86,13 @@ $allowedFunctions = array(
 
 $functionThatNeedIdList = array('monitor');
 
+if (!isset($resourceType) || !isset($maintenanceFunction)) {
+	$resultObj['success'] = false;
+	$resultObj['message'] = "Parameters resourceType and maintenanceFunction are required.";
+	echo json_encode($resultObj);
+	die();
+}
+
 //check for allowedFunction
 if (!in_array($maintenanceFunction, $allowedFunctions[$resourceType])) {
 	$resultObj['success'] = false;

@@ -35,7 +35,7 @@ $MAPBENDER_URL = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME']
 
 function char_encode($s){
 	if(CHARSET == 'UTF-8'){
-		$s = utf8_encode($s);
+		$s = mb_convert_encoding($s, 'UTF-8', 'ISO-8859-1');
 	}
 	return $s;
 }

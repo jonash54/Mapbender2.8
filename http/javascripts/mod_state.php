@@ -48,7 +48,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'">'
 <BODY bgcolor='#ffffff'>
 <?php
 $sql = "SELECT stand FROM layer_metadata;";
-$res = db_prep_query($sql);
+$res = db_prep_query($sql, array(), array());
 
 echo "Daten der Vertriebsplattform sind vom Stand: ".db_result($res,0,"stand");
 ?>

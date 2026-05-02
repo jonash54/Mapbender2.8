@@ -21,6 +21,7 @@ $outputFormat = "json";
 $compareTimestamps = false;
 $listAllMetadataInJson = true;
 //initiate resultObject to give back as json
+$resultObject = new stdClass();
 $resultObject->success = false;
 $operation = false;
 

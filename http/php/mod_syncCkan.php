@@ -17,7 +17,7 @@ if (defined("CKAN_SERVER_PORT") && CKAN_SERVER_PORT != '') {
 	$serverUrl = CKAN_SERVER_IP;
 }
 DEFINE('SERVER_URL',$serverUrl);
-$ckan = new ckanApi(API_KEY, CKAN_SERVER_IP);
+$ckan = new ckanApi(defined('API_KEY') ? API_KEY : '', CKAN_SERVER_IP);
 
 $ckan->base_url='http://'.SERVER_URL.'/api/';
 
@@ -31,16 +31,17 @@ header('Content-Type: application/json; charset='.CHARSET);
 echo json_encode($ckanObjects);
 */
 //first check if group with given name exists - if not create it in the ckan instance via action api, if it exists - update title and link to logo
-$group = group_get(CKAN_GROUP_NAME);
+$group = group_get((defined('CKAN_GROUP_NAME') ? CKAN_GROUP_NAME : ''));
 if (!$group) {
 	print "No group found, create it via action api!";
-	$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+	$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 	$ckan->base_url='http://'.SERVER_URL.'/api/';
 	
 	//create new one
-	$newGroup->name = CKAN_GROUP_NAME;
-	$newGroup->title = CKAN_GROUP_TITLE;
-	$newGroup->image_url = CKAN_GROUP_SYMBOL;
+	$newGroup = new stdClass();
+	$newGroup->name = (defined('CKAN_GROUP_NAME') ? CKAN_GROUP_NAME : '');
+	$newGroup->title = defined('CKAN_GROUP_TITLE') ? CKAN_GROUP_TITLE : '';
+	$newGroup->image_url = defined('CKAN_GROUP_SYMBOL') ? CKAN_GROUP_SYMBOL : '';
 	//$newGroup->description = CKAN_GROUP_DESCRIPTION;
 	try {
 		$result = $ckan->action_group_create(json_encode($newGroup));
@@ -64,10 +65,13 @@ if (defined("CKAN_EXPORT_URL") && CKAN_EXPORT_URL != "") {
 $ckanObjectConnector = new connector($mapbenderCkanUrl);
 $ckanObjects = json_decode($ckanObjectConnector->file);
 //build dataset array for source datasets
-foreach ($ckanObjects->result as $dataset) {
-	$mbDatasetArray[] =  $dataset->name;
+$mbDatasetArray = array();
+if (isset($ckanObjects->result) && is_array($ckanObjects->result)) {
+	foreach ($ckanObjects->result as $dataset) {
+		$mbDatasetArray[] =  $dataset->name;
+	}
 }
-print "<b>Mapbender datasets:</b><br>"; 
+print "<b>Mapbender datasets:</b><br>";
 if (count($mbDatasetArray) == 0) {
 	$mbDatasetArray = false;
 }
@@ -80,7 +84,7 @@ if ($mbDatasetArray) {
 print "<b>ckan datasets:</b><br>"; 
 //get old package names for defined group in ckan.conf file
 //thru action api
-$ckanDataset = group_get(CKAN_GROUP_NAME);
+$ckanDataset = group_get((defined('CKAN_GROUP_NAME') ? CKAN_GROUP_NAME : ''));
 //$result = json_decode($resultDataset);
 $ckanDatasetArray = array();
 foreach ($ckanDataset->packages as $dataset) {
@@ -211,7 +215,7 @@ print time()."<br>";
 //functions for interacting with ckan apis
 function package_get ($packageName) {
 	try {
-		$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+		$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 		$ckan->base_url='http://'.SERVER_URL.'/api/';
 		$idArray = array ('id'=>$packageName);
 		$resultDataset = $ckan->action_package_show(json_encode($idArray));
@@ -230,7 +234,7 @@ function package_get ($packageName) {
 
 function group_get ($groupName) {
 	try {
-		$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+		$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 		$ckan->base_url='http://'.SERVER_URL.'/api/1/';
 		$resultDataset = $ckan->get_group_entity($groupName);
 		return $resultDataset;
@@ -249,7 +253,7 @@ function package_update ($package, $apiVersion) {
 		switch ($apiVersion) {
 			case 3:
 				//update it ;-)
-				$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+				$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 				$ckan->base_url='http://'.SERVER_URL.'/api/';
 				try {
 					$result = $ckan->action_package_update(json_encode($package));
@@ -267,7 +271,7 @@ function package_update ($package, $apiVersion) {
 			break;
 			case 1:	
 				//update it with api v1 ;-)
-				$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+				$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 				$ckan->base_url='http://'.SERVER_URL.'/api/1/';
 				try {
 					$result = $ckan->put_package_entity($package->name,json_encode($package));
@@ -280,7 +284,7 @@ function package_update ($package, $apiVersion) {
 			break;
 			case 2:	
 				//update it with api v2 ;-)
-				$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+				$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 				$ckan->base_url='http://'.SERVER_URL.'/api/2/';
 				$error = new mb_exception('mod_syncCkan.php: '.$package->groups[0]);
 				try {
@@ -313,7 +317,7 @@ function package_create ($package,$apiVersion) {
 		return false;
 	} else {
 		//package insertion
-		$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+		$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 		switch ($apiVersion) {
 			case 1:
 				$ckan->base_url='http://'.SERVER_URL.'/api/1/';
@@ -358,7 +362,7 @@ function package_create ($package,$apiVersion) {
 
 function get_packages_by_group($groupname) {
 	//by action api
-	$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+	$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 	$ckan->base_url='http://'.SERVER_URL.'/api/';
 	$datasetNames = array();
 	try {
@@ -381,7 +385,7 @@ function get_packages_by_group($groupname) {
 function get_packages_by_group2($groupname) {
 	//by action api
 	unset($ckanApi);
-	$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+	$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 	$ckan->set_base_url();
 	$e = new mb_exception("testckan: ".SERVER_URL);
 	$ckan->base_url='http://'.SERVER_URL.'/api/rest';
@@ -427,7 +431,7 @@ function package_delete($packageName,$apiVersion) {
 					//$existingPackage->other_terms_of_use = "dummy";
 					//$existingPackage->point_of_contact_url = "http://www.geoportal.rlp.de";
 					try {
-						$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+						$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 						$ckan->base_url='http://'.SERVER_URL.'/api/';
 						$result = $ckan->action_package_update(json_encode($existingPackage));
 					}
@@ -463,7 +467,7 @@ function package_delete($packageName,$apiVersion) {
 					$package->state = "deleted";
 					$package->name = $existingPackage->name."_".time();
 					//update it with api v2 ;-)
-					$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+					$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 					$ckan->base_url='http://'.SERVER_URL.'/api/2/';
 					try {
 						$result = $ckan->post_package_register($existingPackage->id,json_encode($package));
@@ -497,7 +501,7 @@ function package_delete($packageName,$apiVersion) {
 					//update the name and status of package to delete:
 					$package->state = "deleted";
 					$package->name = $existingPackage->name."_".time();
-					$ckan = new ckanApi(API_KEY,CKAN_SERVER_IP);
+					$ckan = new ckanApi(defined("API_KEY") ? API_KEY : "",CKAN_SERVER_IP);
 					$ckan->base_url='http://'.SERVER_URL.'/api/1/';
 					try {
 						$result = $ckan->put_package_entity($packageName,json_encode($package));

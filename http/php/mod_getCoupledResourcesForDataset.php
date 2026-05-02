@@ -120,7 +120,7 @@ function getServiceUrl($mdServiceType, $mdServiceTypeVersion, $accessUrls) {
 }
 
 $languageCode = "de";
-$url = urldecode($_REQUEST['getRecordByIdUrl']);
+$url = urldecode(($_REQUEST['getRecordByIdUrl'] ?? ''));
 $outputFormat = 'json';
 $catalogueId = 1;
 $resultObj['result'] = '';

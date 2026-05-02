@@ -238,7 +238,7 @@ function checkLayer(){
 }
   function initDiv ( )
   {
-  document.writeln("<span class='header'><?php echo  $language[MSG53] ?></span>");
+  document.writeln("<span class='header'><?php echo  $language['MSG53'] ?? '' ?></span>");
     if ( isDOM || isDomIE )
     {
       divPrefix='<DIV CLASS="sitemap" style="position:absolute; left:0; top:0; visibility:hidden;" ID="sitemap'

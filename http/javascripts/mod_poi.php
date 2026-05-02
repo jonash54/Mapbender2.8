@@ -90,7 +90,7 @@ require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
 echo "<script type='text/javascript'>";  
 
 $queryString = $_REQUEST["search"];
-if (!preg_match("/^[a-zA-Z0-9_- \*]+$/", $search)) {
+if (!preg_match("/^[a-zA-Z0-9_- \*]+$/", ($search ?? ''))) {
 
 	$errorMessage = _mb("Invalid search term");
 	echo htmlentities($errorMessage, ENT_QUOTES, CHARSET);
@@ -106,7 +106,7 @@ if ($backlink !== "parent") {
 echo "var backlink = '".$backlink."';";
 
 $lingo = $_REQUEST["lingo"];
-if (!preg_match("/^[a-zA-Z]+$/", $lingo)) {
+if (!preg_match("/^[a-zA-Z]+$/", ($lingo ?? ''))) {
 
 	$errorMessage = _mb("Invalid language") . ": " . $lingo;
 	echo htmlentities($errorMessage, ENT_QUOTES, CHARSET);

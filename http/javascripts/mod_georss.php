@@ -26,7 +26,7 @@ var georssTargetArray = [];
 //for old versions:
 //$e_target = explode(",",$e_target);
 
-for ($i = 0; $i < count($e_target); $i++) {
+for ($i = 0; $i < (is_array($e_target) ? count($e_target) : 0); $i++) {
 	echo "georssTargetArray.push('".$e_target[$i]."');";
 	#echo "georssTargetArray.push('mapframe1');";
 	#echo "georssTargetArray.push('mapframe1');";

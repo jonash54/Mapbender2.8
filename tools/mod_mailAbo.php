@@ -138,7 +138,7 @@ for ($iz = 0; $iz < count($user_id_all); $iz++) {
 				$admin->getEmailByUserId($userid), 
 				$user, 
 				$mail_user_topic . " " . date("F j, Y, G:i:s"), 
-				utf8_decode($body), 
+				mb_convert_encoding($body, 'ISO-8859-1', 'UTF-8'), 
 				$error_msg
 			);
 		}

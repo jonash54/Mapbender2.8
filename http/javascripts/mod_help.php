@@ -27,9 +27,9 @@ try{if(mod_help_height){}}catch(e){mod_help_height = 1000;}
 try{if(mod_help_text){}}catch(e){mod_help_text = "<?php echo _mb("click highlighted elements for help");?>"}
 var mod_help_elName = "<?php echo $e_id; ?>";
 var mod_help_str = "";
-var mod_help_img_on = new Image(); mod_help_img_on.src =  "<?php  echo preg_replace("/_off/","_on",$e_src);  ?>";
+var mod_help_img_on = new Image(); mod_help_img_on.src =  "<?php  echo preg_replace("/_off/","_on",($e_src ?? ''));  ?>";
 var mod_help_img_off = new Image(); mod_help_img_off.src ="<?php  echo $e_src;  ?>";
-var mod_help_img_over = new Image(); mod_help_img_over.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+var mod_help_img_over = new Image(); mod_help_img_over.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 mb_regButton(function (ind) {
 	mb_button[ind] = document.getElementById(mod_help_elName);

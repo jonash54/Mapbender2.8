@@ -93,7 +93,7 @@ $t = array('i');
 $res = db_prep_query($sql,$v,$t);
 $cnt = 0;
 
-$str = "<span style='font-size:30'>Usage for W".strtoupper($serviceTypeAbbr)."S: </span><hr><br>\n";
+$str = "<span style='font-size:30'>Usage for W".strtoupper(($serviceTypeAbbr ?? ''))."S: </span><hr><br>\n";
 switch ($serviceType) {
 	case 'wms':
 		$serviceTitle = $admin->getWmsTitleByWmsId($serviceId);

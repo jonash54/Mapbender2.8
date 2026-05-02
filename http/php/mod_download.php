@@ -5,7 +5,7 @@ ob_start();
 $download = array();
 
 $download["dir"]  = "../tmp/";
-$filename = basename(trim($_REQUEST["download"]));
+$filename = basename(trim(($_REQUEST["download"] ?? '')));
 if (!preg_match("/^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9]+)$/", $filename) 
 	|| !file_exists($download["dir"] . $filename)) {
 	die("Invalid filename.");

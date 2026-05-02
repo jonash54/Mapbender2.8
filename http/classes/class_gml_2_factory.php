@@ -36,9 +36,9 @@ class Gml_2_Factory extends GmlFactory {
 	 * @return Gml_3
 	 * @param $geoJson String
 	 */
-	public function createFromGeoJson ($geoJson) {
-		$gml2 = new Gml_2();
-		
+	public function createFromGeoJson ($geoJson, $gml = null) {
+		$gml2 = $gml ?? new Gml_2();
+
 		return parent::createFromGeoJson($geoJson, $gml2);
 	}
 
@@ -325,9 +325,9 @@ class Gml_2_Factory extends GmlFactory {
 	 * @return Gml_2
 	 * @param $xml String
 	 */
-	public function createFromXml ($xml, $wfsConf, $myWfs=false, $myFeatureType=false, $geomColumnName=false) {
-		$gml2 = new Gml_2();
+	public function createFromXml ($xml, $wfsConf, $gml = null, $myWfs=false, $myFeatureType=false, $geomColumnName=false) {
+		$gml2 = $gml ?? new Gml_2();
 		return parent::createFromXml($xml, $wfsConf, $gml2, $myWfs, $myFeatureType, $geomColumnName);
-	}	
+	}
 }
 ?>

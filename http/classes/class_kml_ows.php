@@ -649,7 +649,7 @@ class KML {
 	public function updateKml ($kmlId, $placemarkId, $geoJSON) {
 		$kmlFromDb = $this->getKmlDocumentFromDB($kmlId);
 
-		if ($kmlFromDb !== NULL) {
+		if ($kmlFromDb !== NULL && $kmlFromDb !== '') {
 			// load the KML from the database in the DOM object
 			$kmlDoc_DOM = new DOMDocument("1.0");
 			$kmlDoc_DOM->encoding = CHARSET;

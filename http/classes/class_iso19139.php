@@ -265,7 +265,7 @@ class Iso19139 {
 		//$e = new mb_exception($this->metadata);
 		libxml_use_internal_errors(true);
 		try {
-			$iso19139Xml = simplexml_load_string($xml);
+			$iso19139Xml = simplexml_load_string(($xml ?? ''));
 			if ($iso19139Xml === false) {
 				foreach(libxml_get_errors() as $error) {
         				$err = new mb_exception("class_Iso19139:".$error->message);
@@ -889,7 +889,7 @@ XML;
 	}
 
 	public function transformToHtml($layout, $languageCode, $serviceInformation=false){
-	    if (strpos($this->metadata, 'mb:ExceptionReport') !== false) {
+	    if (strpos(($this->metadata ?? ''), 'mb:ExceptionReport') !== false) {
 	        $e = new mb_exception("php/class_iso19139.php: the iso record could not be transformed to html!");
 	        //generate html
 	        $html = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dctype="http://purl.org/dc/dcmitype/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xml:lang="'.$languageCode.'">';
@@ -918,7 +918,7 @@ XML;
 		libxml_use_internal_errors(true);
 		//TODO don't parse it again, but change the internal parser function!
 		try {
-			$iso19139Xml = simplexml_load_string($this->metadata);
+			$iso19139Xml = simplexml_load_string(($this->metadata ?? ''));
 			if ($iso19139Xml === false) {
 				foreach(libxml_get_errors() as $error) {
         				$err = new mb_exception("class_Iso19139:".$error->message);
@@ -2012,8 +2012,9 @@ SQL;
 		);
 		$t = array('s');
 		$res = db_prep_query($sql,$v,$t);
+		$metadataId = array();
 		while ($row = db_fetch_array($res)){
-			$metadataId[] = $row['metadata_id'];	
+			$metadataId[] = $row['metadata_id'];
 		}
 		if (count($metadataId) > 0 && count($metadataId) < 2) {
 			return $metadataId[0];

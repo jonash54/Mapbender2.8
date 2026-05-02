@@ -20,10 +20,10 @@ $width;
 $height;
 $new_name;
 //get the http referer and the service (wms,wmc)
-$referer = explode('=',$_SERVER["HTTP_REFERER"]);
+$referer = explode('=',($_SERVER["HTTP_REFERER"] ?? ''));
 $service = end($referer);
 // get the file informations
-$info = pathinfo($_FILES['image']['name']);
+$info = pathinfo(($_FILES['image']['name'] ?? ''));
 // get the extension of the file
 $ext = $info['extension'];
 // set the new fileName

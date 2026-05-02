@@ -8,6 +8,9 @@
 
 # Generated/runtime files — never commit
 conf/mapbender.conf
+conf/ckan.conf
+conf/atomFeedClient.conf
+conf/gazetteerSQL.conf
 conf/.docker-initialised
 log/*.log
 resources/locale/**/*.mo

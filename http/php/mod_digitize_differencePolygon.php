@@ -35,7 +35,7 @@ $multiPolygonPattern = "MULTIPOLYGON( )\(" . $polygonPattern . "(,( )*" . $polyg
 $anyPolygonPattern = "(" . $singlePolygonPattern . ")|(" . $multiPolygonPattern . ")";
 
 $pattern = "/" . $anyPolygonPattern . "/";
-if (!preg_match($pattern, $polygon1Text)) {
+if (!preg_match($pattern, ($polygon1Text ?? ''))) {
 	echo "Polygon 1 not a polygon.";
 	die();
 }

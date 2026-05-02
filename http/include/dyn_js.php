@@ -17,6 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/../classes/class_mb_exception.php");
 
 if(isset($gui_id))
@@ -31,9 +32,9 @@ if(isset($gui_id))
 	{
 		if (mb_strpos($row["var_name"], "[")) {
 			$arrayname = mb_substr($row["var_name"], 0, mb_strpos($row["var_name"], "["));
-			
+
 			if (!in_array($arrayname, $arrays)) {
-				$i++;
+				$i = ($i ?? 0) + 1;
 				$arrays[$i] = $arrayname;
 				echo "var " . $arrayname  . " = new Array();\n";
 			}
@@ -41,18 +42,18 @@ if(isset($gui_id))
 		else {
 			echo "var ";
 		}
-		if (is_numeric(stripslashes($row["var_value"]))) {
+		if (is_numeric(stripslashes($row["var_value"] ?? ''))) {
 			echo $row["var_name"]." = ".stripslashes($row["var_value"]).";\n";
 		}
-		elseif (strpos(stripslashes($row["var_value"]), "[") === 0 || strpos(stripslashes($row["var_value"]), "{") === 0) {
+		elseif (strpos(stripslashes($row["var_value"] ?? ''), "[") === 0 || strpos(stripslashes($row["var_value"] ?? ''), "{") === 0) {
 			echo $row["var_name"]." = ".stripslashes($row["var_value"]).";\n";
 		}
 		else {
-			echo $row["var_name"]." = '".str_replace(array('"',"'", "\r", "\n", "\0"), array('\"','\\\'','\r', '\n', '\0'), stripslashes($row["var_value"]))."';\n";
+			echo $row["var_name"]." = '".str_replace(array('"',"'", "\r", "\n", "\0"), array('\"','\\\'','\r', '\n', '\0'), stripslashes($row["var_value"] ?? ''))."';\n";
 		}
 	}
 }
 else {
-	$e = new mb_exception("Application ID not set while retrieving element vars of module " . $e_id);
+	$e = new mb_exception("Application ID not set while retrieving element vars of module " . ($e_id ?? ''));
 }
 ?>

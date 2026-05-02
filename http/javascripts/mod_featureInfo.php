@@ -70,9 +70,9 @@ var mod_featureInfo_frameName = "";
 var mod_featureInfo_target = "<?php echo $e_target[0]; ?>";
 var mod_featureInfo_mapObj = null;
 
-var mod_featureInfo_img_on = new Image(); mod_featureInfo_img_on.src =  "<?php  echo preg_replace("/_off/","_on",$e_src);  ?>";
+var mod_featureInfo_img_on = new Image(); mod_featureInfo_img_on.src =  "<?php  echo preg_replace("/_off/","_on",($e_src ?? ''));  ?>";
 var mod_featureInfo_img_off = new Image(); mod_featureInfo_img_off.src ="<?php  echo $e_src;  ?>";
-var mod_featureInfo_img_over = new Image(); mod_featureInfo_img_over.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+var mod_featureInfo_img_over = new Image(); mod_featureInfo_img_over.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 if (featureInfoDrawClick) {
 	var standingHighlightFeatureInfo = null;

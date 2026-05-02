@@ -21,9 +21,9 @@ $con = db_connect(DBSERVER,OWNER,PW);
 db_select_db(DB,$con);
 
 function display_text($string) {
-    $string = preg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", "<a href=\"\\0\" target=_blank>\\0</a>", $string);   
-    $string = preg_replace("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@([0-9a-z](-?[0-9a-z])*\.)+[a-z]{2}([zmuvtg]|fo|me)?$", "<a href=\"mailto:\\0\" target=_blank>\\0</a>", $string);   
-    $string = preg_replace("\n", "<br>", $string);
+    $string = preg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", "<a href=\"\\0\" target=_blank>\\0</a>", ($string ?? ''));   
+    $string = preg_replace("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@([0-9a-z](-?[0-9a-z])*\.)+[a-z]{2}([zmuvtg]|fo|me)?$", "<a href=\"mailto:\\0\" target=_blank>\\0</a>", ($string ?? ''));   
+    $string = preg_replace("\n", "<br>", ($string ?? ''));
     return $string;
 }  
 
@@ -109,7 +109,7 @@ function display_text($string) {
 
 	$keys = array_keys($wfs);
 	for ($j=0; $j<count($wfs); $j++) {
-		echo $t_a . utf8_encode($keys[$j]) . $t_b . display_text($wfs[$keys[$j]]) . $t_c;
+		echo $t_a . mb_convert_encoding($keys[$j], 'UTF-8', 'ISO-8859-1') . $t_b . display_text($wfs[$keys[$j]]) . $t_c;
 	}
 	
 	echo "</td></tr></table>\n";

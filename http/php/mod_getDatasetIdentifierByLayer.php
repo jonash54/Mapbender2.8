@@ -23,7 +23,7 @@ if (isset($_REQUEST["layerIds"]) && $_REQUEST["layerIds"] != "") {
     $testMatch = NULL;
 }
 //transform to array
-$layerIdsArray = explode(',' ,$layerIds);
+$layerIdsArray = explode(',' ,($layerIds ?? ''));
 $v = array();
 $t = array();
 $sql = "SELECT metadata_id, uuid, datasetid, datasetid_codespace from mb_metadata WHERE ";

@@ -96,7 +96,7 @@ $transpSqlTable = array_transpose($sqlTable);
 $ckanPackages = new stdClass();
 $ckanPackages->result = array();
 //invoke creation of ckan package objects
-for ($i=0; $i < count($sqlTable['name']); $i++){
+for ($i=0; $i < (isset($sqlTable['name']) && is_array($sqlTable['name']) ? count($sqlTable['name']) : 0); $i++){
 	$ckanPackages->result[] = buildCkanPackage($transpSqlTable[$i]);
 }
 header('Content-Type: application/json; charset='.CHARSET);
@@ -265,7 +265,7 @@ function getOrganizationInfoForServices($groupOwnerArray) {
 	$listGroupIds = array();
 	$listOwnerIds = array();
 	//echo "<br>count groupOwnerArray: ".count($groupOwnerArray[0]);
-	for ($i=0; $i < count($groupOwnerArray[0]); $i++){
+	for ($i=0; $i < (isset($groupOwnerArray[0]) && is_array($groupOwnerArray[0]) ? count($groupOwnerArray[0]) : 0); $i++){
 		$key = $i;
 		if (!isset($groupOwnerArray[0][$i]) || is_null($groupOwnerArray[0][$i]) || $groupOwnerArray[0][$i] == 0){
 			$listOwnerIds[$key] = $groupOwnerArray[1][$i];

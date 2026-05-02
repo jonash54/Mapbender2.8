@@ -57,6 +57,8 @@ $sql_gui_wms = "SELECT fkey_wms_id FROM gui_wms WHERE fkey_gui_id = $1 ORDER BY 
 $v = array($gui_id);
 $t = array('s');
 $res_gui_wms = db_prep_query($sql_gui_wms,$v,$t);
+$fkey_gui_id = array();
+$fkey_wms_id_1 = array();
 while(db_fetch_row($res_gui_wms)){
 	$fkey_gui_id[$cnt_gui_wms] = db_result($res_gui_wms,$cnt_gui_wms,"fkey_gui_id");
 	$fkey_wms_id_1[$cnt_gui_wms] = db_result($res_gui_wms,$cnt_gui_wms,"fkey_wms_id");

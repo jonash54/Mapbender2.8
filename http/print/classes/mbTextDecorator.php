@@ -49,7 +49,7 @@ class mbTextDecorator extends mbTemplatePdfDecorator
         $this->pdf->objPdf->setTextColor($rgb[0], $rgb[1], $rgb[2]);
         $this->pdf->objPdf->setFont($this->conf->font_family, "", $this->conf->font_size);
         new mb_notice("print: " . $this->conf->x_ul . " " . $this->conf->y_ul . " " . $this->value);
-        $this->pdf->objPdf->Text($this->conf->x_ul, $this->conf->y_ul, utf8_decode($this->value));
+        $this->pdf->objPdf->Text($this->conf->x_ul, $this->conf->y_ul, mb_convert_encoding($this->value, 'ISO-8859-1', 'UTF-8'));
     }
 
 

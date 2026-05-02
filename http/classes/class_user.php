@@ -645,7 +645,7 @@ class User implements RPCObject{
 			$userMessage .= _mb("Please activate your account by click on following link").": \n";
 			$userMessage .= $activateRedirectUrl.$activation_key."\n";
 			$e = new mb_exception("sending email to name=".$name."  email=".$email." key=".$activation_key);
-			if(!$admin->sendEmail("", "", $email, $name, utf8_decode(_mb("Your Geoportal account")), utf8_decode($userMessage), $error_msg)) {
+			if(!$admin->sendEmail("", "", $email, $name, mb_convert_encoding(_mb("Your Geoportal account"), 'ISO-8859-1', 'UTF-8'), mb_convert_encoding($userMessage, 'ISO-8859-1', 'UTF-8'), $error_msg)) {
 				return _mb("Registry data could not be send. Please check mail address.");
 				$e = new mb_exception("MAIL FAIL!");
 			}
@@ -662,7 +662,7 @@ class User implements RPCObject{
 			$userMessage .= _mb("Follow this link to login to Mapbender").": \n";
 			$userMessage .= LOGIN."\n";
 			$userMail = $admin->getEmailByUserId($this->id);
-			if(!$admin->sendEmail("", "", $userMail, $this->name, utf8_decode(_mb("Your Mapbender Geoportal account")), utf8_decode($userMessage), $error_msg)) {
+			if(!$admin->sendEmail("", "", $userMail, $this->name, mb_convert_encoding(_mb("Your Mapbender Geoportal account"), 'ISO-8859-1', 'UTF-8'), mb_convert_encoding($userMessage, 'ISO-8859-1', 'UTF-8'), $error_msg)) {
 				return _mb("Registry data could not be send. Please check mail address.");
 				$e = new mb_exception("MAIL FAIL!");
 			}

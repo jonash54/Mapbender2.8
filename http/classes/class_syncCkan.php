@@ -33,6 +33,7 @@ class syncCkan {
     var $ckanApiKey;
     var $ckanApiUrl;
     var $ckanApiVersion;
+    var $ckanApiProtocol;
     var $syncOrgaId;
     var $mapbenderUserId;
     var $topicCkanCategoryMap;
@@ -1048,7 +1049,7 @@ $e = new mb_exception("classes/class_syncCkan.php: uuid from departmentArray: ".
             }
             $numberGeoportalOrga++;
         }
-	if (count($syncListResult->geoportal_organization) >= 1) {
+	if (isset($syncListResult->geoportal_organization) && is_array($syncListResult->geoportal_organization) && count($syncListResult->geoportal_organization) >= 1) {
 	    $syncList->result = $syncListResult;
             $syncList->success = true;
 	}

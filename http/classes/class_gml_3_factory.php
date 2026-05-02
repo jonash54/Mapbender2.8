@@ -36,9 +36,9 @@ class Gml_3_Factory extends GmlFactory {
 	 * @return Gml_3
 	 * @param $geoJson String
 	 */
-	public function createFromGeoJson ($geoJson) {
-		$gml3 = new Gml_3();
-		
+	public function createFromGeoJson ($geoJson, $gml = null) {
+		$gml3 = $gml ?? new Gml_3();
+
 		return parent::createFromGeoJson($geoJson, $gml3);
 	}
 
@@ -48,10 +48,10 @@ class Gml_3_Factory extends GmlFactory {
 	 * @return Gml_3
 	 * @param $xml String
 	 */
-	public function createFromXml ($xml, $wfsConf, $myWfs=false, $myFeatureType=false, $geomColumnName=false) {
-		$gml3 = new Gml_3();
+	public function createFromXml ($xml, $wfsConf, $gml = null, $myWfs=false, $myFeatureType=false, $geomColumnName=false) {
+		$gml3 = $gml ?? new Gml_3();
 		return parent::createFromXml($xml, $wfsConf, $gml3, $myWfs, $myFeatureType, $geomColumnName);
-	}	
+	}
 
 	public static function getDimensionFromNode ($domNode) {
 		if (!$domNode->hasAttribute("srsDimension")) {

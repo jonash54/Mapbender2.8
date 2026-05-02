@@ -12,7 +12,7 @@ require_once(dirname(__FILE__) . "/../classes/class_csw.php");
 //show html from a given url
 //default languageCode to de
 $languageCode = "de";
-$url = urldecode($_REQUEST['url']);
+$url = urldecode(($_REQUEST['url'] ?? ''));
 $outputFormat = 'html';
 $resolveCoupledResources = false;
 //get language parameter out of mapbender session if it is set else set default language to de_DE

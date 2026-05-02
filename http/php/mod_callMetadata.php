@@ -506,7 +506,7 @@ if ($resultTarget == 'file' or $resultTarget == 'webclient') {
 
 }
 if (!isset($searchPages) OR ($searchPages == "")) {
-	for($i=0;$i<count(explode(",",$searchResources));$i++) {
+	for($i=0;$i<count(explode(",",($searchResources ?? '')));$i++) {
 		$searchPages[$i] = 1;
 	}
 	$searchPages = implode(",",$searchPages);

@@ -46,9 +46,9 @@ var mod_measure_TotalDist = new Array();
 // global variable
 window.eventAfterMeasure = new MapbenderEvent();
 
-var mod_measure_img_on = new Image(); mod_measure_img_on.src = "<?php  echo preg_replace("/_off/","_on",$e_src);  ?>";
+var mod_measure_img_on = new Image(); mod_measure_img_on.src = "<?php  echo preg_replace("/_off/","_on",($e_src ?? ''));  ?>";
 var mod_measure_img_off = new Image(); mod_measure_img_off.src = "<?php  echo $e_src;  ?>";
-var mod_measure_img_over = new Image(); mod_measure_img_over.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+var mod_measure_img_over = new Image(); mod_measure_img_over.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 
 

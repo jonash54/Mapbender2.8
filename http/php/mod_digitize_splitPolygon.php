@@ -24,7 +24,7 @@ $anyPolygonPattern = "(" . $singlePolygonPattern . ")|(" . $multiPolygonPattern 
 $linePattern = "LINESTRING \(" . $pointPattern . ",( )*" . $pointPattern . "(,( )*" . $pointPattern . ")*\)";
 
 $pattern = "/" . $anyPolygonPattern . "/";
-if (!preg_match($pattern, $polygonText)) {
+if (!preg_match($pattern, ($polygonText ?? ''))) {
 	echo "not a polygon.";
 	die();
 }

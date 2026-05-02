@@ -38,7 +38,7 @@ $pattern = "/" . $linePattern . "/";
 #	die();
 #}
 
-if (!preg_match($pattern, $line1)) {
+if (!preg_match($pattern, ($line1 ?? ''))) {
 	echo "Line 1 not a line.";
 	die();
 }

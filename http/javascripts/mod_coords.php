@@ -25,9 +25,9 @@ var mod_showCoords_map = null;
 var mod_showCoords_win = null;
 var mod_showCoords_elName = "showCoords";
 var mod_showCoords_frameName = "";
-var mod_showCoords_img_on = new Image(); mod_showCoords_img_on.src = "<?php  echo preg_replace("/_off/","_on",$e_src);  ?>";
+var mod_showCoords_img_on = new Image(); mod_showCoords_img_on.src = "<?php  echo preg_replace("/_off/","_on",($e_src ?? ''));  ?>";
 var mod_showCoords_img_off = new Image(); mod_showCoords_img_off.src = "<?php  echo $e_src;  ?>";
-var mod_showCoords_img_over = new Image(); mod_showCoords_img_over.src = "<?php  echo preg_replace("/_off/","_over",$e_src);  ?>";
+var mod_showCoords_img_over = new Image(); mod_showCoords_img_over.src = "<?php  echo preg_replace("/_off/","_over",($e_src ?? ''));  ?>";
 
 function init_mod_showCoords(ind){
 	mb_button[ind] = document.getElementById(mod_showCoords_elName);

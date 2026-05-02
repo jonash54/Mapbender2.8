@@ -19,7 +19,7 @@ if ($e_id != false) {
 	include dirname(__FILE__) . "/../include/dyn_php.php";
 }
 $pf = new mbPdfFactory();
-$confFile = basename($_REQUEST["printPDF_template"]);
+$confFile = basename(($_REQUEST["printPDF_template"] ?? ''));
 if (!preg_match("/^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9]+)$/", $confFile) || 
 	!file_exists($_REQUEST["printPDF_template"])) {
 

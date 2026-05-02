@@ -33,7 +33,7 @@ include '../include/dyn_css.php';
 </head>
 <body leftmargin="5" topmargin="0">
 <?php
-echo "<div class='text4'>".htmlentities($gui_id,ENT_QUOTES)."</div>";
+echo "<div class='text4'>".htmlentities(($gui_id ?? ''),ENT_QUOTES)."</div>";
 ?>
 </body>
 </html>

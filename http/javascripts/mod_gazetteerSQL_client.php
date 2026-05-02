@@ -14,7 +14,7 @@ include '../include/dyn_css.php';
 var targetFrameArray = [];
 <?php
 echo "var e_id = '". $e_id . "';";
-for ($i = 0; $i < count($e_target); $i++) {
+for ($i = 0; $i < (is_array($e_target) ? count($e_target) : 0); $i++) {
 	echo "targetFrameArray.push('".$e_target[$i]."');";
 }
 ?>

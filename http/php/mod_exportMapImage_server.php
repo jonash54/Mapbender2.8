@@ -38,7 +38,7 @@ $array_file = array();
 $array_file["dir"]  = TMPDIR; 
 $array_file["filename"] = "image"; 
 
-$array_urls = explode("___", $wms_urls);
+$array_urls = explode("___", ($wms_urls ?? ''));
 foreach ($array_urls as $key => $value) {
       if (is_null($value) || $value=="") {
         unset($array_urls[$key]);

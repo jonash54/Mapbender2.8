@@ -74,8 +74,8 @@ include '../include/dyn_css.php';
 </STYLE>
 <?php
 echo '<script type="text/javascript">';
-echo "var mod_WMSpreferences_target1 = '".trim($e_target[0])."';";
-echo "var mod_WMSpreferences_target2 = '".trim($e_target[1])."';";
+echo "var mod_WMSpreferences_target1 = '".trim(($e_target[0] ?? ''))."';";
+echo "var mod_WMSpreferences_target2 = '".trim(($e_target[1] ?? ''))."';";
 echo "</script>";
 ?>
 <script type="text/javascript">

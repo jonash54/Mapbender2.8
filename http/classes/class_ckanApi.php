@@ -309,7 +309,7 @@ class ckanApi
 	 */
 	private function set_headers()
 	{
-		$date = new DateTime(NULL, new DateTimeZone('UTC'));
+		$date = new DateTime('now', new DateTimeZone('UTC'));
 		$this->ch_headers = array(
 			'Date: ' . $date->format('D, d M Y H:i:s') . ' GMT', // RFC 1123
 			'Accept: application/json;q=1.0, application/xml;q=0.5, */*;q=0.0',

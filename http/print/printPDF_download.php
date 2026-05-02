@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
 
-$filename = basename($_GET["f"]);
+$filename = basename(($_GET["f"] ?? ''));
 if (!preg_match("/^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9]+)$/", $filename)) {
 	$errorMessage = _mb("Invalid filename.");
 	echo htmlentities($errorMessage, ENT_QUOTES, CHARSET);

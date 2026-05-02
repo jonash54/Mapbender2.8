@@ -102,7 +102,7 @@ switch ($serviceType) {
 $str .= "<table cellpadding=10 cellspacing=0 border=0>";
 $str .= "<tr bgcolor='#dddddd'><th align='left'>date</th><th align='left' colspan = 2>"._mb("Status")."</th><th align='center'>"._mb("Response time")."</th><th align='center'>"._mb("Diff")."</th></tr>";//Status Antwortzeit
 
-for ($k=0; $k<count($upload_id); $k++) {
+for ($k=0; $k < (is_array($upload_id) ? count($upload_id) : 0); $k++) {
 	$img = "stop.png";
 	if ($status[$k]==0) $img = "wait.png";
 	elseif ($status[$k]==1) $img = "go.png";

@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/../php/mb_validateSession.php");
 require_once(dirname(__FILE__)."/../classes/class_json.php");
 require_once(dirname(__FILE__)."/../../conf/gazetteerSQL.conf");
 
-$con = 	pg_connect($connstring);		
+$con = 	pg_connect($connstring ?? '');
 
 $command = $_GET["command"];
 $communeId = $_GET["communeId"];

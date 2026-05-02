@@ -39,7 +39,7 @@ $um_title = array();
 $um_x = array();
 $um_y = array();
 for($i=0; $i<$g->getMemberCount();$i++) {
-    $um_title[] = utf8_decode($g->getValueBySeparatedKey($i,"name"));
+    $um_title[] = mb_convert_encoding($g->getValueBySeparatedKey($i,"name"), 'ISO-8859-1', 'UTF-8');
     $um_x[] = $g->getXfromMemberAsString($i,0);
     $um_y[] = $g->getYfromMemberAsString($i,0);
 }

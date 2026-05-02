@@ -20,7 +20,7 @@ function isLinestring($string) {
 	$pointPattern = $floatPattern . " " . $floatPattern;
 	$linePattern = "LINESTRING \(" . $pointPattern . ",( )*" . $pointPattern . "(,( )*" . $pointPattern . ")*\)";
 	
-	if(preg_match("/" . $linePattern . "/", $string)) {
+	if(preg_match("/" . $linePattern . "/", ($string ?? ''))) {
 		return true;
 	}
 	return false;

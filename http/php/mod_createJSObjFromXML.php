@@ -28,7 +28,7 @@ $output = "";
 $charset = CHARSET;
 $mywms = new wms();
 $caps = $capabilitiesURL;
-$caps = html_entity_decode($_REQUEST['caps']);
+$caps = html_entity_decode(($_REQUEST['caps'] ?? ''));
 $result = $mywms->createObjFromXML($caps);
 
 if (!$result['success']) {

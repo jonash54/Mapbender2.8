@@ -23,11 +23,11 @@ echo "var mod_forward_overview = '".$e_target[1]."';";
 
 ?>
 var mod_forward_img_off = new Image(); 
-mod_forward_img_off.src = "<?php  echo preg_replace("/_off_disabled/","_off",$e_src);?>";
+mod_forward_img_off.src = "<?php  echo preg_replace("/_off_disabled/","_off",($e_src ?? ''));?>";
 var mod_forward_img_off_disabled = new Image(); 
 mod_forward_img_off_disabled.src = "<?php  echo $e_src;  ?>";
 var mod_forward_img_over = new Image(); 
-mod_forward_img_over.src = "<?php  echo preg_replace("/_off_disabled/","_over",$e_src);?>";
+mod_forward_img_over.src = "<?php  echo preg_replace("/_off_disabled/","_over",($e_src ?? ''));?>";
 var mod_forward_img_previous = mod_forward_img_off_disabled.src;
 
 eventAfterMapRequest.register(function (obj) {

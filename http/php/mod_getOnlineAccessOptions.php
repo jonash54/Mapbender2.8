@@ -86,7 +86,7 @@ if (isset($_REQUEST['ID']) && $_REQUEST['ID'] != "") {
 	//$uuid = new Uuid($testMatch);
 	//$isUuid = $uuid->isValid();
 	$idList = explode(',',$_REQUEST['ID']);
-	for ($i = 0; $i < count($idList); $i++) {
+	for ($i = 0; $i < (is_array($idList) ? count($idList) : 0); $i++) {
 		$testMatch = $idList[$i];
 		$uuid = new Uuid($testMatch);
 		$isUuid = $uuid->isValid();
@@ -130,7 +130,7 @@ select service_id, resource_id, service_uuid, resource_type, fkey_datalink_id as
 
 	//initialize array for result
 	//$e = new mb_exception($idList);
-	for ($i = 0; $i < count($idList); $i++) {
+	for ($i = 0; $i < (is_array($idList) ? count($idList) : 0); $i++) {
 		$v = array($idList[$i]);
 		$t = array('s');
 		$res = db_prep_query($sql,$v,$t);
