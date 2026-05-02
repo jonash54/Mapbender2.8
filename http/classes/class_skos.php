@@ -272,6 +272,7 @@ SQL;
             's'
         );
         $res = db_prep_query ( $sql, $v, $t );
+        $customCategoryId = array();
         while ( $row = db_fetch_array ( $res ) ) {
             $customCategoryId [] = $row ['id'];
         }
@@ -328,7 +329,7 @@ SQL;
     }
     public function insertConceptObjectToDb($conceptObject, $categoryOriginId, $categoryParentUri) {
         $this->insertSkosCategoryEntry ( $conceptObject, $categoryOriginId, $categoryParentUri );
-        if (count ( $conceptObject->conceptArray ) > 0) {
+        if (isset($conceptObject->conceptArray) && is_array($conceptObject->conceptArray) && count($conceptObject->conceptArray) > 0) {
             foreach ( $conceptObject->conceptArray as $concept ) {
                 $this->insertConceptObjectToDb ( $concept, $categoryOriginId, $conceptObject->identifier );
             }
@@ -347,6 +348,7 @@ SQL;
             's'
         );
         $res = db_prep_query ( $sql, $v, $t );
+        $customCategoryEntryId = array();
         while ( $row = db_fetch_array ( $res ) ) {
             $customCategoryEntryId [] = $row ['custom_category_id'];
         }

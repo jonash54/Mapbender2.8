@@ -104,15 +104,19 @@ data-dependent.
    alone.**
    - `http/extensions/dompdf/*` — auto-vivification patterns similar to
      what we fixed in first-party code. Best path is `composer require
-     dompdf/dompdf:^3` rather than patching the vendored copy.
-   - `http/classes/phpmailer-1.72/` (alongside the modern 6.0.2). The
-     1.72 copy is referenced by some old admin pages; either delete it
-     and migrate the callers to 6.0.2, or vendor 5.x as a transitional
-     copy.
+     dompdf/dompdf:^3` rather than patching the vendored copy. Only
+     `http/print/classes/mbTemplatePdf.php` calls it.
    - `http/fpdf/fpdi.php` — only the `each()` call site was patched.
+     Two callers: `http/print/classes/mbTemplatePdf.php` and
+     `http/print/print_functions.php`. Right move is FPDI 2.x via
+     composer once the print flow is exercised.
    - `http/extensions/JSON.php` — already converted to bracket-offset
      syntax in this round (was a hard parse error in 8.0+); the rest of
      the file works.
+   - `http/classes/phpmailer-1.72/` — **deleted** in this round; the
+     modern 6.0.2 (`http/classes/phpmailer-6.0.2/`) is now the only
+     mailer and `class_administration::sendEmail()` was rewritten to
+     drop the PHP-version-conditional path.
 
 8. **`owsproxy_api/`** — Apache alias is now wired
    (`/owsproxy_api → /var/www/mapbender/owsproxy_api/http`) and the

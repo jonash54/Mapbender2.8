@@ -20,17 +20,10 @@ require_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/class_user.php");
 require_once(dirname(__FILE__)."/class_cache.php");
 require_once dirname(__FILE__) . "/../../tools/wms_extent/extent_service.conf";
-# changed to Version 6.0.2 due to dprecated/removed functionality (php7+) TODO - check invokation of new class !!!!
-$phpversion = phpversion();
-if (strpos($phpversion, "7.") === 0) {
-    //use new mailer
-//$e = new mb_exception($phpversion);
-    require(dirname(__FILE__) . "/phpmailer-6.0.2/src/PHPMailer.php");
-    require(dirname(__FILE__) . "/phpmailer-6.0.2/src/SMTP.php");
-    require(dirname(__FILE__) . "/phpmailer-6.0.2/src/Exception.php");
-} else {
-    require(dirname(__FILE__) . "/phpmailer-1.72/class.phpmailer.php");
-}
+// PHPMailer 6.x — namespaced; supports PHP 7.x and 8.x.
+require_once(dirname(__FILE__) . "/phpmailer-6.0.2/src/PHPMailer.php");
+require_once(dirname(__FILE__) . "/phpmailer-6.0.2/src/SMTP.php");
+require_once(dirname(__FILE__) . "/phpmailer-6.0.2/src/Exception.php");
 /**
  * class to wrap administration methods
  *
@@ -109,29 +102,18 @@ class administration {
 			$fromName = MAILADMINNAME;
 		}
 		if ($this->isValidEmail($fromAddr) && $this->isValidEmail($toAddr)) {
-			$phpversion = $this->getPhpVersion();
-			if (strpos($phpversion, "7.") === 0) {
-    			    //use new mailer
-                            $mail = new PHPMailer\PHPMailer\PHPMailer();
-                            $mail->SMTPOptions = array(
-                                'ssl' => array(
-                                    'verify_peer' => false,
-                                    'verify_peer_name' => false,
-                                    'allow_self_signed' => true
-                                 )
-                            );
-                            $mail->Port = 25;
-			} else {
-    			    $mail = new PHPMailer();
-			}
-			if ($fromName != "" ) {
-				$mail->FromName = $fromName;
-			}
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+			);
+			$mail->Port = 25;
 			$mail->IsSMTP();                  // set mailer to use SMTP
 			$mail->Host = $mailHost;          // specify main and backup server
-                        if (strpos($phpversion, "7.") === 0) {
-			        $mail->setFrom($fromAddr,$fromName);
-			}
+			$mail->setFrom($fromAddr, $fromName);
 			$mail->AddAddress($toAddr, $toName);
 			#$mail->AddReplyTo("info@ccgis.de", "Information");
 
